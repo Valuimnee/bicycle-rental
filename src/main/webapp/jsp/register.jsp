@@ -14,32 +14,32 @@
 <jsp:include page="/jsp/component/header.jsp"/>
 <%--<jsp:forward page="startpage/"/>--%>
 <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
-<div class="content">
-    <div class="greeting"><h2 id="reg">Register on our site so you can rent your best bike!</h2></div>
+<main class="container-fluid">
+    <div class="register-block">
+    <h2 id="reg" class="greeting text-center mb-4">Register on our site so you can rent your best bike!</h2>
     <form name="register" method="post" action="/control">
-    <%-- <input type="hidden" name="command" value="register"/>--%>
-    <c:if test="${requestScope.containsKey('wrong')}"><p>${requestScope.get("wrong")}</p></c:if>
+    <c:if test="${requestScope.containsKey('wrong')}"><p>${requestScope.wrong}</p></c:if>
     <p><label><b>Enter client information: </b></label></p>
-    <p><label for="login" class="short"><b>Login: </b></label>
+    <p><label for="login" class="long-label"><b>Login: </b></label>
         <input type="text" id="login" name="login" size="50" value=""/></p>
-    <p><label for="password" class="short"><b>Password: </b></label>
+    <p><label for="password" class="long-label"><b>Password: </b></label>
         <input type="password" id="password" name="password" size="50" value=""/></p>
     <p><b><label>Repeat password</label></b><br>
-    <label for="password2" class="short"><b>Password: </b></label>
+    <label for="password2" class="long-label"><b>Password: </b></label>
         <input type="password" id="password2" name="password2" size="50" value=""/></p>
     <p>
-    <p><label for="fullname" class="short"><b>Full name: </b></label>
+    <p><label for="fullname" class="long-label"><b>Full name: </b></label>
         <input type="text" id="fullname" name="fullname" size="50" value=""/></p>
-    <p><label for="address" class="short"><b>Address: </b></label>
+    <p><label for="address" class="long-label"><b>Address: </b></label>
         <input type="text" id="address" name="address" size="50" value=""/></p>
-    <p><label for="passport" class="short"><b>Passport number: </b></label>
+    <p><label for="passport" class="long-label"><b>Passport number: </b></label>
         <input type="text" id="passport" name="passport" size="50" value=""/></p>
-    <p><label for="drivers-license" class="short"><b>Driver&apos;s license number: </b></label>
+    <p><label for="drivers-license" class="long-label"><b>Driver&apos;s license number: </b></label>
         <input type="text" id="drivers-license" name="drivers-license" size="50" value=""/></p>
-    <%--<p><input type="submit" name="register" value="Register"/></p>--%>
-    <p><button type="submit" name="command" value="register">Register</button></p>
+    <p class="text-center"><button class="btn" type="submit" name="command" value="register">Register</button></p>
     </form>
-</div>
+    </div>
+</main>
 <jsp:include page="/jsp/component/footer.jsp"/>
 </body>
 </html>

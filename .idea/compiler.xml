@@ -7,12 +7,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="bicyclerental" />
-        <module name="bicyclerentallogin" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="bicyclerental" target="1.8" />
-      <module name="bicyclerentallogin" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

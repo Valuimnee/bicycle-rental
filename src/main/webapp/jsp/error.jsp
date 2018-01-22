@@ -5,7 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ page errorPage="/jsp/error.jsp" %>
+<%@ page isErrorPage="true" %>
 <!DOCTYPE HTML>
 <html lang="en">
 <jsp:include page="/jsp/component/head.jsp"/>

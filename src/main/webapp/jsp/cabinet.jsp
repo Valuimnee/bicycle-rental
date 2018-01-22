@@ -16,30 +16,30 @@
 <div class="content">
     <%--<jsp:forward page="startpage/"/>--%>
     <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
-    <c:if test="${requestScope.containsKey('message')}"><p class="message">${requestScope.get("message")}</p></c:if>
+    <c:if test="${requestScope.containsKey('message')}"><p class="message">${requestScope.message}</p></c:if>
     <c:choose>
-        <c:when test="${requestScope.get(\"content\")==\"admins\"}">
+        <c:when test="${requestScope.content=='admins'}">
             <jsp:include page="/jsp/list/admins.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"clients\"}">
+        <c:when test="${requestScope.content=='clients'}">
             <jsp:include page="/jsp/list/clients.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"autos\"}">
+        <c:when test="${requestScope.content=='bikes'}">
             <jsp:include page="/jsp/list/autos.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"rentals\"}">
+        <c:when test="${requestScope.content=='rentals'}">
             <jsp:include page="/jsp/list/full-rentals.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"add-auto-form\"}">
+        <c:when test="${requestScope.content=='add-bike-form'}">
             <jsp:include page="/jsp/entity/add-auto.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"find-auto\"}">
+        <c:when test="${requestScope.content=='find-bike'}">
             <jsp:include page="/jsp/entity/find-auto.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"auto\"}">
-            <jsp:include page="/jsp/entity/auto.jsp"/>
+        <c:when test="${requestScope.content=='bike'}">
+            <jsp:include page="/jsp/entity/bike.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"find-auto-client-form\"}">
+        <c:when test="${requestScope.content=='find-bike-client-form'}">
             <jsp:include page="/jsp/entity/find-auto-client.jsp"/>
         </c:when>
     </c:choose>

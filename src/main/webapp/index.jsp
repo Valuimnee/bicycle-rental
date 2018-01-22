@@ -13,29 +13,29 @@
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
 <jsp:include page="/jsp/component/menubar.jsp"/>
-<main>
+<main class="container">
     <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
-    <c:if test="${requestScope.containsKey('message')}"><p class="message">${message}</p></c:if>
+    <c:if test="${requestScope.containsKey('message')}"><p class="message">${requestScope.message}</p></c:if>
     <c:choose>
-        <c:when test="${requestScope.get('content')=='autos'}">
+        <c:when test="${requestScope.content=='bikes'}">
             <jsp:include page="/jsp/list/autos.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"rentals\"}">
+        <c:when test="${requestScope.content=='rentals'}">
             <jsp:include page="/jsp/list/rentals.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"auto\"}">
-            <jsp:include page="/jsp/entity/auto.jsp"/>
+        <c:when test="${requestScope.content=='bike'}">
+            <jsp:include page="/jsp/entity/bike.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"profile\"}">
+        <c:when test="${requestScope.content=='profile'}">
             <jsp:include page="/jsp/entity/client.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"client-account\"}">
+        <c:when test="${requestScope.content=='client-account'}">
             <jsp:include page="/jsp/entity/login.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"date-form\"}">
+        <c:when test="${requestScope.content=='date-form'}">
             <jsp:include page="/jsp/entity/date-interval.jsp"/>
         </c:when>
-        <c:when test="${requestScope.get(\"content\")==\"choose-auto\"}">
+        <c:when test="${requestScope.content=='choose-bike'}">
             <jsp:include page="/jsp/list/rent-autos.jsp"/>
         </c:when>
     </c:choose>

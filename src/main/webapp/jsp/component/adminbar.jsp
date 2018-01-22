@@ -18,8 +18,7 @@
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clients</button>
                 <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">View all clients</button>
-                    <%--<li><button type="submit" name="command" value="">Choose client</button></li>
-                    <li><button type="submit" name="command" value=""></button></li>--%>
+                    <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">Choose client</button>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">
