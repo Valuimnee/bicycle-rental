@@ -12,7 +12,7 @@
     <title>Student'sGrades</title>
 </head>
 <body>
-<jsp:include page="../element/header.jsp"/>
+<jsp:include page="../component/header.jsp"/>
 <form name="studentInfo" method="post" action="grades">
     <p><label for="fullname" class="short"><b>Full name</b></label>
         <input type="text" id="fullname" name="fullname" size="50" value=""/></p>

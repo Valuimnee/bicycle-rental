@@ -7,6 +7,7 @@ import com.tsalapova.bicyclerental.logic.impl.UserLogicImpl;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 /**
  * @author TsalapovaMD
@@ -21,7 +22,7 @@ public class LoginCommand implements ActionCommand {
     public String execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASSWORD);
-
+        
         User user;
         try {
             user = new UserLogicImpl().login(login, password);

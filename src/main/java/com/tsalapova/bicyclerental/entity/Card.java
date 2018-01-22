@@ -1,6 +1,7 @@
 package com.tsalapova.bicyclerental.entity;
 
-import sun.util.calendar.LocalGregorianCalendar.Date;
+
+import java.util.Date;
 
 /**
  * @author TsalapovaMD

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="bicyclerental:war exploded">
-    <output-path>$PROJECT_DIR$/target/bicyclerental1</output-path>
+    <output-path>$PROJECT_DIR$/target/bicyclerental</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -17,10 +17,14 @@
           <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: javax.servlet.jsp:jsp-api:2.1" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.webjars:jquery:3.2.1" />
+          <element id="library" level="project" name="Maven: org.webjars.bower:popper.js:1.12.9" />
+          <element id="library" level="project" name="Maven: org.webjars:bootstrap:4.0.0-beta.2" />
+          <element id="library" level="project" name="Maven: org.webjars.npm:popper.js:1.11.1" />
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/bicyclerental1/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/bicyclerental/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="bicyclerental/web/Web" />
     </root>

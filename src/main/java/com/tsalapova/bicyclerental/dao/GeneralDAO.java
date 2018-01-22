@@ -31,4 +31,12 @@ public interface GeneralDAO<T> {
             throw new DAOException("Error while closing connection.", e);
         }
     }
+
+    default void close(Statement statement, Connection connection) throws DAOException {
+        try {
+            close(statement);
+        } finally {
+            close(connection);
+        }
+    }
 }

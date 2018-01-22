@@ -16,35 +16,33 @@ import java.sql.SQLException;
  * @version 1.0, 1/3/2018
  */
 public class UserDAOImpl implements UserDAO {
-    private static final String[] columns = {"id","login", "password", "salt", "role"};
-    private static final String FIND_BY_LOGIN ="SELECT * FROM `user` WHERE `login`=?";
+    private static final String[] columns = {"id", "login", "password", "salt", "role"};
+    private static final String FIND_BY_LOGIN = "SELECT * FROM `user` WHERE `login`=?";
 
     @Override
-    public User findByLogin(String login) {
-        User user=null;
-        Connection conn=null;
-        PreparedStatement statement=null;
+    public User findByLogin(String login) throws DAOException {
+        User user = null;
+        Connection connection = null;
+        PreparedStatement statement = null;
         try {
-            conn = ConnectionPool.getInstance().getConnection();
-            statement=conn.prepareStatement(FIND_BY_LOGIN);
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(FIND_BY_LOGIN);
             statement.setString(1, login);
-            ResultSet rs=statement.executeQuery();
-            if(rs.next()){
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
                 //TODO replace with builder classes
-                user=defineEntity(rs);
+                user = defineEntity(rs);
             }
         } catch (SQLException e) {
             throw new DAOException("Error while finding a user.", e);
         } finally {
-            //TODO
-            close(statement);
-            close(conn);
+            close(statement, connection);
         }
         return user;
     }
 
     private User defineEntity(ResultSet resultSet) throws SQLException {
-        int i=0;
+        int i = 0;
         return new User(resultSet.getLong(columns[i++]), resultSet.getString(columns[i++]), resultSet.getString(columns[i++]),
                 resultSet.getString(columns[i++]), resultSet.getString(columns[i]));
     }

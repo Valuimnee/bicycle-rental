@@ -11,11 +11,11 @@ public class ConnectionPoolTest {
 
     @Test
     public void testGetInstance() throws Exception {
-        Assert.assertTrue(null!=ConnectionPool.getInstance());
+        Assert.assertTrue(null != ConnectionPool.getInstance());
     }
 
     @Test
     public void testGetConnection() throws Exception {
-        Assert.assertTrue(null!=ConnectionPool.getInstance().getConnection());
+        Assert.assertTrue(null != ConnectionPool.getInstance().getConnection());
     }
 }

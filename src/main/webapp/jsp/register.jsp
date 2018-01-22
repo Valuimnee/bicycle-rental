@@ -1,20 +1,17 @@
 <%--
-  User: CalapovaMD
+  Author: CalapovaMD
   Date: 5/28/2017
   Time: 2:14 PM
 --%>
-<!DOCTYPE HTML>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; chatset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
-    <title>BicycleRental</title>
-</head>
+<!DOCTYPE HTML>
+<html lang="en">
+<jsp:include page="/jsp/component/head.jsp"/>
 <body>
-<jsp:include page="/jsp/element/header.jsp"/>
+<jsp:include page="/jsp/component/main-nav.jsp"/>
+<jsp:include page="/jsp/component/header.jsp"/>
 <%--<jsp:forward page="startpage/"/>--%>
 <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
 <div class="content">
@@ -43,6 +40,6 @@
     <p><button type="submit" name="command" value="register">Register</button></p>
     </form>
 </div>
-<jsp:include page="/jsp/element/footer.jsp"/>
+<jsp:include page="/jsp/component/footer.jsp"/>
 </body>
 </html>

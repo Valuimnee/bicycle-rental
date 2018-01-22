@@ -40,5 +40,9 @@
     <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet.jsp:jsp-api:2.1" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:jquery:3.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.bower:popper.js:1.12.9" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars:bootstrap:4.0.0-beta.2" level="project" />
+    <orderEntry type="library" name="Maven: org.webjars.npm:popper.js:1.11.1" level="project" />
   </component>
 </module>

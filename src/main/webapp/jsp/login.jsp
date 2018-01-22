@@ -1,22 +1,17 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: User
+  Author: TsalapovaMD
   Date: 12/28/2017
   Time: 2:25 PM
-  To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE HTML>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; chatset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
-    <title>BicycleRental</title>
-</head>
+<!DOCTYPE HTML>
+<html lang="en">
+<jsp:include page="/jsp/component/head.jsp"/>
 <body>
-<jsp:include page="/jsp/element/header.jsp"/>
+<jsp:include page="/jsp/component/main-nav.jsp"/>
+<jsp:include page="/jsp/component/header.jsp"/>
 <div class="content">
     <div class="greeting">
         <h2 id="log">Log in to rent your bike!</h2>
@@ -30,8 +25,6 @@
         <p><button type="submit" name="command" value="login">Login</button>
     </form>
 </div>
-<jsp:include page="/jsp/element/footer.jsp"/>
-</body>
-</html>
+<jsp:include page="/jsp/component/footer.jsp"/>
 </body>
 </html>

@@ -1,28 +1,23 @@
 <%--
-  User: CalapovaMD
+  Author: TsalapovaMD
   Date: 5/28/2017
   Time: 2:14 PM
 --%>
-<!DOCTYPE HTML>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; chatset=UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
-    <title>BicycleRental</title>
-</head>
+<!DOCTYPE HTML>
+<html lang="en">
+<jsp:include page="/jsp/component/head.jsp"/>
 <body>
-<div class="header">
-    <jsp:include page="/jsp/element/header.jsp"/>
-</div>
-<div class="content">
-    <jsp:include page="/jsp/element/menubar.jsp"/>
+<jsp:include page="/jsp/component/main-nav.jsp"/>
+<jsp:include page="/jsp/component/header.jsp"/>
+<jsp:include page="/jsp/component/menubar.jsp"/>
+<main>
     <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
     <c:if test="${requestScope.containsKey('message')}"><p class="message">${message}</p></c:if>
     <c:choose>
-        <c:when test="${requestScope.get(\"content\")==\"autos\"}">
+        <c:when test="${requestScope.get('content')=='autos'}">
             <jsp:include page="/jsp/list/autos.jsp"/>
         </c:when>
         <c:when test="${requestScope.get(\"content\")==\"rentals\"}">
@@ -44,7 +39,7 @@
             <jsp:include page="/jsp/list/rent-autos.jsp"/>
         </c:when>
     </c:choose>
-</div>
-<jsp:include page="/jsp/element/footer.jsp"/>
+</main>
+<jsp:include page="/jsp/component/footer.jsp"/>
 </body>
 </html>

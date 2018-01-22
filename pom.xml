@@ -2,11 +2,11 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.tsalapova</groupId>
-  <artifactId>bicyclerental1</artifactId>
+  <artifactId>bicyclerental</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>bicyclerental1</name>
+  <name>bicyclerental</name>
   <url>http://maven.apache.org</url>
 
   <properties>
@@ -61,13 +61,29 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>jquery</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars.bower</groupId>
+      <artifactId>popper.js</artifactId>
+      <version>1.12.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.webjars</groupId>
+      <artifactId>bootstrap</artifactId>
+      <version>4.0.0-beta.2</version>
+    </dependency>
   </dependencies>
 
   <build>
-    <finalName>bicyclerental1</finalName>
+    <finalName>bicyclerental</finalName>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5</version>
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
