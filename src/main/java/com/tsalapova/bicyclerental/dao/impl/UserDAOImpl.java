@@ -4,7 +4,7 @@ import com.tsalapova.bicyclerental.dao.UserDAO;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.mapper.ResultSetMapper;
+import com.tsalapova.bicyclerental.mapper.POJOMapper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -19,7 +19,6 @@ import java.util.List;
  * @version 1.0, 1/3/2018
  */
 public class UserDAOImpl implements UserDAO {
-    private static final String[] columns = {"id", "login", "password", "salt", "role"};
     private static final String FIND_BY_LOGIN = "SELECT * FROM `user` WHERE `login`=?";
 
     @Override
@@ -33,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
             //TODO correct minor errors
-            List<User> users=new ResultSetMapper<User>().mapResultSet(rs, User.class);
+            List<User> users=new POJOMapper<User>().mapPojos(rs, User.class);
             if(!users.isEmpty()){
                 user=users.get(0);
             }
@@ -43,11 +42,5 @@ public class UserDAOImpl implements UserDAO {
             close(statement, connection);
         }
         return user;
-    }
-
-    private User defineEntity(ResultSet resultSet) throws SQLException {
-        int i = 0;
-        return new User(resultSet.getLong(columns[i++]), resultSet.getString(columns[i++]), resultSet.getString(columns[i++]),
-                resultSet.getString(columns[i++]), resultSet.getString(columns[i]));
     }
 }

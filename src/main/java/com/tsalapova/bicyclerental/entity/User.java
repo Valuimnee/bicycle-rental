@@ -7,7 +7,6 @@ import java.util.Objects;
  * @author TsalapovaMD
  * @version 1.0, 1/3/2018
  */
-@javax.persistence.Entity
 public class User implements Entity {
   @Column
   private long id;

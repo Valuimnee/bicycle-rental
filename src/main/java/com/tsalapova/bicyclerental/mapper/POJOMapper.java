@@ -15,8 +15,8 @@ import java.util.List;
  * @author TsalapovaMD
  * @version 1.0, 1/24/2018
  */
-public class ResultSetMapper<T> {
-    public List<T> mapResultSet(ResultSet resultSet, Class<T> mappingClass) throws SQLException, IllegalAccessException, InstantiationException, InvocationTargetException {
+public class POJOMapper<T> {
+    public List<T> mapPojos(ResultSet resultSet, Class<T> mappingClass) throws SQLException, IllegalAccessException, InstantiationException, InvocationTargetException {
         List<T> objects = new ArrayList<>();
         ResultSetMetaData metaData = resultSet.getMetaData();
         Field[] fields = mappingClass.getDeclaredFields();
