@@ -10,10 +10,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface ActionCommand {
     String execute(HttpServletRequest request) throws CommandException;
-    //todo
+    //TODO
     //Logging
     //PageConstant
     //final
     //parameters in constant
-    //close Statement DAO
 }

@@ -1,3 +1,3 @@
-encrypt(){
+function encrypt(){
 
-}
+};

@@ -4,8 +4,12 @@
   Time: 2:14 PM
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
+<c:set var="lang" value="${not empty param.lang ? param.lang : not empty lang ? lang : pageContext.request.locale}" scope="session"/>
+<fmt:setLocale value="${lang}" scope="session"/>
+<fmt:setBundle basename="text" scope="session"/>
 <!DOCTYPE HTML>
 <html lang="en">
 <jsp:include page="/jsp/component/head.jsp"/>

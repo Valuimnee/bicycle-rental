@@ -4,6 +4,7 @@
   Time: 2:35 PM
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page isErrorPage="true" %>
 <!DOCTYPE HTML>
@@ -12,12 +13,13 @@
 <body>
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
-<div class="content">
+<div class="container-fluid">
 <form>
-    <h1>An error occurred!</h1>
-    Error code: ${pageContext.errorData.statusCode}<br>
-    URI: ${pageContext.errorData.requestURI}<br>
-    Message: ${pageContext.errorData.throwable.message}<br>
+    <h1><fmt:message key="error.header"/></h1>
+    <fmt:message key="error.code"/>: ${pageContext.errorData.statusCode}<br>
+    <fmt:message key="error.uri"/>: ${pageContext.errorData.requestURI}<br>
+    <fmt:message key="error.message"/>: ${pageContext.errorData.throwable.localizedMessage}<br>
+    <fmt:message key="error.header"/>: ${pageContext.errorData.throwable.printStackTrace()}<br>
 </form>
 </div>
 <jsp:include page="/jsp/component/footer.jsp"/>

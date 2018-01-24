@@ -3,10 +3,11 @@
   Date: 12/28/2017
   Time: 6:00 PM
 --%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <footer class="footer">
     <div class="container-fluid text-center">
-        <span>&copy; Maria Tsalapova, 2017-2018</span>
+        <span><fmt:message key="main.footer"/></span>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

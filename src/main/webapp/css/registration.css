@@ -1,0 +1,12 @@
+.long-label{
+    min-width: 182px;
+}
+.register-block{
+    margin: 0 auto;
+    margin-top: 2rem;
+}
+form[name="register"]{
+    margin:0 auto;
+    max-width: 600px;
+    padding: 10px;
+}

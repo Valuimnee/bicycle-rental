@@ -14,8 +14,8 @@ public class CommandFactory {
         String commandName = command.replaceAll(PARAMETER_DELIMETER, ENUM_DELIMETER).toUpperCase();
         try {
             return CommandEnum.valueOf(commandName).getCommand();
-        } catch (Exception e) {
-            throw new CommandException("No command exists for parameter: "+command, e);
+        } catch (IllegalArgumentException e) {
+            throw new CommandException("No command exists for parameter: " + command, e);
         }
     }
 }

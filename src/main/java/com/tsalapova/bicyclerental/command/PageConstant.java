@@ -6,8 +6,11 @@ package com.tsalapova.bicyclerental.command;
  */
 public class PageConstant {
     public static final String MAIN = "/index.jsp";
+    public static final String LOGIN = "/jsp/login.jsp";
     public static final String ADMIN = "/jsp/cabinet.jsp";
     public static final String ERROR = "/jsp/error.jsp";
-    public static final String LOGIN = "/jsp/login.jsp";
 
+    public enum Client {
+        GUEST, USER, ADMINISTRATOR;
+    }
 }

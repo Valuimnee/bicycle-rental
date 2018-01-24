@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = "/control")
 public class InitialController extends HttpServlet {
-    private static final String COMMAND="command";
+    private static final String COMMAND = "command";
 
     @Override
     public void init() throws ServletException {
@@ -38,7 +38,7 @@ public class InitialController extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandName=request.getParameter(COMMAND);
+        String commandName = request.getParameter(COMMAND);
         if (commandName != null) {
             try {
                 ActionCommand command = CommandFactory.defineCommand(commandName);

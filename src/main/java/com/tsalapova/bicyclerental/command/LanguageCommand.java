@@ -7,13 +7,16 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author TsalapovaMD
- * @version 1.0, 1/4/2018
+ * @version 1.0, 1/24/2018
  */
-public class LogoutCommand implements ActionCommand {
+public class LanguageCommand implements ActionCommand {
+
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        HttpSession session = request.getSession(true);
-        session.invalidate();
+        HttpSession session=request.getSession(true);
+        if(session.getAttribute("admin")!=null){
+            return PageConstant.ADMIN;
+        }
         return PageConstant.MAIN;
     }
 }

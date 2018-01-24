@@ -1,6 +1,11 @@
 .bd-color {
     background-color: deepskyblue;
 }
-form{
-    margin: auto;
+form {
+    margin: 2rem auto;
+    max-width: max-content;
+}
+.form-inline{
+    margin: 0;
+    max-width: none;
 }
