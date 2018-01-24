@@ -21,6 +21,10 @@
           <element id="library" level="project" name="Maven: org.webjars.bower:popper.js:1.12.9" />
           <element id="library" level="project" name="Maven: org.webjars:bootstrap:4.0.0-beta.2" />
           <element id="library" level="project" name="Maven: org.webjars.npm:popper.js:1.11.1" />
+          <element id="library" level="project" name="Maven: javax.persistence:javax.persistence-api:2.2" />
+          <element id="library" level="project" name="Maven: commons-beanutils:commons-beanutils:1.9.3" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.2" />
         </element>
       </element>
       <element id="directory" name="META-INF">

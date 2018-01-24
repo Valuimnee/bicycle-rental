@@ -4,11 +4,14 @@ import com.tsalapova.bicyclerental.dao.UserDAO;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.mapper.ResultSetMapper;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 
 /**
@@ -29,11 +32,12 @@ public class UserDAOImpl implements UserDAO {
             statement = connection.prepareStatement(FIND_BY_LOGIN);
             statement.setString(1, login);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                //TODO replace with builder classes
-                user = defineEntity(rs);
+            //TODO correct minor errors
+            List<User> users=new ResultSetMapper<User>().mapResultSet(rs, User.class);
+            if(!users.isEmpty()){
+                user=users.get(0);
             }
-        } catch (SQLException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException|SQLException e) {
             throw new DAOException("Error while finding a user.", e);
         } finally {
             close(statement, connection);

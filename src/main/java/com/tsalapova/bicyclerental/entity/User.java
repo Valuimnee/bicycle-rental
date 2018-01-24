@@ -1,18 +1,26 @@
 package com.tsalapova.bicyclerental.entity;
 
+import javax.persistence.Column;
 import java.util.Objects;
 
 /**
  * @author TsalapovaMD
  * @version 1.0, 1/3/2018
  */
+@javax.persistence.Entity
 public class User implements Entity {
-
+  @Column
   private long id;
+  @Column
   private String login;
+  @Column
   private String password;
+  @Column
   private String salt;
+  @Column
   private String role;
+
+  public User(){}
 
   public User(long id, String login, String password, String salt, String role) {
     this.id = id;
@@ -81,5 +89,16 @@ public class User implements Entity {
   @Override
   public int hashCode() {
     return Objects.hash(id, login, password, salt, role);
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+            "id=" + id +
+            ", login='" + login + '\'' +
+            ", password='" + password + '\'' +
+            ", salt='" + salt + '\'' +
+            ", role='" + role + '\'' +
+            '}';
   }
 }
