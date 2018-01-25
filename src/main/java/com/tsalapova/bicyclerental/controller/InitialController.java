@@ -5,6 +5,9 @@ import com.tsalapova.bicyclerental.command.CommandFactory;
 import com.tsalapova.bicyclerental.command.PageConstant;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.exception.CommandException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +23,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/control")
 public class InitialController extends HttpServlet {
     private static final String COMMAND = "command";
+    private static final Logger LOGGER = LogManager.getLogger(InitialController.class);
 
     @Override
     public void init() throws ServletException {
@@ -45,7 +49,8 @@ public class InitialController extends HttpServlet {
                 String page = command.execute(request);
                 request.getRequestDispatcher(page).forward(request, response);
             } catch (CommandException e) {
-                request.getRequestDispatcher(PageConstant.ERROR).forward(request, response);
+                LOGGER.log(Level.ERROR, "Exception while executing command "+ commandName+".", e);
+                throw new ServletException(e);
             }
         } else {
             request.getRequestDispatcher(PageConstant.MAIN).forward(request, response);
