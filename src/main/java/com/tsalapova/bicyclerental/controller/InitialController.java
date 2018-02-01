@@ -49,7 +49,7 @@ public class InitialController extends HttpServlet {
                 String page = command.execute(request);
                 request.getRequestDispatcher(page).forward(request, response);
             } catch (CommandException e) {
-                LOGGER.log(Level.ERROR, "Exception while executing command "+ commandName+".", e);
+                LOGGER.log(Level.WARN, "Exception while executing command "+ commandName+".", e);
                 throw new ServletException(e);
             }
         } else {

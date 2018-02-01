@@ -1,5 +1,10 @@
 package com.tsalapova.bicyclerental.db;
 
+import com.tsalapova.bicyclerental.exception.ConnectionPoolException;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,6 +17,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * @version 1.0, 12/28/2017
  */
 public class ConnectionPool {
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
+
     private final static ReentrantLock instanceLock = new ReentrantLock(true);
     private static ConnectionPool instance;
 
@@ -37,6 +44,7 @@ public class ConnectionPool {
     private ConnectionPool() {
         //Protecting from creation of another instance through Reflection API
         if (instance != null) {
+            LOGGER.log(Level.FATAL, "Trying to create second instance of singleton class ConnectionPool");
             throw new RuntimeException("Instance of ConnectionPool already exists.");
         }
 
@@ -60,15 +68,14 @@ public class ConnectionPool {
         return super.clone();
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() throws ConnectionPoolException {
         ProxyConnection connection=null;
         try {
             semaphore.acquire();
             connection=available.removeLast();
             taken.addLast(connection);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-            //TODO
+            throw new ConnectionPoolException("Error while acquiring connection", e);
         }
         return connection;
     }
@@ -80,11 +87,7 @@ public class ConnectionPool {
     }
 
     public void destroyPool() {
-        try {
-            semaphore.acquire(semaphore.availablePermits());
-        } catch (InterruptedException e) {
-            //TODO
-        }
+        semaphore.acquireUninterruptibly(semaphore.availablePermits());
         try {
             for(ProxyConnection connection: available){
                 connection.closeConnection();
@@ -94,16 +97,17 @@ public class ConnectionPool {
             }
         } catch (SQLException e) {
             //TODO
+            LOGGER.log(Level.WARN, "Exception while closing pool connections", e);
         }
 
         Enumeration<java.sql.Driver> drivers= DriverManager.getDrivers();
         try {
-
             while(drivers.hasMoreElements()){
                 DriverManager.deregisterDriver(drivers.nextElement());
             }
         } catch (SQLException e) {
             //TODO
+            LOGGER.log(Level.WARN, "Exception while deregistering database connection drivers", e);
         }
 
     }
