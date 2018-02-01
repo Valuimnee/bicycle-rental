@@ -8,9 +8,7 @@ public class PageConstant {
     public static final String MAIN = "/index.jsp";
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String ADMIN = "/jsp/cabinet.jsp";
+    public static final String REGISTER = "/jsp/register.jsp";
     public static final String ERROR = "/jsp/error.jsp";
 
-    public enum Client {
-        GUEST, USER, ADMINISTRATOR;
-    }
 }

@@ -9,11 +9,11 @@
 <nav class="navbar navbar-fixed-top navbar-expand navbar-light bd-color">
     <div class="container nav-fill filler">
         <c:choose>
-            <c:when test="${sessionScope.client!=null||sessionScope.admin==null}">
-                <div class="nav-item"><a class="nav-link text-left" href="/index.jsp"><fmt:message key="main-nav.main-page"/></a></div>
+            <c:when test="${sessionScope.role=='administrator'}">
+                <div class="nav-item"><a class="nav-link text-left" href="/jsp/cabinet.jsp"><fmt:message key="main-nav.admin-cabinet"/></a></div>
             </c:when>
             <c:otherwise>
-                <div class="nav-item"><a class="nav-link text-left" href="/jsp/cabinet.jsp"><fmt:message key="main-nav.admin-cabinet"/></a></div>
+                <div class="nav-item"><a class="nav-link text-left" href="/index.jsp"><fmt:message key="main-nav.main-page"/></a></div>
             </c:otherwise>
         </c:choose>
     </div>
@@ -31,7 +31,7 @@
                 </form>
             </li>
             <c:choose>
-                <c:when test="${sessionScope.admin==null&&sessionScope.client==null}">
+                <c:when test="${sessionScope.role==null}">
                     <li class="nav-item"><a class="nav-link" href="/jsp/login.jsp"><fmt:message key="main-nav.login"/></a></li>
                     <li class="nav-item"><a class="nav-link" href="/jsp/register.jsp"><fmt:message key="main-nav.register"/></a></li>
                 </c:when>

@@ -9,4 +9,6 @@ import com.tsalapova.bicyclerental.exception.DAOException;
  */
 public interface UserDAO extends GeneralDAO<User> {
     User findByLogin(String login) throws DAOException;
+    long findIdByLogin(String login) throws DAOException;
+    void addClient(User user) throws DAOException;
 }

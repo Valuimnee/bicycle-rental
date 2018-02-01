@@ -4,6 +4,7 @@ import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.UserLogicImpl;
+import com.tsalapova.bicyclerental.validator.ParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +23,11 @@ public class LoginCommand implements ActionCommand {
     public String execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter(LOGIN);
         String password = request.getParameter(PASSWORD);
-        
+        ParameterValidator validator=new ParameterValidator();
+        if(!validator.validateLogin(login)||!validator.validatePassword(password)){
+            request.setAttribute(WRONG, "Invalid login or password, please try again");
+            return PageConstant.LOGIN;
+        }
         User user;
         try {
             user = new UserLogicImpl().login(login, password);
@@ -31,14 +36,8 @@ public class LoginCommand implements ActionCommand {
         }
         if (user != null) {
             HttpSession session = request.getSession(true);
-            session.setAttribute("login", user.getLogin());
-            if (user.getRole().equals("client")) {
-                session.setAttribute("client", user.getId());
-                return PageConstant.MAIN;
-            } else {
-                session.setAttribute("admin", user.getId());
-                return PageConstant.ADMIN;
-            }
+            new SessionConstant().setUserSession(session,user);
+            return getStartPage(request);
         } else {
             request.setAttribute(WRONG, "Invalid login or password, please try again");
             return PageConstant.LOGIN;
