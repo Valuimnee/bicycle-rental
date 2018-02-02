@@ -1,18 +1,43 @@
 package com.tsalapova.bicyclerental.entity;
 
 
+import javax.persistence.Column;
+import java.util.Objects;
+
 public class Client {
-
+  @Column
   private long clientId;
+  @Column
   private String firstName;
+  @Column
   private String middleName;
+  @Column
   private String lastname;
+  @Column
   private String passportNumber;
+  @Column
   private String address;
+  @Column
   private String email;
+  @Column
   private String phone;
-  private String active;
+  @Column
+  private Byte active;
 
+  public Client(){}
+
+  public Client(long clientId, String firstName, String middleName, String lastname, String passportNumber,
+                String address, String email, String phone, Byte active) {
+    this.clientId = clientId;
+    this.firstName = firstName;
+    this.middleName = middleName;
+    this.lastname = lastname;
+    this.passportNumber = passportNumber;
+    this.address = address;
+    this.email = email;
+    this.phone = phone;
+    this.active = active;
+  }
 
   public long getClientId() {
     return clientId;
@@ -86,12 +111,47 @@ public class Client {
   }
 
 
-  public String getActive() {
+  public Byte getActive() {
     return active;
   }
 
-  public void setActive(String active) {
+  public void setActive(Byte active) {
     this.active = active;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Client)) return false;
+    Client client = (Client) o;
+    return clientId == client.clientId &&
+            Objects.equals(firstName, client.firstName) &&
+            Objects.equals(middleName, client.middleName) &&
+            Objects.equals(lastname, client.lastname) &&
+            Objects.equals(passportNumber, client.passportNumber) &&
+            Objects.equals(address, client.address) &&
+            Objects.equals(email, client.email) &&
+            Objects.equals(phone, client.phone) &&
+            Objects.equals(active, client.active);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(clientId, firstName, middleName, lastname, passportNumber, address, email, phone, active);
+  }
+
+  @Override
+  public String toString() {
+    return "Client{" +
+            "clientId=" + clientId +
+            ", firstName='" + firstName + '\'' +
+            ", middleName='" + middleName + '\'' +
+            ", lastname='" + lastname + '\'' +
+            ", passportNumber='" + passportNumber + '\'' +
+            ", address='" + address + '\'' +
+            ", email='" + email + '\'' +
+            ", phone='" + phone + '\'' +
+            ", active='" + active + '\'' +
+            '}';
+  }
 }

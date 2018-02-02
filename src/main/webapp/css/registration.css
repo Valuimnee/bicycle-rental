@@ -1,9 +1,13 @@
 .long-label{
     min-width: 182px;
+    text-align: right;
+    padding-right: 10px;
 }
 .register-block{
     margin: 0 auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
+    margin-right: 4rem;
+    /*margin-bottom: 4rem;*/
 }
 form[name="register"]{
     margin:0 auto;
