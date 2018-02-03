@@ -23,6 +23,9 @@ public class UserDAOImpl implements UserDAO {
     private static final String FIND_BY_LOGIN = "SELECT * FROM `user` WHERE `login`=?";
     private static final String FIND_ID_BY_LOGIN = "SELECT `id` FROM `user` WHERE `login`=?";
     private static final String ADD_USER_CLIENT = "INSERT INTO `user` (`login`, `password`, `salt`, `role`) VALUES (?, ?, ?, 'client')";
+    private static final String UPDATE_LOGIN = "UPDATE `user` SET `login`=? WHERE `id`=?";
+    private static final String UPDATE_HASH_SALT = "UPDATE `user` SET `password`=?, `salt`=? WHERE `id`=?";
+    private static final String DELETE_BY_ID = "DELETE FROM `user` WHERE `id`=?";
 
     @Override
     public User findByLogin(String login) throws DAOException {
@@ -80,6 +83,57 @@ public class UserDAOImpl implements UserDAO {
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding user.", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public void updateLogin(long id, String login) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(UPDATE_LOGIN);
+            statement.setString(1, login);
+            statement.setLong(2, id);
+            statement.executeUpdate();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error occurred while updating login.", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public void updateHashSalt(User user) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(UPDATE_HASH_SALT);
+            statement.setString(1, user.getPassword());
+            statement.setString(2, user.getSalt());
+            statement.setLong(3, user.getId());
+            statement.executeUpdate();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error occurred while updating password and salt.", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public void deleteById(long id) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(DELETE_BY_ID);
+            statement.setLong(1, id);
+            statement.execute();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error occurred while deleting user.", e);
         } finally {
             close(statement, connection);
         }

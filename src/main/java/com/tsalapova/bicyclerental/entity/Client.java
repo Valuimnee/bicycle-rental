@@ -5,15 +5,15 @@ import javax.persistence.Column;
 import java.util.Objects;
 
 public class Client {
-  @Column
+  @Column(name = "client_id")
   private long clientId;
-  @Column
+  @Column(name = "first_name")
   private String firstName;
-  @Column
+  @Column(name="middle_name")
   private String middleName;
   @Column
   private String lastname;
-  @Column
+  @Column(name = "passport_number")
   private String passportNumber;
   @Column
   private String address;

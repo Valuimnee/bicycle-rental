@@ -11,7 +11,7 @@ public class ParameterValidator {
     private final static String LOGIN_REGEX="^[-\\w.]{4,20}$";
     private static final String NAME_REGEX = "^([\\p{L}'][ \\p{L}'-]*\\p{L}|\\p{L}[\\p{L}'-]*)$";
     private static final String ADDRESS_REGEX="^([\\p{L}.,-/\\d]+\\s+)*[\\p{L}.,-/\\d]+$";
-    private final static String PASSPORT_NUMBER_REGEX="^(AB|BM|HB|KH|MP|MC|KB|PP)[0-9]{7}$";
+    private final static String PASSPORT_NUMBER_REGEX="^(AB|BM|HB|KH|MP|MC|KB|PP)\\d{7}$";
     private final static String EMAIL_REGEX="^[\\w-+]+(\\.\\w+)*@[\\w-]+(\\.\\w+)*(\\.[a-z]{2,})$";
     private static final String PHONE_REGEX = "^\\d{12}$";
 

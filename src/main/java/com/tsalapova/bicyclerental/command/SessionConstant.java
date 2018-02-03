@@ -1,6 +1,7 @@
 package com.tsalapova.bicyclerental.command;
 
 import com.tsalapova.bicyclerental.entity.User;
+import com.tsalapova.bicyclerental.entity.UserRole;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,9 +18,9 @@ public class SessionConstant {
         session.setAttribute(SessionConstant.ID, user.getId());
         session.setAttribute(SessionConstant.LOGIN, user.getLogin());
 
-        if(user.getRole().equals("admin")) {
+        if(user.getRole().equals(UserRole.ADMIN.getName())) {
             session.setAttribute(SessionConstant.ROLE, SessionConstant.ROLE_NAME.ADMINISTRATOR.name().toLowerCase());
-        } else if (user.getRole().equals("client")) {
+        } else if (user.getRole().equals(UserRole.CLIENT.getName())) {
             session.setAttribute(SessionConstant.ROLE, SessionConstant.ROLE_NAME.USER.name().toLowerCase());
         }
     }

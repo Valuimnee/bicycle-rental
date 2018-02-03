@@ -48,5 +48,11 @@
                 </div>
             </li>
         </ul>
+        <div class="nav-item dropdown">
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.login}</button>
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="submit" name="command" value="account"><fmt:message key="menubar.account"/></button>
+            </div>
+        </div>
     </form>
 </nav>

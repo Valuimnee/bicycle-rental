@@ -15,19 +15,17 @@ import java.util.ArrayList;
  * @version 1.0, 1/3/2018
  */
 public class LoginCommand implements ActionCommand {
-    private static final String LOGIN = "login";
-    private static final String PASSWORD = "password";
-    private static final String WRONG = "wrong";
-
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        String login = request.getParameter(LOGIN);
-        String password = request.getParameter(PASSWORD);
+        String login = request.getParameter(DocumentConstant.LOGIN);
+        String password = request.getParameter(DocumentConstant.PASSWORD);
+
         ParameterValidator validator=new ParameterValidator();
         if(!validator.validateLogin(login)||!validator.validatePassword(password)){
-            request.setAttribute(WRONG, "Invalid login or password, please try again");
+            request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
             return PageConstant.LOGIN;
         }
+
         User user;
         try {
             user = new UserLogicImpl().login(login, password);
@@ -39,7 +37,7 @@ public class LoginCommand implements ActionCommand {
             new SessionConstant().setUserSession(session,user);
             return getStartPage(request);
         } else {
-            request.setAttribute(WRONG, "Invalid login or password, please try again");
+            request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
             return PageConstant.LOGIN;
         }
     }

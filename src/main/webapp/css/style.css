@@ -9,3 +9,6 @@ form {
     margin: 0;
     max-width: none;
 }
+.menu-user{
+    min-width: 150px;
+}

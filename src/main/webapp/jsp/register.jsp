@@ -13,8 +13,6 @@
 <body>
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
-<%--<jsp:forward page="startpage/"/>--%>
-<%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
 <script src="/js/register.js"></script>
 <main class="container-fluid mb-5">
     <div class="register-block">

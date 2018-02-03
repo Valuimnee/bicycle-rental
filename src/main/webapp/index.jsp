@@ -17,9 +17,9 @@
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
 <jsp:include page="/jsp/component/menubar.jsp"/>
-<main class="container">
+<main class="container-fluid mt-4 mb-5">
     <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
-    <c:if test="${requestScope.containsKey('message')}"><p class="message">${requestScope.message}</p></c:if>
+    <c:if test="${requestScope.containsKey('message')}"><p class="text-center"><fmt:message  key="message.${requestScope.message}"/></p></c:if>
     <c:choose>
         <c:when test="${requestScope.content=='bikes'}">
             <jsp:include page="/jsp/list/autos.jsp"/>
@@ -30,11 +30,11 @@
         <c:when test="${requestScope.content=='bike'}">
             <jsp:include page="/jsp/entity/bike.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='profile'}">
-            <jsp:include page="/jsp/entity/client.jsp"/>
+        <c:when test="${requestScope.content=='account'}">
+            <jsp:include page="/jsp/entity/account.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='client-account'}">
-            <jsp:include page="/jsp/entity/login.jsp"/>
+        <c:when test="${requestScope.content=='profile'}">
+            <jsp:include page="/jsp/entity/profile.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='date-form'}">
             <jsp:include page="/jsp/entity/date-interval.jsp"/>

@@ -22,8 +22,8 @@ import java.io.IOException;
  */
 @WebServlet(urlPatterns = "/control")
 public class InitialController extends HttpServlet {
-    private static final String COMMAND = "command";
     private static final Logger LOGGER = LogManager.getLogger(InitialController.class);
+    private static final String COMMAND = "command";
 
     @Override
     public void init() throws ServletException {

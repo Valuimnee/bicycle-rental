@@ -17,10 +17,8 @@
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
 <jsp:include page="/jsp/component/adminbar.jsp"/>
-<div class="content">
-    <%--<jsp:forward page="startpage/"/>--%>
-    <%--<c:if test="${sessionScope.get('result')!=null}"><br><p id="result">${sessionScope.get('result')}</p></c:if>--%>
-    <c:if test="${requestScope.containsKey('message')}"><p class="message">${requestScope.message}</p></c:if>
+<main class="container-fluid mt-4 mb-5">
+    <c:if test="${requestScope.containsKey('message')}"><p class="text-center"><fmt:message key="message.${requestScope.message}"/></p></c:if>
     <c:choose>
         <c:when test="${requestScope.content=='admins'}">
             <jsp:include page="/jsp/list/admins.jsp"/>
@@ -46,8 +44,11 @@
         <c:when test="${requestScope.content=='find-bike-client-form'}">
             <jsp:include page="/jsp/entity/find-auto-client.jsp"/>
         </c:when>
+        <c:when test="${requestScope.content=='account'}">
+            <jsp:include page="/jsp/entity/account.jsp"/>
+        </c:when>
     </c:choose>
-</div>
+</main>
 <jsp:include page="/jsp/component/footer.jsp"/>
 </body>
 </html>

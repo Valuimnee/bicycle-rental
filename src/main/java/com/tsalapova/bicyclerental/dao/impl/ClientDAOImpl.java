@@ -23,7 +23,8 @@ public class ClientDAOImpl implements ClientDAO {
             " `passport_number`, `address`, `email`, `phone`, `active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT `client_id`, `first_name`, `middle_name`, `lastname`," +
             " `passport_number`, `address`, `email`, `phone`, `active` FROM `client` WHERE `client_id`=?";
-
+    private static final String UPDATE_BY_ID = "UPDATE `client` SET `first_name`=?, `middle_name`=?, `lastname`=?," +
+            " `passport_number`=?, `address`=?, `email`=?, `phone`=? WHERE `client_id`=?";
 
     @Override
     public void add(Client client) throws DAOException {
@@ -69,5 +70,28 @@ public class ClientDAOImpl implements ClientDAO {
             close(statement, connection);
         }
         return client;
+    }
+
+    @Override
+    public void update(Client client) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(UPDATE_BY_ID);
+            statement.setString(1, client.getFirstName());
+            statement.setString(2, client.getMiddleName());
+            statement.setString(3, client.getLastname());
+            statement.setString(4, client.getPassportNumber());
+            statement.setString(5, client.getAddress());
+            statement.setString(6, client.getEmail());
+            statement.setString(7, client.getPhone());
+            statement.setLong(8, client.getClientId());
+            statement.executeUpdate();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while updating client.", e);
+        } finally {
+            close(statement, connection);
+        }
     }
 }
