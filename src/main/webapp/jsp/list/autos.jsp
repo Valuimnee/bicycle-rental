@@ -7,16 +7,16 @@
                 <th><c:out value="${theader}"/></th>
             </c:forEach>
         </tr>
-        <c:forEach items="${autos}" var="rental">
+        <c:forEach items="${autos}" var="bicycle">
             <tr>
-                <td><c:out value="${rental.make}"/></td>
-                <td><c:out value="${rental.model}"/></td>
-                <td><c:out value="${rental.displacement}"/></td>
-                <td><c:out value="${rental.fuel}"/></td>
-                <td><c:out value="${rental.registrationNumber}"/></td>
-                <td><c:out value="${rental.vin}"/></td>
-                <td><c:out value="${rental.available}"/></td>
-                <td><c:out value="${rental.pricePh}"/></td>
+                <td><c:out value="${bicycle.make}"/></td>
+                <td><c:out value="${bicycle.model}"/></td>
+                <td><c:out value="${bicycle.displacement}"/></td>
+                <td><c:out value="${bicycle.fuel}"/></td>
+                <td><c:out value="${bicycle.registrationNumber}"/></td>
+                <td><c:out value="${bicycle.vin}"/></td>
+                <td><c:out value="${bicycle.available}"/></td>
+                <td><c:out value="${bicycle.pricePh}"/></td>
             </tr>
         </c:forEach>
     </table>

@@ -7,8 +7,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html; charset=utf-8" language="java" pageEncoding="UTF-8" %>
 <nav class="navbar navbar-expand-md navbar-collapse collapse navbar-light bd-color pl-md-4">
-    <form name="menu" class="form-inline" method="post" action="/control">
-        <ul class="navbar-nav">
+    <form name="menu" class="form-inline container-fluid pr-0 pl-0" method="post" action="/control">
+        <ul class="navbar-nav container-fluid">
             <li class="nav-item dropdown mr-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.admins"/></button>
                 <div class="dropdown-menu">

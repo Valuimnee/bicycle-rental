@@ -7,15 +7,15 @@
                 <th><c:out value="${theader}"/></th>
             </c:forEach>
         </tr>
-        <c:forEach items="${requestScope.getOrDefault('rentals', null)}" var="rental">
+        <c:forEach items="${requestScope.getOrDefault('rentals', null)}" var="bicycle">
             <tr>
-                <td><c:out value="${rental.rentalId}"/></td>
-                <td><c:out value="${rental.autoId}"/></td>
-                <td><c:out value="${rental.getPickupDateString()}"/></td>
-                <td><c:out value="${rental.hours}"/></td>
-                <td><c:out value="${rental.total}"/></td>
-                <td><c:out value="${rental.status}"/></td>
-                <td><c:out value="${rental.secondDriver}"/></td>
+                <td><c:out value="${bicycle.rentalId}"/></td>
+                <td><c:out value="${bicycle.autoId}"/></td>
+                <td><c:out value="${bicycle.getPickupDateString()}"/></td>
+                <td><c:out value="${bicycle.hours}"/></td>
+                <td><c:out value="${bicycle.total}"/></td>
+                <td><c:out value="${bicycle.status}"/></td>
+                <td><c:out value="${bicycle.secondDriver}"/></td>
             </tr>
         </c:forEach>
     </table>

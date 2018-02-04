@@ -12,3 +12,11 @@ form {
 .menu-user{
     min-width: 150px;
 }
+form[name="locations-form"] {
+    margin: 2rem auto;
+    /*max-width: 920px;*/
+}
+.location-card{
+    margin:1rem;
+    padding: 1rem;
+}

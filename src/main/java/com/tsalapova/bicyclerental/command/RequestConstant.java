@@ -7,10 +7,14 @@ package com.tsalapova.bicyclerental.command;
 public class RequestConstant {
     public static final String MESSAGE = "message";
     public static final String NO_PROFILE = "no-profile";
+    public static final String NO_LOCATIONS = "no-locations";
+    public static final String NO_BICYCLES = "no-bicycles";
 
     public static final String CONTENT = "content";
     public static final String ACCOUNT = "account";
     public static final String PROFILE = "profile";
+    public static final String LOCATIONS = "locations";
+    public static final String BICYCLES = "bicycles";
 
     public static final String WRONG = "wrong";
     public static final String WRONG_INFO = "wrong-info";

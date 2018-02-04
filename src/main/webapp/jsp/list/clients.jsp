@@ -7,16 +7,16 @@
                 <th><c:out value="${theader}"/></th>
             </c:forEach>
         </tr>
-        <c:forEach items="${requestScope.getOrDefault('clients', null)}" var="rental">
+        <c:forEach items="${requestScope.getOrDefault('clients', null)}" var="bicycle">
             <tr>
                 <%--<td><c:out value="${client.clientId}"/></td>--%>
-                <td><c:out value="${rental.login}"/></td>
-                <td><c:out value="${rental.password}"/></td>
-                <td><c:out value="${rental.fullname}"/></td>
-                <td><c:out value="${rental.address}"/></td>
-                <td><c:out value="${rental.passport}"/></td>
-                <td><c:out value="${rental.driversLicense}"/></td>
-                <td><c:out value="${rental.regular}"/></td>
+                <td><c:out value="${bicycle.login}"/></td>
+                <td><c:out value="${bicycle.password}"/></td>
+                <td><c:out value="${bicycle.fullname}"/></td>
+                <td><c:out value="${bicycle.address}"/></td>
+                <td><c:out value="${bicycle.passport}"/></td>
+                <td><c:out value="${bicycle.driversLicense}"/></td>
+                <td><c:out value="${bicycle.regular}"/></td>
             </tr>
         </c:forEach>
     </table>

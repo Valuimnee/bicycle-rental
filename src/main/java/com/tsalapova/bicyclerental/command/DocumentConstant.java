@@ -18,4 +18,7 @@ public class DocumentConstant {
     public static final String EMAIL = "email";
 
     public static final String LANG = "lang";
+
+    public static final String LOCATION_ID = "location-id";
+
 }

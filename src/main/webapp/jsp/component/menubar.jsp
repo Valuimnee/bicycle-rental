@@ -10,19 +10,21 @@
     <form name="menu" class="form-inline navbar-collapse container-fluid pr-0" method="post" action="/control">
         <ul class="navbar-nav  mr-auto pr-0">
             <li class="nav-item dropdown mr-md-2">
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.locations"/></button>
-                <div class="dropdown-menu">
+                <button type="submit" name="command" value="locations" class="btn btn-primary <%--dropdown-toggle dropdown-toggle-split--%>"
+                        <%--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"--%>><fmt:message key="menubar.locations"/></button>
+               <%-- <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="all-autos">View all locations</button>
                     <c:if test="${sessionScope.role=='user'}">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all available bikes</button>
                     <button class="dropdown-item" type="submit" name="command" value="choose-date-interval">Rent a bike</button>
                     </c:if>
-                </div>
+                </div>--%>
             </li>
             <li class="nav-item dropdown mr-md-2">
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.bikes"/></button>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.bikes"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="all-autos">View all bikes</button>
+                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles">View all bikes</button>
                     <button class="dropdown-item" type="submit" name="command" value="all-autos">View all bikes of location</button>
                     <c:if test="${sessionScope.role=='user'}">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all rented bikes</button>
