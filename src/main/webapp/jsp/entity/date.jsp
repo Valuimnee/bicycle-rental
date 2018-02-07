@@ -7,5 +7,5 @@
         <input type="datetime-local" id="start-date" name="start-date" size="50" value="" required="required"/></p>
     <p class="mb-2"><label for="hours" class="long-label"><b><fmt:message key="date.duration"/>: </b></label>
         <input type="number" min="1" max="168" id="hours" name="hours" size="50" value="" required="required"/></p>
-    <p><button class="btn align-right" type="submit" name="command" value="select-date">Select</button></p>
+    <p class="container text-right"><button class="btn" type="submit" name="command" value="select-date">Select</button></p>
 </form>

@@ -22,6 +22,8 @@ public class BicycleDAOImpl implements BicycleDAO {
             " `type`, `price_ph` FROM `bicycle` WHERE `location_id`=?";
     private static final String FIND_ALL = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
             " `type`, `price_ph` FROM `bicycle`";
+    private static final String FIND_BY_RENTALS_CLIENT_ID = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
+            " `type`, `price_ph` FROM `bicycle` WHERE `bicycle_id` IN (SELECT `bicycle_id` FROM `rental` WHERE `client_id`=?)";
 
     @Override
     public List<Bicycle> findByLocation(long locationId) throws DAOException {
@@ -76,5 +78,22 @@ public class BicycleDAOImpl implements BicycleDAO {
             close(statement, connection);
         }
         return bicycle;
+    }
+
+    @Override
+    public List<Bicycle> findByRentalsClientId(long clientId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(FIND_BY_RENTALS_CLIENT_ID);
+            statement.setLong(1, clientId);
+            ResultSet rs = statement.executeQuery();
+            return new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding the bicycle", e);
+        } finally {
+            close(statement, connection);
+        }
     }
 }

@@ -44,9 +44,9 @@
         <c:when test="${requestScope.content=='date-form'}">
             <jsp:include page="/jsp/entity/date.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='choose-bike'}">
+        <%--<c:when test="${requestScope.content=='choose-bike'}">
             <jsp:include page="/jsp/list/rent-autos.jsp"/>
-        </c:when>
+        </c:when>--%>
     </c:choose>
 </main>
 <jsp:include page="/jsp/component/footer.jsp"/>

@@ -27,7 +27,8 @@ public class SelectDateCommand implements ActionCommand {
         ParameterValidator validator = new ParameterValidator();
         if (!validator.validateStartTime(timestamp) || !validator.validateHours(hours)) {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
-            return PageConstant.DATE;
+            request.setAttribute(RequestConstant.CONTENT, RequestConstant.DATE);
+            return PageConstant.MAIN;
         }
 
         Location location = (Location) session.getAttribute(SessionConstant.LOCATION);

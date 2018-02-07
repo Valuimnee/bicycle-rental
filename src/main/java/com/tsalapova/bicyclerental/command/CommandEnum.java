@@ -9,7 +9,8 @@ public enum CommandEnum {
     ACCOUNT(new AccountCommand()), EDIT_ACCOUNT(new EditAccountCommand()), PROFILE(new ProfileCommand()),
     EDIT_PROFILE(new EditProfileCommand()), DELETE_ACCOUNT(new DeleteAccountCommand()),
     LOCATIONS(new LocationsCommand()), ALL_BICYCLES(new AllBicyclesCommand()), BICYCLES_BY_LOCATION(new BicyclesByLocationCommand()),
-    SELECT_BICYCLE(new SelectBicycleCommand()), SELECT_DATE(new SelectDateCommand()), RENT(new RentCommand());
+    SELECT_BICYCLE(new SelectBicycleCommand()), SELECT_DATE(new SelectDateCommand()), RENT(new RentCommand()),
+    CLIENT_RENTALS(new ClientRentalsCommand());
 
     private ActionCommand command;
 

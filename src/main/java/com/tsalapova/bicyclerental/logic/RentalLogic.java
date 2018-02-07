@@ -1,7 +1,9 @@
 package com.tsalapova.bicyclerental.logic;
 
+import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.LogicException;
+import javafx.util.Pair;
 
 import java.util.List;
 
@@ -11,5 +13,5 @@ import java.util.List;
  */
 public interface RentalLogic {
     void createRental(Rental rental) throws LogicException;
-    List<Rental> displayByClientId(long clientId) throws LogicException;
+    Pair<List<Rental>, List<Bicycle>> displayByClientId(long clientId) throws LogicException;
 }

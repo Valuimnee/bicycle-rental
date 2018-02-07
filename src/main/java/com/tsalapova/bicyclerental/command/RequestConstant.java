@@ -17,6 +17,7 @@ public class RequestConstant {
     public static final String BICYCLES = "bicycles";
     public static final String DATE = "date";
     public static final String CONFIRM_RENTAL = "confirm-rental";
+    public static final String RENTALS = "rentals";
 
     public static final String WRONG = "wrong";
     public static final String WRONG_INFO = "wrong-info";
@@ -27,4 +28,5 @@ public class RequestConstant {
     public static final String LOCATION = "location";
     public static final String BICYCLE = "bicycle";
     public static final String RENTAL = "rental";
-}
+    public static final String NO_RENTALS = "no-rentals";
+    }

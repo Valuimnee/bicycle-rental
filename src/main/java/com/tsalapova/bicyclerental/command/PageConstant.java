@@ -9,7 +9,6 @@ public class PageConstant {
     public static final String LOGIN = "/jsp/login.jsp";
     public static final String ADMIN = "/jsp/cabinet.jsp";
     public static final String REGISTER = "/jsp/register.jsp";
-    public static final String DATE = "/jsp/entity/date.jsp";
     public static final String ERROR = "/jsp/error.jsp";
 
 }
