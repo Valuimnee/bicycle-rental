@@ -45,7 +45,7 @@ public class ConnectionPool {
         //Protecting from creation of another instance through Reflection API
         if (instance != null) {
             LOGGER.log(Level.FATAL, "Trying to create second instance of singleton class ConnectionPool");
-            throw new RuntimeException("Instance of ConnectionPool already exists.");
+            throw new RuntimeException("Instance of ConnectionPool already exists");
         }
 
         semaphore=new Semaphore(POOL_SIZE, true);

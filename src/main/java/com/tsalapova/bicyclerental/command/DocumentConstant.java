@@ -7,8 +7,10 @@ package com.tsalapova.bicyclerental.command;
 public class DocumentConstant {
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
-
     public static final String PASSWORD_2 = "password2";
+    public static final String NEW_PASSWORD = "new-password";
+    public static final String NEW_PASSWORD2 = "new-password2";
+
     public static final String FIRST_NAME = "first-name";
     public static final String MIDDLE_NAME = "middle-name";
     public static final String LASTNAME = "lastname";
@@ -20,5 +22,8 @@ public class DocumentConstant {
     public static final String LANG = "lang";
 
     public static final String LOCATION_ID = "location-id";
+    public static final String BICYCLE_ID = "bicycle-id";
 
+    public static final String START_DATE = "start-date";
+    public static final String HOURS = "hours";
 }

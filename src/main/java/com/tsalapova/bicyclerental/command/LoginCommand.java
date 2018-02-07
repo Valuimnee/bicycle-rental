@@ -30,7 +30,7 @@ public class LoginCommand implements ActionCommand {
         try {
             user = new UserLogicImpl().login(login, password);
         } catch (LogicException e) {
-            throw new CommandException("Error while logging in.", e);
+            throw new CommandException("Error while logging in", e);
         }
         if (user != null) {
             HttpSession session = request.getSession(true);

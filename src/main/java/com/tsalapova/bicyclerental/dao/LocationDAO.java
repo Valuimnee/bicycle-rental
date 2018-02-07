@@ -10,5 +10,6 @@ import java.util.List;
  * @version 1.0, 2/3/2018
  */
 public interface LocationDAO extends GeneralDAO<Location> {
+    Location findById(long locationId) throws DAOException;
     List<Location> findAll() throws DAOException;
 }

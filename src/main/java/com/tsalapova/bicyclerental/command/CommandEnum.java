@@ -8,7 +8,8 @@ public enum CommandEnum {
     LOGIN(new LoginCommand()), LOGOUT(new LogoutCommand()), LANGUAGE(new LanguageCommand()), REGISTER(new RegisterCommand()),
     ACCOUNT(new AccountCommand()), EDIT_ACCOUNT(new EditAccountCommand()), PROFILE(new ProfileCommand()),
     EDIT_PROFILE(new EditProfileCommand()), DELETE_ACCOUNT(new DeleteAccountCommand()),
-    LOCATIONS(new LocationsCommand()), ALL_BICYCLES(new AllBicyclesCommand()), BICYCLES_BY_LOCATION(new BicyclesByLocationCommand());
+    LOCATIONS(new LocationsCommand()), ALL_BICYCLES(new AllBicyclesCommand()), BICYCLES_BY_LOCATION(new BicyclesByLocationCommand()),
+    SELECT_BICYCLE(new SelectBicycleCommand()), SELECT_DATE(new SelectDateCommand()), RENT(new RentCommand());
 
     private ActionCommand command;
 

@@ -31,7 +31,7 @@ class ProxyConnectionFactory {
         ResourceBundle rb = ResourceBundle.getBundle("db");
         String driver = "com.mysql.cj.jdbc.Driver";
         if (rb == null) {
-            throw new RuntimeException("Database properties file not found.");
+            throw new RuntimeException("Database properties file not found");
         }
         URL = rb.getString("url");
         driver = rb.getString("driver");
@@ -45,8 +45,8 @@ class ProxyConnectionFactory {
             LOGGER.log(Level.FATAL, "ProxyConnectionFactory failed to register database driver: " + driver, e);
             throw new RuntimeException("Can not register database driver: " + driver + ".", e);
         } catch (IllegalAccessException | InstantiationException | ClassNotFoundException exc) {
-            LOGGER.log(Level.FATAL, "Database driver " + driver +" in database properties file is invalid.", exc);
-            throw new RuntimeException("Database driver in database properties file is invalid.", exc);
+            LOGGER.log(Level.FATAL, "Database driver " + driver +" in database properties file is invalid", exc);
+            throw new RuntimeException("Database driver in database properties file is invalid", exc);
         }
     }
 
@@ -54,8 +54,8 @@ class ProxyConnectionFactory {
         try {
             return new ProxyConnection(DriverManager.getConnection(URL, properties));
         } catch (SQLException e) {
-            LOGGER.log(Level.FATAL, "Connection to database: " + URL + " was not established.", e);
-            throw new RuntimeException("Connection to database: " + URL + " was not established.", e);
+            LOGGER.log(Level.FATAL, "Connection to database: " + URL + " was not established", e);
+            throw new RuntimeException("Connection to database: " + URL + " was not established", e);
         }
     }
 }

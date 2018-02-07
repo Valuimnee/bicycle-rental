@@ -16,7 +16,7 @@ import java.io.IOException;
  * @version 1.0, 2/2/2018
  * Class prevents direct access of jsp pages from browser
  */
-@WebFilter(urlPatterns = {"/jsp/*"}, initParams = {@WebInitParam(name = "MAIN", value = "/index.jsp")})
+@WebFilter(urlPatterns = {"/jsp/*"}, initParams = {@WebInitParam(name = "MAIN", value = PageConstant.MAIN)})
 public class JspAccessFilter implements Filter {
     private String mainPage;
 

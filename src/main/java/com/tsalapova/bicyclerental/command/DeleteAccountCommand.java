@@ -19,7 +19,7 @@ public class DeleteAccountCommand implements ActionCommand {
         try {
             new DeleteAccountLogicImpl().deleteClient((Long)session.getAttribute(SessionConstant.ID));
         } catch (LogicException e) {
-            throw new CommandException("Error occured on delete account", e);
+            throw new CommandException("Error occurred on delete account", e);
         }
         Enumeration<String> attributes=session.getAttributeNames();
         String attribute;

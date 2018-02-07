@@ -19,7 +19,7 @@ public class LocationsCommand implements ActionCommand {
         try {
             locations = new LocationLogicImpl().displayAll();
         } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying locations.", e);
+            throw new CommandException("Error occurred when displaying locations", e);
         }
         if(locations.isEmpty()){
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_LOCATIONS);

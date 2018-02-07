@@ -26,14 +26,14 @@
         <c:when test="${requestScope.content=='bicycles'}">
             <jsp:include page="/jsp/list/bicycles.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='bikes'}">
-            <jsp:include page="/jsp/list/autos.jsp"/>
+        <c:when test="${requestScope.content=='date'}">
+            <jsp:include page="/jsp/entity/date.jsp"/>
+        </c:when>
+        <c:when test="${requestScope.content=='confirm-rental'}">
+            <jsp:include page="/jsp/entity/confirm-rental.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='rentals'}">
             <jsp:include page="/jsp/list/rentals.jsp"/>
-        </c:when>
-        <c:when test="${requestScope.content=='bike'}">
-            <jsp:include page="/jsp/entity/bike.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='account'}">
             <jsp:include page="/jsp/entity/account.jsp"/>
@@ -42,7 +42,7 @@
             <jsp:include page="/jsp/entity/profile.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='date-form'}">
-            <jsp:include page="/jsp/entity/date-interval.jsp"/>
+            <jsp:include page="/jsp/entity/date.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='choose-bike'}">
             <jsp:include page="/jsp/list/rent-autos.jsp"/>

@@ -3,6 +3,9 @@ package com.tsalapova.bicyclerental.validator;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.Location;
 
+import java.sql.Timestamp;
+import java.util.Date;
+
 /**
  * @author TsalapovaMD
  * @version 1.0, 1/3/2018
@@ -46,6 +49,14 @@ public class ParameterValidator {
 
     public boolean validateEmail(String email) {
         return email != null && email.matches(EMAIL_REGEX);
+    }
+
+    public boolean validateHours(int hours) {
+        return hours >= 1 && hours <= 168;
+    }
+
+    public boolean validateStartTime(Timestamp timestamp) {
+        return timestamp.after(Timestamp.valueOf("2017-01-01 00:00:00"));
     }
 
     public boolean validateClientInfo(Client client) {

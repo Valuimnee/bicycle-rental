@@ -13,6 +13,10 @@ public class SessionConstant {
     public static final String ID = "id";
     public static final String ROLE = "role";
     public static final String LOGIN = "login";
+    public static final String LOCATION = "location";
+    public static final String BICYCLE = "bicycle";
+    public static final String RENTAL = "rental";
+
 
     void setUserSession(HttpSession session, User user){
         session.setAttribute(SessionConstant.ID, user.getId());

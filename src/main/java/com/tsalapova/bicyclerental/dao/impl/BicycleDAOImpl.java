@@ -3,7 +3,6 @@ package com.tsalapova.bicyclerental.dao.impl;
 import com.tsalapova.bicyclerental.dao.BicycleDAO;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.entity.Location;
 import com.tsalapova.bicyclerental.exception.ConnectionPoolException;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.mapper.POJOMapper;
@@ -17,6 +16,8 @@ import java.util.List;
  * @version 1.0, 1/3/2018
  */
 public class BicycleDAOImpl implements BicycleDAO {
+    private static final String FIND_BY_ID = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
+            " `type`, `price_ph` FROM `bicycle` WHERE `bicycle_id`=?";
     private static final String FIND_BY_LOCATION_ID = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
             " `type`, `price_ph` FROM `bicycle` WHERE `location_id`=?";
     private static final String FIND_ALL = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
@@ -33,7 +34,7 @@ public class BicycleDAOImpl implements BicycleDAO {
             ResultSet rs = statement.executeQuery();
             return new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while finding bicycles by location id.", e);
+            throw new DAOException("Error while finding bicycles by location id", e);
         } finally {
             close(statement, connection);
         }
@@ -49,9 +50,31 @@ public class BicycleDAOImpl implements BicycleDAO {
             ResultSet rs = statement.executeQuery(FIND_ALL);
             return new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while finding all bicycles.", e);
+            throw new DAOException("Error while finding all bicycles", e);
         } finally {
             close(statement, connection);
         }
+    }
+
+    @Override
+    public Bicycle findById(long bicycleId) throws DAOException {
+        Bicycle bicycle=null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(FIND_BY_ID);
+            statement.setLong(1, bicycleId);
+            ResultSet rs = statement.executeQuery();
+            List<Bicycle> bicycles = new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
+            if (!bicycles.isEmpty()) {
+                bicycle = bicycles.get(0);
+            }
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding the bicycle", e);
+        } finally {
+            close(statement, connection);
+        }
+        return bicycle;
     }
 }

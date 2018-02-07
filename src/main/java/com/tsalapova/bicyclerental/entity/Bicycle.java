@@ -8,7 +8,7 @@ import java.util.Objects;
  * @version 1.0, 1/3/2018
  */
 public class Bicycle implements Entity {
-    @Column(name = "bycicle_id")
+    @Column(name = "bicycle_id")
     private long bicycleId;
     @Column(name = "location_id")
     private long locationId;

@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO {
                 user = users.get(0);
             }
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while finding the user by login.", e);
+            throw new DAOException("Error while finding the user by login", e);
         } finally {
             close(statement, connection);
         }
@@ -82,7 +82,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(3, user.getSalt());
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while adding user.", e);
+            throw new DAOException("Error while adding user", e);
         } finally {
             close(statement, connection);
         }
@@ -99,7 +99,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setLong(2, id);
             statement.executeUpdate();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error occurred while updating login.", e);
+            throw new DAOException("Error occurred while updating login", e);
         } finally {
             close(statement, connection);
         }
@@ -117,7 +117,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setLong(3, user.getId());
             statement.executeUpdate();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error occurred while updating password and salt.", e);
+            throw new DAOException("Error occurred while updating password and salt", e);
         } finally {
             close(statement, connection);
         }
@@ -133,7 +133,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setLong(1, id);
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error occurred while deleting user.", e);
+            throw new DAOException("Error occurred while deleting user", e);
         } finally {
             close(statement, connection);
         }

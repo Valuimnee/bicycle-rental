@@ -14,11 +14,20 @@ import java.util.List;
  */
 public class LocationLogicImpl implements LocationLogic {
     @Override
+    public Location displayById(long locationId) throws LogicException {
+        try {
+            return new LocationDAOImpl().findById(locationId);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when displaying location", e);
+        }
+    }
+
+    @Override
     public List<Location> displayAll() throws LogicException {
         try {
             return new LocationDAOImpl().findAll();
         } catch (DAOException e) {
-            throw new LogicException("Error occurred when displaying locations.", e);
+            throw new LogicException("Error occurred when displaying locations", e);
         }
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
  * @version 1.0, 2/4/2018
  */
 public interface BicycleLogic {
+    Bicycle displayById(long bicycleId) throws LogicException;
     List<Bicycle> displayByLocation(long locationId) throws LogicException;
     List<Bicycle> displayAll() throws LogicException;
 }

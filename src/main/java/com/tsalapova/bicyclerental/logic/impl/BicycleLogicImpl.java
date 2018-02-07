@@ -14,6 +14,15 @@ import java.util.List;
  */
 public class BicycleLogicImpl implements BicycleLogic {
     @Override
+    public Bicycle displayById(long bicycleId) throws LogicException {
+        try {
+            return new BicycleDAOImpl().findById(bicycleId);
+        } catch (DAOException e) {
+            throw new LogicException("Error while displaying the bike", e);
+        }
+    }
+
+    @Override
     public List<Bicycle> displayByLocation(long locationId) throws LogicException {
         try {
             return new BicycleDAOImpl().findByLocation(locationId);

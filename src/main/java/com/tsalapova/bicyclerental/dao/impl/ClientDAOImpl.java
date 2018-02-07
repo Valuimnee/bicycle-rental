@@ -44,7 +44,7 @@ public class ClientDAOImpl implements ClientDAO {
             statement.setByte(9, client.getActive());
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while adding client.", e);
+            throw new DAOException("Error while adding client", e);
         } finally {
             close(statement, connection);
         }
@@ -65,7 +65,7 @@ public class ClientDAOImpl implements ClientDAO {
                 client = clients.get(0);
             }
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while finding the client.", e);
+            throw new DAOException("Error while finding the client", e);
         } finally {
             close(statement, connection);
         }
@@ -89,7 +89,7 @@ public class ClientDAOImpl implements ClientDAO {
             statement.setLong(8, client.getClientId());
             statement.executeUpdate();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while updating client.", e);
+            throw new DAOException("Error while updating client", e);
         } finally {
             close(statement, connection);
         }

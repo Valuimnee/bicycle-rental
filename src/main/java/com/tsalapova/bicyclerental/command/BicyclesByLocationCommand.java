@@ -21,7 +21,7 @@ public class BicyclesByLocationCommand implements ActionCommand {
         try {
             bicycles=new BicycleLogicImpl().displayByLocation(locationId);
         } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying bicycles of location.", e);
+            throw new CommandException("Error occurred when displaying bicycles of location", e);
         }
         if(bicycles.isEmpty()){
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_BICYCLES);

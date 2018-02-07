@@ -10,5 +10,6 @@ import java.util.List;
  * @version 1.0, 2/3/2018
  */
 public interface LocationLogic {
+    Location displayById(long locationId) throws LogicException;
     List<Location> displayAll() throws LogicException;
 }

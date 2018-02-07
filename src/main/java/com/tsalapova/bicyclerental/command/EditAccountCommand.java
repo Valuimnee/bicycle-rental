@@ -13,19 +13,14 @@ import javax.servlet.http.HttpSession;
  * @version 1.0, 2/3/2018
  */
 public class EditAccountCommand implements ActionCommand {
-    public static final String LOGIN = "login";
-    public static final String PASSWORD = "password";
-    public static final String NEW_PASSWORD = "new-password";
-    public static final String NEW_PASSWORD2 = "new-password2";
-
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession(true);
         String login = (String) session.getAttribute(SessionConstant.LOGIN);
-        String newLogin = request.getParameter(LOGIN);
-        String password = request.getParameter(PASSWORD);
-        String newPassword = request.getParameter(NEW_PASSWORD);
-        String newPassword2 = request.getParameter(NEW_PASSWORD2);
+        String newLogin = request.getParameter(DocumentConstant.LOGIN);
+        String password = request.getParameter(DocumentConstant.PASSWORD);
+        String newPassword = request.getParameter(DocumentConstant.NEW_PASSWORD);
+        String newPassword2 = request.getParameter(DocumentConstant.NEW_PASSWORD2);
 
         ParameterValidator validator = new ParameterValidator();
         if (!validator.validateLogin(newLogin) || !(password.isEmpty() && newPassword.isEmpty() && newPassword2.isEmpty() ||
