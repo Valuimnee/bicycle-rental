@@ -37,6 +37,7 @@ public class SelectBicycleCommand implements ActionCommand {
 
         session.setAttribute(SessionConstant.BICYCLE, bicycle);
         session.setAttribute(SessionConstant.LOCATION, location);
+        session.removeAttribute(SessionConstant.RENTAL);
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.DATE);
         return PageConstant.MAIN;
     }

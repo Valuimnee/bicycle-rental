@@ -23,6 +23,7 @@ public class DocumentConstant {
 
     public static final String LOCATION_ID = "location-id";
     public static final String BICYCLE_ID = "bicycle-id";
+    public static final String RENTAL_ID = "rental-id";
 
     public static final String START_DATE = "start-date";
     public static final String HOURS = "hours";

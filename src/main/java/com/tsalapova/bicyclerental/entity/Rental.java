@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import java.sql.Timestamp;
 import java.util.Objects;
 
-public class Rental {
+public class Rental implements Entity {
     @Column(name = "rental_id")
     private long rentalId;
     @Column(name = "client_id")

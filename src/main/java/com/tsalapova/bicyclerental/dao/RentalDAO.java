@@ -12,4 +12,6 @@ import java.util.List;
 public interface RentalDAO extends GeneralDAO<Rental> {
     void add(Rental rental) throws DAOException;
     List<Rental> findByClientId(long clientId) throws DAOException;
+    Rental findById(long rentalId) throws DAOException;
+    void cancelById(long rentalId) throws DAOException;
 }

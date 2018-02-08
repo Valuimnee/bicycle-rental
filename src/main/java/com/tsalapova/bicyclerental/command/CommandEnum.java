@@ -10,7 +10,8 @@ public enum CommandEnum {
     EDIT_PROFILE(new EditProfileCommand()), DELETE_ACCOUNT(new DeleteAccountCommand()),
     LOCATIONS(new LocationsCommand()), ALL_BICYCLES(new AllBicyclesCommand()), BICYCLES_BY_LOCATION(new BicyclesByLocationCommand()),
     SELECT_BICYCLE(new SelectBicycleCommand()), SELECT_DATE(new SelectDateCommand()), RENT(new RentCommand()),
-    CLIENT_RENTALS(new ClientRentalsCommand());
+    BACK_TO_DATE(new BackToDateCommand()), CLIENT_RENTALS(new ClientRentalsCommand()), RENTAL(new RentalCommand()),
+    EDIT_RENTAL(new EditRentalCommand()), CANCEL_RENTAL(new CancelRentalCommand());
 
     private ActionCommand command;
 

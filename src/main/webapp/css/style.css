@@ -18,5 +18,8 @@ form[name="locations-form"] {
 }
 .location-card{
     margin:1rem;
-    padding: 1rem;
+    /*padding: 1rem;*/
+}
+.clickable{
+    cursor: pointer;
 }

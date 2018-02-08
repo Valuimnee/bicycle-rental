@@ -21,8 +21,11 @@ import java.util.List;
 public class RentalDAOImpl implements RentalDAO {
     private static final String ADD_RENTAL = "INSERT INTO `rental` (`client_id`, `bicycle_id`, `start_time`, `hours`," +
             " `total`, `status`) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String FIND_BY_CLIENT_ID = "SELECT `client_id`, `bicycle_id`, `start_time`, `hours`," +
+    private static final String FIND_BY_CLIENT_ID = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
             " `total`, `status` FROM `rental` WHERE `client_id`=?";
+    private static final String FIND_BY_ID = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
+            " `total`, `status` FROM `rental` WHERE `rental_id`=?";
+    private static final String CANCEL_BY_ID = "UPDATE `rental` SET `status`='Canceled' WHERE `rental_id`=?";
 
     @Override
     public void add(Rental rental) throws DAOException {
@@ -56,6 +59,44 @@ public class RentalDAOImpl implements RentalDAO {
             return new POJOMapper<Rental>().mapPojos(rs, Rental.class);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding rentals by client id", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public Rental findById(long rentalId) throws DAOException {
+        Rental rental=null;
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(FIND_BY_ID);
+            statement.setLong(1, rentalId);
+            ResultSet rs = statement.executeQuery();
+            List<Rental> rentals= new POJOMapper<Rental>().mapPojos(rs, Rental.class);
+            if (!rentals.isEmpty()) {
+                rental = rentals.get(0);
+            }
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding rental by id", e);
+        } finally {
+            close(statement, connection);
+        }
+        return rental;
+    }
+
+    @Override
+    public void cancelById(long rentalId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(CANCEL_BY_ID);
+            statement.setLong(1, rentalId);
+            statement.executeUpdate();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while canceling rental", e);
         } finally {
             close(statement, connection);
         }

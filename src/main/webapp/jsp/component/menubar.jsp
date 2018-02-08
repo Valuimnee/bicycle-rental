@@ -24,7 +24,7 @@
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.bikes"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles">View all bikes</button>
+                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles"><fmt:message key="menubar.all-bikes"/></button>
                     <button class="dropdown-item" type="submit" name="command" value="all-autos">View bikes by type</button>
                     <%--<c:if test="${sessionScope.role=='user'}">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all rented bikes</button>
@@ -32,21 +32,21 @@
                     </c:if>--%>
                 </div>
             </li>
-            <c:if test="${sessionScope.role=='user'}">
-            <li class="nav-item dropdown mr-md-2">
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Rentals</button>
-                <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="client-rentals">View all rentals</button>
-                    <%--<button class="dropdown-item" type="submit" name="command" value="view-client-rentals">View current rentals</button>--%>
-                    <%--<button class="dropdown-item" type="submit" name="command" value="view-client-rentals">Choose rental</button>
-                    <button class="dropdown-item" type="submit" name="command" value="view-client-rentals">Edit rental</button>--%>
-                </div>
-            </li>
-            </c:if>
         </ul>
         <c:if test="${sessionScope.role=='user'}">
+            <div class="nav-item dropdown mr-md-2">
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.rentals"/></button>
+                <div class="dropdown-menu">
+                    <button class="dropdown-item" type="submit" name="command" value="client-rentals"><fmt:message key="menubar.all-rentals"/></button>
+                        <%--<button class="dropdown-item" type="submit" name="command" value="view-client-rentals">View current rentals</button>--%>
+                        <%--<button class="dropdown-item" type="submit" name="command" value="view-client-rentals">Choose rental</button>
+                        <button class="dropdown-item" type="submit" name="command" value="view-client-rentals">Edit rental</button>--%>
+                </div>
+            </div>
         <div class="nav-item dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.login}</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">${sessionScope.login}</button>
             <div class="dropdown-menu dropdown-menu-right">
                 <button class="dropdown-item" type="submit" name="command" value="account"><fmt:message key="menubar.account"/></button>
                 <button class="dropdown-item" type="submit" name="command" value="profile"><fmt:message key="menubar.profile"/></button>

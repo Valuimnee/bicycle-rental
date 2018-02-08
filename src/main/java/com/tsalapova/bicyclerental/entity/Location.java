@@ -4,7 +4,7 @@ package com.tsalapova.bicyclerental.entity;
 import javax.persistence.Column;
 import java.util.Objects;
 
-public class Location {
+public class Location implements Entity {
     @Column(name = "location_id")
     private long locationId;
     @Column

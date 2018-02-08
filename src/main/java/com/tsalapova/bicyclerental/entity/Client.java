@@ -4,7 +4,7 @@ package com.tsalapova.bicyclerental.entity;
 import javax.persistence.Column;
 import java.util.Objects;
 
-public class Client {
+public class Client implements Entity {
   @Column(name = "client_id")
   private long clientId;
   @Column(name = "first_name")

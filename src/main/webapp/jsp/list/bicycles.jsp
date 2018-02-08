@@ -9,12 +9,16 @@
                     <div class="col-sm-3 pl-0 pr-0">
                         <div class="card location-card">
                             <c:set var="bicycle" value="${bicycles.get(4*loop.index+element.index)}"/>
-                            <p class="text-center text">${bicycle.model}</p>
+                            <div class="card-header text-center text">${bicycle.model}</div>
+                            <div class="card-body">
                             <p class="text-center text"><fmt:message key="bicycle.brand"/>: ${bicycle.brand}</p>
                             <p class="text-center text"><fmt:message key="bicycle.material"/>: ${bicycle.material}</p>
                             <p class="text-center text"><fmt:message key="bicycle.type"/>: ${bicycle.type}</p>
-                            <p class="text-center text"><fmt:message key="bicycle.price-ph"/>: ${bicycle.pricePh} <fmt:message key="bicycle.price-ph-currency"/></p>
-                            <button class="btn mb-2" type="submit" name="bicycle-id" value="${bicycle.bicycleId}" <c:if test="${sessionScope.role!='user'}">hidden</c:if> >Rent</button>
+                            <p class="text-center text"><fmt:message key="bicycle.price-ph"/>: ${bicycle.pricePh}
+                                <fmt:message key="bicycle.price-ph-currency"/></p>
+                            <button class="btn mb-2" type="submit" name="bicycle-id" value="${bicycle.bicycleId}"
+                                    <c:if test="${sessionScope.role!='user'}">hidden</c:if> ><fmt:message key="bicycle.rent"/></button>
+                            </div>
                         </div>
                     </div>
                 </c:if>

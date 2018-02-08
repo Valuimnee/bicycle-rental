@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<form class="container text-center pb-5" name="rentals" method="post" action="/control">
-    <table>
+<form class="container text-center pb-5" name="rentals" method="post" action="/control?command=rental">
+    <table class="table table-striped table-responsive-sm">
         <caption></caption>
         <thead>
             <tr>
@@ -15,12 +15,12 @@
         <c:forEach begin="0" end="${rentals.size()-1}" varStatus="loop">
             <c:set var="rental" value="${rentals.get(loop.index)}"/>
             <c:set var="bicycle" value="${bicycles.get(loop.index)}"/>
-            <tr>
+            <tr class="clickable" onclick="document.getElementById('rental${loop.index}').click()">
                 <td class="text-center text">${bicycle.model}</td>
                 <td class="text-center text">${rental.startTime}</td>
                 <td class="text-center text">${rental.total} <fmt:message key="bicycle.price-ph-currency"/></td>
                 <td class="text-center text">${rental.status}</td>
-               <%-- <button class="btn mb-2" type="submit" name="bicycle-id" value="${bicycle.bicycleId}" <c:if test="${sessionScope.role!='user'}">hidden</c:if> >Rent</button>--%>
+                <td hidden><button id="rental${loop.index}" type="submit" name="rental-id" value="${rental.rentalId}"></button></td>
             </tr>
         </c:forEach>
         </tbody>

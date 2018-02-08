@@ -1,9 +1,6 @@
 package com.tsalapova.bicyclerental.command;
 
-import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.entity.Location;
-import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.entity.RentalStatus;
+import com.tsalapova.bicyclerental.entity.*;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.util.EntityAction;
 import com.tsalapova.bicyclerental.validator.ParameterValidator;
@@ -11,12 +8,13 @@ import com.tsalapova.bicyclerental.validator.ParameterValidator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * @author TsalapovaMD
- * @version 1.0, 2/7/2018
+ * @version 1.0, 2/8/2018
  */
-public class SelectDateCommand implements ActionCommand {
+public class EditRentalCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
@@ -28,7 +26,7 @@ public class SelectDateCommand implements ActionCommand {
         ParameterValidator validator = new ParameterValidator();
         if (!validator.validateStartTime(timestamp) || !validator.validateHours(hours)) {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
-            request.setAttribute(RequestConstant.CONTENT, RequestConstant.DATE);
+            request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
             return PageConstant.MAIN;
         }
 
@@ -52,5 +50,4 @@ public class SelectDateCommand implements ActionCommand {
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.CONFIRM_RENTAL);
         return PageConstant.MAIN;
     }
-
 }
