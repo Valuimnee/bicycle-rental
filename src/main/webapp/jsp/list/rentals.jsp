@@ -17,7 +17,7 @@
             <c:set var="bicycle" value="${bicycles.get(loop.index)}"/>
             <tr class="clickable" onclick="document.getElementById('rental${loop.index}').click()">
                 <td class="text-center text">${bicycle.model}</td>
-                <td class="text-center text">${rental.startTime}</td>
+                <td class="text-center text">${rental.startTime.toString().replace(":00.0", "")}</td>
                 <td class="text-center text">${rental.total} <fmt:message key="bicycle.price-ph-currency"/></td>
                 <td class="text-center text">${rental.status}</td>
                 <td hidden><button id="rental${loop.index}" type="submit" name="rental-id" value="${rental.rentalId}"></button></td>

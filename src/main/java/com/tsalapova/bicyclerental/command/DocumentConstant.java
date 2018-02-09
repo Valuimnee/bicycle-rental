@@ -27,4 +27,9 @@ public class DocumentConstant {
 
     public static final String START_DATE = "start-date";
     public static final String HOURS = "hours";
+    public static final String MODEL = "model";
+    public static final String BRAND = "brand";
+    public static final String MATERIAL = "material";
+    public static final String TYPE = "type";
+    public static final String PRICE_PH = "price-ph";
 }

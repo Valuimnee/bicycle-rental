@@ -20,22 +20,23 @@
 <main class="container-fluid mt-4 mb-5">
     <c:if test="${requestScope.containsKey('message')}"><p class="text-center"><fmt:message key="message.${requestScope.message}"/></p></c:if>
     <c:choose>
-        <c:when test="${requestScope.content=='admins'}">
+        <%--<c:when test="${requestScope.content=='admins'}">
             <jsp:include page="/jsp/list/admins.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='clients'}">
             <jsp:include page="/jsp/list/clients.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='bikes'}">
-            <jsp:include page="/jsp/list/autos.jsp"/>
-        </c:when>
-        <c:when test="${requestScope.content=='rentals'}">
+        --%>
+        <%--<c:when test="${requestScope.content=='rentals'}">
             <jsp:include page="/jsp/list/full-rentals.jsp"/>
+        </c:when>--%>
+        <c:when test="${requestScope.content=='bicycles'}">
+            <jsp:include page="/jsp/list/bicycles.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='add-bike-form'}">
-            <jsp:include page="/jsp/entity/add-auto.jsp"/>
+        <c:when test="${requestScope.content=='add-bicycle'}">
+            <jsp:include page="/jsp/entity/add-bicycle.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='find-bike'}">
+        <%--<c:when test="${requestScope.content=='find-bike'}">
             <jsp:include page="/jsp/entity/find-auto.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='bike'}">
@@ -43,7 +44,7 @@
         </c:when>
         <c:when test="${requestScope.content=='find-bike-client-form'}">
             <jsp:include page="/jsp/entity/find-auto-client.jsp"/>
-        </c:when>
+        </c:when>--%>
         <c:when test="${requestScope.content=='account'}">
             <jsp:include page="/jsp/entity/account.jsp"/>
         </c:when>

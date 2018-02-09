@@ -13,7 +13,7 @@
     <p class="mb-2"><label for="location-address" class="long-label"><b><fmt:message key="register.address"/>: </b></label>
         <input type="text" id="location-address" name="location-address" size="50" value="${location.address}" disabled/></p>
     <p class="mb-2"><label for="start-date" class="long-label"><b><fmt:message key="date.start-date"/>: </b></label>
-        <input type="datetime-local" id="start-date" name="start-date" size="50" value="${rental.startTime.toString().replace(' ', 'T')}"
+        <input type="datetime-local" id="start-date" name="start-date" size="50" value="${datetime}"
                <c:if test="${rental.status != 'Concluded'}">disabled</c:if> /></p>
     <p class="mb-2"><label for="hours" class="long-label"><b><fmt:message key="date.duration"/>: </b></label>
         <input type="number" min="1" max="168" id="hours" name="hours" size="50" value="${rental.hours}"

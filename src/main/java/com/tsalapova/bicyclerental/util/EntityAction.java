@@ -14,6 +14,10 @@ public class EntityAction {
         return Timestamp.valueOf(datetime.replace('T', ' ').concat(":00"));
     }
 
+    public String defineDateTime(Timestamp timestamp){
+        return timestamp.toString().replace(' ', 'T').substring(0, timestamp.toString().lastIndexOf(':'));
+    }
+
     public double countTotal(double pricePh, int hours) {
         if (hours < DAY) {
             return pricePh * hours;

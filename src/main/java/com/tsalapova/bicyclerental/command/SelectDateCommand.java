@@ -20,7 +20,6 @@ public class SelectDateCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
-        Rental rental;
         EntityAction action=new EntityAction();
         Timestamp timestamp = action.defineTimestamp(request.getParameter(DocumentConstant.START_DATE));
         int hours = Integer.valueOf(request.getParameter(DocumentConstant.HOURS));
@@ -32,11 +31,10 @@ public class SelectDateCommand implements ActionCommand {
             return PageConstant.MAIN;
         }
 
-        Location location = (Location) session.getAttribute(SessionConstant.LOCATION);
         Bicycle bicycle = (Bicycle) session.getAttribute(SessionConstant.BICYCLE);
         long clientId = (Long) session.getAttribute(SessionConstant.ID);
 
-        rental = new Rental();
+        Rental rental = new Rental();
         rental.setClientId(clientId);
         rental.setBicycleId(bicycle.getBicycleId());
         rental.setStartTime(timestamp);
@@ -46,9 +44,6 @@ public class SelectDateCommand implements ActionCommand {
 
         session.setAttribute(SessionConstant.RENTAL, rental);
 
-        request.setAttribute(RequestConstant.LOCATION, location);
-        request.setAttribute(RequestConstant.BICYCLE, bicycle);
-        request.setAttribute(RequestConstant.RENTAL, rental);
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.CONFIRM_RENTAL);
         return PageConstant.MAIN;
     }

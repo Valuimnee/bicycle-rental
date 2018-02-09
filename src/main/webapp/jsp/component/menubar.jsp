@@ -25,7 +25,7 @@
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.bikes"/></button>
                 <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="all-bicycles"><fmt:message key="menubar.all-bikes"/></button>
-                    <button class="dropdown-item" type="submit" name="command" value="all-autos">View bikes by type</button>
+                    <%--<button class="dropdown-item" type="submit" name="command" value="all-autos">View bikes by type</button>--%>
                     <%--<c:if test="${sessionScope.role=='user'}">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all rented bikes</button>
                     <button class="dropdown-item" type="submit" name="command" value="choose-date-interval">Rent a bike</button>
@@ -39,9 +39,7 @@
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.rentals"/></button>
                 <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="client-rentals"><fmt:message key="menubar.all-rentals"/></button>
-                        <%--<button class="dropdown-item" type="submit" name="command" value="view-client-rentals">View current rentals</button>--%>
-                        <%--<button class="dropdown-item" type="submit" name="command" value="view-client-rentals">Choose rental</button>
-                        <button class="dropdown-item" type="submit" name="command" value="view-client-rentals">Edit rental</button>--%>
+                    <button class="dropdown-item" type="submit" name="command" value="current-client-rentals"><fmt:message key="menubar.current-rentals"/></button>
                 </div>
             </div>
         <div class="nav-item dropdown">

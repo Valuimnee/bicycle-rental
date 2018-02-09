@@ -48,6 +48,8 @@ public class InitialController extends HttpServlet {
                 ActionCommand command = CommandFactory.defineCommand(commandName);
                 String page = command.execute(request);
                 request.getRequestDispatcher(page).forward(request, response);
+                /*request.getRequestDispatcher(page);
+                response.sendRedirect(page);*/
             } catch (CommandException e) {
                 LOGGER.log(Level.WARN, "Exception while executing command "+ commandName+".", e);
                 throw new ServletException(e);

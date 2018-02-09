@@ -2,13 +2,14 @@ package com.tsalapova.bicyclerental.command;
 
 import com.tsalapova.bicyclerental.entity.*;
 import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
 import com.tsalapova.bicyclerental.util.EntityAction;
 import com.tsalapova.bicyclerental.validator.ParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * @author TsalapovaMD
@@ -18,36 +19,39 @@ public class EditRentalCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
-        Rental rental;
         EntityAction action=new EntityAction();
+
+        Rental rental=(Rental)session.getAttribute(SessionConstant.RENTAL);
+
         Timestamp timestamp = action.defineTimestamp(request.getParameter(DocumentConstant.START_DATE));
         int hours = Integer.valueOf(request.getParameter(DocumentConstant.HOURS));
 
         ParameterValidator validator = new ParameterValidator();
         if (!validator.validateStartTime(timestamp) || !validator.validateHours(hours)) {
+            request.setAttribute(RequestConstant.DATETIME, action.defineDateTime(rental.getStartTime()));
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
             return PageConstant.MAIN;
         }
 
-        Location location = (Location) session.getAttribute(SessionConstant.LOCATION);
-        Bicycle bicycle = (Bicycle) session.getAttribute(SessionConstant.BICYCLE);
-        long clientId = (Long) session.getAttribute(SessionConstant.ID);
 
-        rental = new Rental();
-        rental.setClientId(clientId);
-        rental.setBicycleId(bicycle.getBicycleId());
         rental.setStartTime(timestamp);
-        rental.setHours(hours);
-        rental.setTotal(action.countTotal(bicycle.getPricePh(), hours));
-        rental.setStatus(RentalStatus.CONCLUDED.getName());
+        if(rental.getHours()!=hours){
+            Bicycle bicycle=(Bicycle)session.getAttribute(SessionConstant.BICYCLE);
+            rental.setHours(hours);
+            rental.setTotal(action.countTotal(bicycle.getPricePh(), hours));
+        }
 
-        session.setAttribute(SessionConstant.RENTAL, rental);
+        try {
+            new RentalLogicImpl().editTimeHours(rental);
+        } catch (LogicException e) {
+            throw new CommandException("Error occurred when updating rental", e);
+        }
 
-        request.setAttribute(RequestConstant.LOCATION, location);
-        request.setAttribute(RequestConstant.BICYCLE, bicycle);
-        request.setAttribute(RequestConstant.RENTAL, rental);
-        request.setAttribute(RequestConstant.CONTENT, RequestConstant.CONFIRM_RENTAL);
+        session.removeAttribute(SessionConstant.LOCATION);
+        session.removeAttribute(SessionConstant.BICYCLE);
+        session.removeAttribute(SessionConstant.RENTAL);
+
         return PageConstant.MAIN;
     }
 }

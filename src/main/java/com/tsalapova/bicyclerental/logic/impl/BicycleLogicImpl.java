@@ -27,7 +27,7 @@ public class BicycleLogicImpl implements BicycleLogic {
         try {
             return new BicycleDAOImpl().findByLocation(locationId);
         } catch (DAOException e) {
-            throw new LogicException("Error while displaying all bikes of location.", e);
+            throw new LogicException("Error while displaying all bikes of location", e);
         }
     }
 
@@ -36,7 +36,16 @@ public class BicycleLogicImpl implements BicycleLogic {
         try {
             return new BicycleDAOImpl().findAll();
         } catch (DAOException e) {
-            throw new LogicException("Error while displaying all bikes.", e);
+            throw new LogicException("Error while displaying all bikes", e);
+        }
+    }
+
+    @Override
+    public void add(Bicycle bicycle) throws LogicException {
+        try {
+            new BicycleDAOImpl().add(bicycle);
+        } catch (DAOException e) {
+            throw new LogicException("Error while adding new bike", e);
         }
     }
 }

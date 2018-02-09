@@ -4,8 +4,7 @@
     <c:if test="${requestScope.wrong=='wrong'}"><p class="mb-2"><fmt:message key="date.wrong"/></p></c:if>
     <p class="mb-2 text-center"><label><b><fmt:message key="date.greeting"/></b></label></p>
     <p class="mb-2"><label for="start-date" class="long-label"><b><fmt:message key="date.start-date"/>: </b></label>
-        <input type="datetime-local" id="start-date" name="start-date" size="50" value="${rental.startTime.replace(' ', 'T')}"
-               required="required"/></p>
+        <input type="datetime-local" id="start-date" name="start-date" size="50" value="${datetime}" required="required"/></p>
     <p class="mb-2"><label for="hours" class="long-label"><b><fmt:message key="date.duration"/>: </b></label>
         <input type="number" min="1" max="168" id="hours" name="hours" size="50" value="${rental.hours}" required="required"/></p>
     <p class="container text-right"><button class="btn" type="submit" name="command" value="select-date"><fmt:message key="date.select"/></button></p>

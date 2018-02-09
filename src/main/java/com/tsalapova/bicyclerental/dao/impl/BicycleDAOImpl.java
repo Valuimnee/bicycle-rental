@@ -24,6 +24,8 @@ public class BicycleDAOImpl implements BicycleDAO {
             " `type`, `price_ph` FROM `bicycle`";
     private static final String FIND_BY_RENTALS_CLIENT_ID = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
             " `type`, `price_ph` FROM `bicycle` WHERE `bicycle_id` IN (SELECT `bicycle_id` FROM `rental` WHERE `client_id`=?)";
+    private static final String ADD_BICYCLE = "INSERT INTO `bicycle` (`brand`, `model`, `material`, `type`, `price_ph`)" +
+            " VALUES (?, ?, ?, ?, ?)";
 
     @Override
     public List<Bicycle> findByLocation(long locationId) throws DAOException {
@@ -92,6 +94,26 @@ public class BicycleDAOImpl implements BicycleDAO {
             return new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding the bicycle", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public void add(Bicycle bicycle) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(ADD_BICYCLE);
+            statement.setString(1, bicycle.getBrand());
+            statement.setString(2, bicycle.getModel());
+            statement.setString(3, bicycle.getMaterial());
+            statement.setString(4, bicycle.getType());
+            statement.setDouble(5, bicycle.getPricePh());
+            statement.execute();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while adding bicycle", e);
         } finally {
             close(statement, connection);
         }

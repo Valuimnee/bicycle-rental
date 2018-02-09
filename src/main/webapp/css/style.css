@@ -23,3 +23,9 @@ form[name="locations-form"] {
 .clickable{
     cursor: pointer;
 }
+.custom-select, .form-control {
+    max-width: 386px;
+}
+.medium-label{
+    min-width: 115px;
+}

@@ -5,7 +5,7 @@ package com.tsalapova.bicyclerental.entity;
  * @version 1.0, 2/7/2018
  */
 public enum BicycleType {
-    RROAD, WOMEN, CHILDREN, RACING;
+    ROAD, WOMEN, CHILDREN, RACING;
 
     public String getName(){
         return name().toLowerCase();

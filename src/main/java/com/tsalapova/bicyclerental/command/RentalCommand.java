@@ -1,14 +1,14 @@
 package com.tsalapova.bicyclerental.command;
 
-import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Entity;
-import com.tsalapova.bicyclerental.entity.Location;
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+import com.tsalapova.bicyclerental.util.EntityAction;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -18,6 +18,7 @@ import java.util.List;
 public class RentalCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
+        HttpSession session=request.getSession();
         long rentalId=Long.valueOf(request.getParameter(DocumentConstant.RENTAL_ID));
         List<Entity> entities;
         try {
@@ -31,9 +32,11 @@ public class RentalCommand implements ActionCommand {
             return PageConstant.MAIN;
         }
 
-        request.setAttribute(RequestConstant.LOCATION, entities.get(0));
-        request.setAttribute(RequestConstant.BICYCLE, entities.get(1));
-        request.setAttribute(RequestConstant.RENTAL, entities.get(2));
+        session.setAttribute(SessionConstant.LOCATION, entities.get(0));
+        session.setAttribute(SessionConstant.BICYCLE, entities.get(1));
+        session.setAttribute(SessionConstant.RENTAL, entities.get(2));
+
+        request.setAttribute(RequestConstant.DATETIME, new EntityAction().defineDateTime(((Rental)entities.get(2)).getStartTime()));
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
         return PageConstant.MAIN;
     }

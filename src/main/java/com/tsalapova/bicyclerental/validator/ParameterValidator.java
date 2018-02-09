@@ -1,5 +1,6 @@
 package com.tsalapova.bicyclerental.validator;
 
+import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.Location;
 
@@ -14,10 +15,15 @@ public class ParameterValidator {
     private final static String PASSWORD_REGEX = "^[^ ]{8,40}$";
     private final static String LOGIN_REGEX = "^[-\\w.]{4,20}$";
     private static final String NAME_REGEX = "^([\\p{L}'][ \\p{L}'-]*\\p{L}|\\p{L}[\\p{L}'-]*)$";
+    private static final String PRODUCT_NAME_REGEX = "^([\\p{L}\\d'][ \\p{L}\\d'-]*[\\p{L}\\d]|[\\p{L}\\d][\\p{L}\\d'-]*)$";
     private static final String ADDRESS_REGEX = "^([\\p{L}.,-/\\d]+\\s+)*[\\p{L}.,-/\\d]+$";
     private final static String PASSPORT_NUMBER_REGEX = "^(AB|BM|HB|KH|MP|MC|KB|PP)\\d{7}$";
     private final static String EMAIL_REGEX = "^[\\w-+]+(\\.\\w+)*@[\\w-]+(\\.\\w+)*(\\.[a-z]{2,})$";
     private static final String PHONE_REGEX = "^\\d{12}$";
+
+    private boolean validateProductName(String productName){
+        return productName!=null&&productName.matches(PRODUCT_NAME_REGEX);
+    }
 
     public boolean validateLogin(String login) {
         return login != null && login.matches(LOGIN_REGEX);
@@ -59,6 +65,10 @@ public class ParameterValidator {
         return timestamp.after(Timestamp.valueOf("2017-01-01 00:00:00"));
     }
 
+    public boolean validatePricePh(double pricePh){
+        return pricePh>=0.01&&pricePh<=100.;
+    }
+
     public boolean validateClientInfo(Client client) {
         return validateName(client.getFirstName()) && (validateName(client.getMiddleName()) ||
                 client.getMiddleName().isEmpty()) && validateName(client.getLastname()) &&
@@ -69,5 +79,10 @@ public class ParameterValidator {
     public boolean validateLocation(Location location) {
         return validateName(location.getName()) && validateAddress(location.getAddress()) &&
                 validatePhone(location.getPhone());
+    }
+
+    public boolean validateBicycle(Bicycle bicycle) {
+        return validateProductName(bicycle.getModel())&&validateProductName(bicycle.getBrand())&&
+                validatePricePh(bicycle.getPricePh());
     }
 }
