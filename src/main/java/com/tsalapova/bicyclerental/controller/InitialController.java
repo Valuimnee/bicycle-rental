@@ -25,6 +25,10 @@ public class InitialController extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(InitialController.class);
     private static final String COMMAND = "command";
 
+    /**
+     *
+     * @throws ServletException
+     */
     @Override
     public void init() throws ServletException {
         super.init();

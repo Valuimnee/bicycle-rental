@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
 <!DOCTYPE HTML>
@@ -19,11 +20,16 @@
         <h2 id="log" class="text-center mb-4"><fmt:message key="login.header"/></h2>
         <form name="login" method="post" action="/control">
             <c:if test="${requestScope.containsKey('wrong')}" ><p><fmt:message key="login.wrong"/></p></c:if>
-            <p class="mb-3"><label for="login" class="short-label"><b><fmt:message key="login.login"/>: </b></label>
-                <input type="text" pattern="^[-\w.]{4,20}$" id="login" name="login" size="50" value="" required="required"/></p>
-            <p><label for="password" class="short-label"><b><fmt:message key="login.password"/>: </b></label>
-                <input type="password" id="password" name="password" size="50" value="" required="required"/></p>
-            <p class="text-center"><button class="btn" type="submit" name="command" value="login"><fmt:message key="login.button"/></button>
+            <fld:input type="login" labelType="short" name="login" required="required">
+                <jsp:attribute name="label"><fmt:message key="login.login"/></jsp:attribute>
+                <jsp:body></jsp:body>
+            </fld:input>
+            <fld:input type="password" labelType="short" name="password" required="required">
+                <jsp:attribute name="label"><fmt:message key="login.password"/></jsp:attribute>
+                <jsp:body></jsp:body>
+            </fld:input>
+            <p class="text-center"><button class="btn" type="submit" name="command" value="login">
+                <fmt:message key="login.button"/></button>
         </form>
     </div>
 </main>

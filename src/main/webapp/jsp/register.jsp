@@ -5,6 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
 <!DOCTYPE HTML>
@@ -20,29 +21,41 @@
     <form name="register" method="post" action="/control">
         <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="register.wrong-info"/></p></c:if>
         <p class="mb-2 text-center"><label><b><fmt:message key="register.login-info"/></b></label></p>
-        <p class="mb-2"><c:if test="${requestScope.wrong=='wrong-login'}"><div class="mb-1"><fmt:message key="register.wrong-login"/></div></c:if>
-        <label for="login" class="long-label"><b><fmt:message key="register.login"/>: </b></label>
-            <input type="text" pattern="^[-\w.]{4,20}$" id="login" name="login" size="50" value="" required="required"/></p>
-        <p class="mb-2"><label for="password" class="long-label"><b><fmt:message key="register.password"/>: </b></label>
-            <input type="password" pattern="^[^ ]{8,40}$" id="password" name="password" size="50" value="" required="required"/></p>
-        <p class="mb-2"><label for="password2" class="long-label"><b><fmt:message key="register.password2"/>: </b></label>
-            <input type="password" pattern="^[^ ]{8,40}$" id="password2" name="password2" size="50" value="" required="required"/></p>
-        <p class="mb-2"><b><label class="container-fluid text-center"><fmt:message key="register.personal-info"/></label></b><br/>
-            <label for="first-name" class="long-label"><b><fmt:message key="register.first-name"/>: </b></label>
-            <input type="text" pattern="^([\p{L}'][ \p{L}'-]*\p{L}|\p{L}[\p{L}'-]*)$" id="first-name" name="first-name" size="50" value="" required="required"/></p>
-        <p class="mb-2"><label for="middle-name" class="long-label"><b><fmt:message key="register.middle-name"/>: </b></label>
-            <input type="text" pattern="^([\p{L}'][ \p{L}'-]*\p{L}|\p{L}[\p{L}'-]*)$" id="middle-name" name="middle-name" size="50" value=""/></p>
-        <p class="mb-2"><label for="lastname" class="long-label"><b><fmt:message key="register.lastname"/>: </b></label>
-            <input type="text" pattern="^([\p{L}'][ \p{L}'-]*\p{L}|\p{L}[\p{L}'-]*)$" id="lastname" name="lastname" size="50" value="" required="required"/></p>
-        <p class="mb-2"><label for="address" class="long-label"><b><fmt:message key="register.address"/>: </b></label>
-            <input type="text" pattern="^([\p{L}.,-/\d]+\s+)*[\p{L}.,-/\d]+$" id="address" name="address" size="50" value=""/></p>
-        <p class="mb-2"><label for="passport" class="long-label"><b><fmt:message key="register.passport-number"/>: </b></label>
-            <input type="text" pattern="^(AB|BM|HB|KH|MP|MC|KB|PP)\d{7}$" id="passport" name="passport" size="50" value="" required="required"/></p>
-        <p class="mb-2"><label for="phone" class="long-label"><b><fmt:message key="register.phone"/>: </b></label>
-            <input type="tel" pattern="^\d{12}$" id="phone" name="phone" size="50" value="" required="required"/></p>
-        <p><label for="email" class="long-label"><b><fmt:message key="register.email"/>: </b></label>
-            <input type="email" id="email" name="email" size="50" value="" required="required"/></p>
-        <p class="text-right col-9"><button class="btn" type="submit" name="command" value="register"><fmt:message key="register.register"/></button></p>
+        <p class="mb-2"><c:if test="${requestScope.wrong=='wrong-login'}"><div class="mb-1">
+                <fmt:message key="register.wrong-login"/></div></c:if></p>
+        <fld:input type="login" labelType="long" name="login" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.login"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="password" labelType="long" name="password" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.password"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="password" labelType="long" name="password2" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.password2"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <p class="mb-2"><b><label class="container-fluid text-center"><fmt:message key="register.personal-info"/></label></b></p>
+        <fld:input type="name" labelType="long" name="first-name" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.first-name"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="name" labelType="long" name="middle-name">
+            <jsp:attribute name="label"><fmt:message key="register.middle-name"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="name" labelType="long" name="lastname" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.lastname"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="address" labelType="long" name="address">
+            <jsp:attribute name="label"><fmt:message key="register.address"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="passport" labelType="long" name="passport" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.passport-number"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="phone" labelType="long" name="phone" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.phone"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <fld:input type="email" labelType="long" name="email" required="required">
+            <jsp:attribute name="label"><fmt:message key="register.email"/></jsp:attribute><jsp:body></jsp:body>
+        </fld:input>
+        <p class="text-right col-9"><button class="btn" type="submit" name="command" value="register">
+            <fmt:message key="register.register"/></button></p>
     </form>
     </div>
 </main>
