@@ -11,6 +11,12 @@
         <input type="text" id="location-name" name="location-name" size="50" value="${location.name}" disabled/></p>
     <p class="mb-2"><label for="location-address" class="long-label"><b><fmt:message key="register.address"/>: </b></label>
         <input type="text" id="location-address" name="location-address" size="50" value="${location.address}" disabled/></p>
+    <%--<fld:input type="datetime" labelType="long" name="start-date" required="required">
+        <jsp:attribute name="label"><fmt:message key="date.start-date"/></jsp:attribute><jsp:body>${datetime}</jsp:body>
+    </fld:input>
+    <fld:input type="hours" labelType="long" name="hours" required="required">
+        <jsp:attribute name="label"><fmt:message key="date.duration"/></jsp:attribute><jsp:body>$${rental.hours}</jsp:body>
+    </fld:input>--%>
     <p class="mb-2"><label for="start-date" class="long-label"><b><fmt:message key="date.start-date"/>: </b></label>
         <input type="datetime-local" id="start-date" name="start-date" size="50" value="${rental.startTime.toString().replace(' ', 'T')}" disabled/></p>
     <p class="mb-2"><label for="hours" class="long-label"><b><fmt:message key="date.duration"/>: </b></label>

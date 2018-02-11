@@ -48,4 +48,40 @@ public class BicycleLogicImpl implements BicycleLogic {
             throw new LogicException("Error while adding new bike", e);
         }
     }
+
+    @Override
+    public void deleteById(long bicycleId) throws LogicException {
+        try {
+            new BicycleDAOImpl().deleteById(bicycleId);
+        } catch (DAOException e) {
+            throw new LogicException("Error while deleting the bike", e);
+        }
+    }
+
+    @Override
+    public void edit(Bicycle bicycle) throws LogicException {
+        try {
+            new BicycleDAOImpl().edit(bicycle);
+        } catch (DAOException e) {
+            throw new LogicException("Error while editing the bike", e);
+        }
+    }
+
+    @Override
+    public void deleteLocation(long bicycleId) throws LogicException {
+        try {
+            new BicycleDAOImpl().deleteLocationById(bicycleId);
+        } catch (DAOException e) {
+            throw new LogicException("Error while deleting bike's location", e);
+        }
+    }
+
+    @Override
+    public void assignLocation(long bicycleId, long locationId) throws LogicException {
+        try {
+            new BicycleDAOImpl().assignLocationById(bicycleId, locationId);
+        } catch (DAOException e) {
+            throw new LogicException("Error while setting location of the bike", e);
+        }
+    }
 }

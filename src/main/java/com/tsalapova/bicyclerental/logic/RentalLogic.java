@@ -17,6 +17,6 @@ public interface RentalLogic {
     Pair<List<Rental>, List<Bicycle>> displayByClientId(long clientId) throws LogicException;
     Pair<List<Rental>,List<Bicycle>> displayCurrentByClientId(long clientId) throws LogicException;
     List<Entity> displayById(long rentalId) throws LogicException;
-    void cancel(long rentalId) throws LogicException;
+    void cancelById(long rentalId) throws LogicException;
     void editTimeHours(Rental rental) throws LogicException;
 }

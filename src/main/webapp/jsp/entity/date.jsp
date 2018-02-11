@@ -1,11 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
 <form name="select-date" method="post" action="/control">
     <c:if test="${requestScope.wrong=='wrong'}"><p class="mb-2"><fmt:message key="date.wrong"/></p></c:if>
     <p class="mb-2 text-center"><label><b><fmt:message key="date.greeting"/></b></label></p>
-    <p class="mb-2"><label for="start-date" class="long-label"><b><fmt:message key="date.start-date"/>: </b></label>
-        <input type="datetime-local" id="start-date" name="start-date" size="50" value="${datetime}" required="required"/></p>
-    <p class="mb-2"><label for="hours" class="long-label"><b><fmt:message key="date.duration"/>: </b></label>
-        <input type="number" min="1" max="168" id="hours" name="hours" size="50" value="${rental.hours}" required="required"/></p>
-    <p class="container text-right"><button class="btn" type="submit" name="command" value="select-date"><fmt:message key="date.select"/></button></p>
+    <fld:input type="datetime" labelType="long" name="start-date" required="required">
+        <jsp:attribute name="label"><fmt:message key="date.start-date"/></jsp:attribute><jsp:body>${datetime}</jsp:body>
+    </fld:input>
+    <fld:input type="hours" labelType="long" name="hours" required="required">
+        <jsp:attribute name="label"><fmt:message key="date.duration"/></jsp:attribute><jsp:body>$${rental.hours}</jsp:body>
+    </fld:input>
+    <p class="container text-right"><button class="btn" type="submit" name="command" value="select-date">
+        <fmt:message key="date.select"/></button></p>
 </form>

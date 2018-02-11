@@ -13,7 +13,7 @@
         <name>input</name>
         <tag-class>com.tsalapova.bicyclerental.tag.InputFieldTag</tag-class>
         <info>Defines input field for different types of input, for example login, password, name.</info>
-        <body-content>jsp</body-content>
+        <body-content>scriptless</body-content>
         <attribute>
             <name>type</name>
             <required>true</required>
@@ -36,6 +36,10 @@
         </attribute>
         <attribute>
             <name>required</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>disabled</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>

@@ -1,5 +1,9 @@
-package com.tsalapova.bicyclerental.command;
+package com.tsalapova.bicyclerental.command.userimpl;
 
+import com.tsalapova.bicyclerental.command.DocumentConstant;
+import com.tsalapova.bicyclerental.command.PageConstant;
+import com.tsalapova.bicyclerental.command.RequestConstant;
+import com.tsalapova.bicyclerental.command.UserCommand;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
@@ -14,7 +18,7 @@ import java.util.ArrayList;
  * @author TsalapovaMD
  * @version 1.0, 1/3/2018
  */
-public class LoginCommand implements ActionCommand {
+public class LoginCommand implements UserCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         String login = request.getParameter(DocumentConstant.LOGIN);
@@ -34,7 +38,7 @@ public class LoginCommand implements ActionCommand {
         }
         if (user != null) {
             HttpSession session = request.getSession(true);
-            new SessionConstant().setUserSession(session,user);
+            setUserSession(session,user);
             return getStartPage(request);
         } else {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);

@@ -1,5 +1,6 @@
-package com.tsalapova.bicyclerental.command;
+package com.tsalapova.bicyclerental.command.userimpl;
 
+import com.tsalapova.bicyclerental.command.*;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.entity.UserRole;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * @author TsalapovaMD
  * @version 1.0, 2/1/2018
  */
-public class RegisterCommand implements ActionCommand {
+public class RegisterCommand implements UserCommand, ClientCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -52,7 +53,7 @@ public class RegisterCommand implements ActionCommand {
         } catch (LogicException e) {
             throw new CommandException("Registration error. "+e.getMessage(), e);
         }
-        new SessionConstant().setUserSession(session, user);
+        setUserSession(session, user);
         return getStartPage(request);
     }
 }

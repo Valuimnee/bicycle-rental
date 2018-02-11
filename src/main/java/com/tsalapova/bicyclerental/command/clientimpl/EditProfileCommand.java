@@ -1,5 +1,6 @@
-package com.tsalapova.bicyclerental.command;
+package com.tsalapova.bicyclerental.command.clientimpl;
 
+import com.tsalapova.bicyclerental.command.*;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;

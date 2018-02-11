@@ -28,7 +28,6 @@
                     <%--<button class="dropdown-item" type="submit" name="command" value="all-autos">View bikes by type</button>--%>
                     <%--<c:if test="${sessionScope.role=='user'}">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all rented bikes</button>
-                    <button class="dropdown-item" type="submit" name="command" value="choose-date-interval">Rent a bike</button>
                     </c:if>--%>
                 </div>
             </li>

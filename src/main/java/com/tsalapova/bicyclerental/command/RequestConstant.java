@@ -35,4 +35,5 @@ public class RequestConstant {
     public static final String DATETIME = "datetime";
     public static final String MATERIALS = "materials";
     public static final String TYPES = "types";
+    public static final String SELECT = "select";
 }

@@ -13,12 +13,14 @@ import java.io.IOException;
  */
 public class InputFieldTag extends BodyTagSupport {
     private static final String REQUIRED = "required";
+    private static final String DISABLED = "disabled";
 
     private String type;
     private String label;
     private String labelType;
     private String name;
     private String required;
+    private String disabled;
 
     public void setType(String type) {
         this.type = type;
@@ -38,6 +40,10 @@ public class InputFieldTag extends BodyTagSupport {
 
     public void setRequired(String required) {
         this.required = required;
+    }
+
+    public void setDisabled(String disabled) {
+        this.disabled = disabled;
     }
 
     protected void writeStartTag(String typePattern) throws JspFieldTagException {
@@ -66,7 +72,8 @@ public class InputFieldTag extends BodyTagSupport {
     @Override
     public int doEndTag() throws JspFieldTagException {
         try {
-            pageContext.getOut().write("\" " + (REQUIRED.equals(required) ? "required=\"required\"" : "") + "/>\n    </div>");
+            pageContext.getOut().write("\" " + (REQUIRED.equals(required) ? "required=\"required\" " : "")+
+                    (DISABLED.equals(disabled) ? "disabled " : "") + "/>\n    </div>");
         } catch (IOException e) {
             throw new JspFieldTagException("Exception occurred while evaluating field tag", e);
         }

@@ -15,4 +15,8 @@ public interface BicycleDAO extends GeneralDAO<Bicycle> {
     Bicycle findById(long bicycleId) throws DAOException;
     List<Bicycle> findByRentalsClientId(long clientId) throws DAOException;
     void add(Bicycle bicycle) throws DAOException;
+    void deleteById(long bicycleId) throws DAOException;
+    void deleteLocationById(long bicycleId) throws DAOException;
+    void assignLocationById(long bicycleId, long locationId) throws DAOException;
+    void edit(Bicycle bicycle) throws DAOException;
 }

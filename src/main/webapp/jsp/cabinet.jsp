@@ -30,11 +30,17 @@
         <%--<c:when test="${requestScope.content=='rentals'}">
             <jsp:include page="/jsp/list/full-rentals.jsp"/>
         </c:when>--%>
+        <c:when test="${requestScope.content=='locations'}">
+            <jsp:include page="/jsp/list/locations.jsp"/>
+        </c:when>
         <c:when test="${requestScope.content=='bicycles'}">
             <jsp:include page="/jsp/list/bicycles.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='add-bicycle'}">
             <jsp:include page="/jsp/entity/add-bicycle.jsp"/>
+        </c:when>
+        <c:when test="${requestScope.content=='bicycle'}">
+            <jsp:include page="/jsp/entity/bicycle.jsp"/>
         </c:when>
         <%--<c:when test="${requestScope.content=='find-bike'}">
             <jsp:include page="/jsp/entity/find-auto.jsp"/>

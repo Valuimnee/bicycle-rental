@@ -1,5 +1,6 @@
-package com.tsalapova.bicyclerental.command;
+package com.tsalapova.bicyclerental.command.bicycleimpl;
 
+import com.tsalapova.bicyclerental.command.BicycleCommand;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
@@ -12,21 +13,15 @@ import java.util.List;
  * @author TsalapovaMD
  * @version 1.0, 2/4/2018
  */
-public class AllBicyclesCommand implements ActionCommand {
+public class AllBicyclesCommand implements BicycleCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         List<Bicycle> bicycles;
         try {
-            bicycles=new BicycleLogicImpl().displayAll();
+            bicycles = new BicycleLogicImpl().displayAll();
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying bicycles", e);
         }
-        if(bicycles.isEmpty()){
-            request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_BICYCLES);
-        }else{
-            request.setAttribute(RequestConstant.CONTENT, RequestConstant.BICYCLES);
-            request.setAttribute(RequestConstant.BICYCLES, bicycles);
-        }
-        return getStartPage(request);
+        return setToRequestBicycles(bicycles, request);
     }
 }

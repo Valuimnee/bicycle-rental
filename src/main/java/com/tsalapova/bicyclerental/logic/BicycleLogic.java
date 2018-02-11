@@ -14,4 +14,8 @@ public interface BicycleLogic {
     List<Bicycle> displayByLocation(long locationId) throws LogicException;
     List<Bicycle> displayAll() throws LogicException;
     void add(Bicycle bicycle) throws LogicException;
+    void deleteById(long bicycleId) throws LogicException;
+    void edit(Bicycle bicycle) throws LogicException;
+    void deleteLocation(long bicycleId) throws LogicException;
+    void assignLocation(long bicycleId, long locationId) throws LogicException;
 }

@@ -15,7 +15,8 @@ public class EntityAction {
     }
 
     public String defineDateTime(Timestamp timestamp){
-        return timestamp.toString().replace(' ', 'T').substring(0, timestamp.toString().lastIndexOf(':'));
+        return timestamp.toString().replace(' ', 'T')
+                .substring(0, timestamp.toString().lastIndexOf(':'));
     }
 
     public double countTotal(double pricePh, int hours) {

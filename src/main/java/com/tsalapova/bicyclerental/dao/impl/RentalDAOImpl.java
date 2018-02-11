@@ -6,7 +6,6 @@ import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.ConnectionPoolException;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.mapper.POJOMapper;
-import com.tsalapova.bicyclerental.util.EntityAction;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -52,41 +51,42 @@ public class RentalDAOImpl implements RentalDAO {
         }
     }
 
-    public List<Rental> findByClientId(long clientId) throws DAOException {
+    private List<Rental> findRentalsByClientId(long clientId, String query) throws DAOException, ConnectionPoolException,
+            SQLException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_BY_CLIENT_ID);
+            statement = connection.prepareStatement(query);
             statement.setLong(1, clientId);
             ResultSet rs = statement.executeQuery();
             return new POJOMapper<Rental>().mapPojos(rs, Rental.class);
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while finding rentals by client id", e);
         } finally {
             close(statement, connection);
         }
     }
 
-    public List<Rental> findConcludedByClientId(long clientId) throws DAOException {
-        Connection connection = null;
-        PreparedStatement statement = null;
+    public List<Rental> findByClientId(long clientId) throws DAOException {
         try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(FIND_CONCLUDED_BY_CLIENT_ID);
-            statement.setLong(1, clientId);
-            ResultSet rs = statement.executeQuery();
-            return new POJOMapper<Rental>().mapPojos(rs, Rental.class);
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            return findRentalsByClientId(clientId, FIND_CONCLUDED_BY_CLIENT_ID);
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
+                ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding rentals by client id", e);
-        } finally {
-            close(statement, connection);
+        }
+    }
+
+    public List<Rental> findConcludedByClientId(long clientId) throws DAOException {
+        try {
+            return findRentalsByClientId(clientId, FIND_BY_CLIENT_ID);
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
+                ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding concluded rentals by client id", e);
         }
     }
 
     @Override
     public Rental findById(long rentalId) throws DAOException {
-        Rental rental=null;
+        Rental rental = null;
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -94,11 +94,12 @@ public class RentalDAOImpl implements RentalDAO {
             statement = connection.prepareStatement(FIND_BY_ID);
             statement.setLong(1, rentalId);
             ResultSet rs = statement.executeQuery();
-            List<Rental> rentals= new POJOMapper<Rental>().mapPojos(rs, Rental.class);
+            List<Rental> rentals = new POJOMapper<Rental>().mapPojos(rs, Rental.class);
             if (!rentals.isEmpty()) {
                 rental = rentals.get(0);
             }
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
+                ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding rental by id", e);
         } finally {
             close(statement, connection);

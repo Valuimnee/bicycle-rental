@@ -105,7 +105,7 @@ public class RentalLogicImpl implements RentalLogic {
     }
 
     @Override
-    public void cancel(long rentalId) throws LogicException {
+    public void cancelById(long rentalId) throws LogicException {
         try {
             new RentalDAOImpl().cancelById(rentalId);
         } catch (DAOException e) {

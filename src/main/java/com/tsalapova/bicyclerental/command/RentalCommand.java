@@ -1,43 +1,71 @@
 package com.tsalapova.bicyclerental.command;
 
-import com.tsalapova.bicyclerental.entity.Entity;
+import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
 import com.tsalapova.bicyclerental.util.EntityAction;
+import com.tsalapova.bicyclerental.validator.ParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ * Interface includes methods, common for several rental commands,
+ * such as displaying rentals, defining rental&apos;s parameters.
+ * Base interface for all commands, working with rentals
+ *
  * @author TsalapovaMD
- * @version 1.0, 2/8/2018
+ * @version 1.0, 2/11/2018
  */
-public class RentalCommand implements ActionCommand {
-    @Override
-    public String execute(HttpServletRequest request) throws CommandException {
-        HttpSession session=request.getSession();
-        long rentalId=Long.valueOf(request.getParameter(DocumentConstant.RENTAL_ID));
-        List<Entity> entities;
-        try {
-            entities=new RentalLogicImpl().displayById(rentalId);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying rental", e);
-        }
-
-        if(entities.isEmpty()){
-            request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_RENTAL);
+public interface RentalCommand extends ActionCommand {
+    /**
+     * Methods sets lists of rentals and corresponding bicycles to request.
+     * If rental list is empty, sets message to request.
+     * Returns page where to send request and response
+     *
+     * @param rentals  List of rentals to display
+     * @param bicycles List bicycles corresponding to rentals to display
+     * @param request  HttpServletRequest - current request
+     * @param message  Message to display if there are no rentals
+     * @return String - next page
+     */
+    default String setToRequestRentals(List<Rental> rentals, List<Bicycle> bicycles, HttpServletRequest request, String message) {
+        if (rentals.isEmpty()) {
+            request.setAttribute(RequestConstant.MESSAGE, message);
             return PageConstant.MAIN;
         }
-
-        session.setAttribute(SessionConstant.LOCATION, entities.get(0));
-        session.setAttribute(SessionConstant.BICYCLE, entities.get(1));
-        session.setAttribute(SessionConstant.RENTAL, entities.get(2));
-
-        request.setAttribute(RequestConstant.DATETIME, new EntityAction().defineDateTime(((Rental)entities.get(2)).getStartTime()));
-        request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
+        request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTALS);
+        request.setAttribute(RequestConstant.RENTALS, rentals);
+        request.setAttribute(RequestConstant.BICYCLES, bicycles);
         return PageConstant.MAIN;
+    }
+
+    /**
+     * Method retrieves start date and hours from the request, validates them.
+     * In case they are valid, sets start date and hours to rental, recalculates the total of the rental
+     * and returns true.
+     * Otherwise sets &Prime;wrong&Prime; attribute to the request and returns false.
+     *
+     * @param request HttpServletRequest - current request
+     * @param rental  current rental
+     * @return true or false, if the start date and hours were defined
+     */
+    default boolean defineDateHours(HttpServletRequest request, Rental rental) {
+        HttpSession session = request.getSession();
+        Timestamp startDate = new EntityAction().defineTimestamp(request.getParameter(DocumentConstant.START_DATE));
+        int hours = Integer.valueOf(request.getParameter(DocumentConstant.HOURS));
+        ParameterValidator validator = new ParameterValidator();
+        if (!validator.validateStartTime(startDate) || !validator.validateHours(hours)) {
+            request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
+            return false;
+        }
+        rental.setStartTime(startDate);
+        if (rental.getHours() != hours) {
+            Bicycle bicycle = (Bicycle) session.getAttribute(SessionConstant.BICYCLE);
+            rental.setHours(hours);
+            rental.setTotal(new EntityAction().countTotal(bicycle.getPricePh(), hours));
+        }
+        return true;
     }
 }

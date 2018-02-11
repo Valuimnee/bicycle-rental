@@ -28,7 +28,7 @@
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.locations"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">View all locations</button>
+                    <button class="dropdown-item" type="submit" name="command" value="locations">View all locations</button>
                     <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">Add location</button>
                     <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">Choose location</button>
                 </div>
@@ -37,10 +37,8 @@
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.bikes"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-autos">View all bikes</button>
-                    <button class="dropdown-item" type="submit" name="command" value="view-client-autos">View all bikes of location</button>
-                    <button class="dropdown-item" type="submit" name="command" value="add-bicycle-form">Add bike</button>
-                    <button class="dropdown-item" type="submit" name="command" value="choose-auto">Choose bike</button>
+                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles"><fmt:message key="menubar.all-bikes"/></button>
+                    <button class="dropdown-item" type="submit" name="command" value="add-bicycle-form"><fmt:message key="adminbar.add-bike"/></button>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">

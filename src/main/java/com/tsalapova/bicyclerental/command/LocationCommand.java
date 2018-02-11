@@ -10,20 +10,19 @@ import java.util.List;
 
 /**
  * @author TsalapovaMD
- * @version 1.0, 2/3/2018
+ * @version 1.0, 2/11/2018
  */
-public class LocationsCommand implements ActionCommand {
-    @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+public interface LocationCommand extends ActionCommand {
+    default String displayLocations(HttpServletRequest request) throws CommandException {
         List<Location> locations;
         try {
             locations = new LocationLogicImpl().displayAll();
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying locations", e);
         }
-        if(locations.isEmpty()){
+        if (locations.isEmpty()) {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_LOCATIONS);
-        }else{
+        } else {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.LOCATIONS);
             request.setAttribute(RequestConstant.LOCATIONS, locations);
         }
