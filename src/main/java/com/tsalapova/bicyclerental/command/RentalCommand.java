@@ -1,8 +1,8 @@
 package com.tsalapova.bicyclerental.command;
 
+import com.tsalapova.bicyclerental.util.*;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.util.EntityAction;
 import com.tsalapova.bicyclerental.validator.ParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
- * Interface includes methods, common for several rental commands,
+ * The interface includes methods, common for several rental commands,
  * such as displaying rentals, defining rental&apos;s parameters.
  * Base interface for all commands, working with rentals
  *
@@ -49,7 +49,7 @@ public interface RentalCommand extends ActionCommand {
      *
      * @param request HttpServletRequest - current request
      * @param rental  current rental
-     * @return true or false, if the start date and hours were defined
+     * @return boolean - true if the defined start date and hours are valid, else false
      */
     default boolean defineDateHours(HttpServletRequest request, Rental rental) {
         HttpSession session = request.getSession();
@@ -67,5 +67,16 @@ public interface RentalCommand extends ActionCommand {
             rental.setTotal(new EntityAction().countTotal(bicycle.getPricePh(), hours));
         }
         return true;
+    }
+
+    /**
+     * Method removes rental and corresponding bicycle and location attributes from session
+     *
+     * @param session - current session
+     */
+    default void removeRentalFromSession(HttpSession session) {
+        session.removeAttribute(SessionConstant.LOCATION);
+        session.removeAttribute(SessionConstant.BICYCLE);
+        session.removeAttribute(SessionConstant.RENTAL);
     }
 }

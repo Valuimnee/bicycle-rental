@@ -6,6 +6,7 @@ import com.tsalapova.bicyclerental.command.clientimpl.ProfileCommand;
 import com.tsalapova.bicyclerental.command.locationimpl.LocationsCommand;
 import com.tsalapova.bicyclerental.command.locationimpl.SelectLocationCommand;
 import com.tsalapova.bicyclerental.command.rentalimpl.*;
+import com.tsalapova.bicyclerental.command.sessionimpl.LogoutCommand;
 import com.tsalapova.bicyclerental.command.userimpl.*;
 
 /**

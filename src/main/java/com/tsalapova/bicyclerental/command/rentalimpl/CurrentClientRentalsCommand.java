@@ -1,8 +1,8 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
 import com.tsalapova.bicyclerental.command.RentalCommand;
-import com.tsalapova.bicyclerental.command.RequestConstant;
-import com.tsalapova.bicyclerental.command.SessionConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.CommandException;

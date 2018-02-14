@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.command.userimpl;
 
 import com.tsalapova.bicyclerental.command.ActionCommand;
-import com.tsalapova.bicyclerental.command.RequestConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;

@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.filter;
 
-import com.tsalapova.bicyclerental.command.PageConstant;
-import com.tsalapova.bicyclerental.command.SessionConstant;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;

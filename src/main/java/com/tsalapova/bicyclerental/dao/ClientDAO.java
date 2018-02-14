@@ -11,4 +11,5 @@ public interface ClientDAO extends GeneralDAO<Client> {
     void add(Client client) throws DAOException;
     Client findById(long clientId) throws DAOException;
     void update(Client client) throws DAOException;
+    void changeStatusById(long clientId, byte status) throws DAOException;
 }

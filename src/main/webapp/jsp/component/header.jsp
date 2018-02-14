@@ -1,8 +1,3 @@
-<%--
-  Author: TsalapovaMD
-  Date: 5/28/2017
-  Time: 2:33 PM
---%>
 <%@ page contentType="text/html;charset=utf-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="jumbotron p-3 p-md-3 mb-0">

@@ -1,8 +1,3 @@
-<%--
-  Author: TsalapovaMD
-  Date: 1/22/2018
-  Time: 3:19 PM
---%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
     <meta charset="utf-8">

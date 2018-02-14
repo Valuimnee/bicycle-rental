@@ -58,8 +58,13 @@ public class ConnectionPool {
         }
     }
 
-
-    //Protecting from creation of another instance through cloning
+    /**
+     * Method protecting from creation of another instance through cloning.
+     * Returns null or throws CloneNotSupportedException
+     *
+     * @return Object - method should always return null
+     * @throws CloneNotSupportedException  - exception
+     */
     @Override
     protected Object clone() throws CloneNotSupportedException {
         if (instance != null) {
@@ -96,7 +101,6 @@ public class ConnectionPool {
                 connection.closeConnection();
             }
         } catch (SQLException e) {
-            //TODO
             LOGGER.log(Level.WARN, "Exception while closing pool connections", e);
         }
 
@@ -106,7 +110,6 @@ public class ConnectionPool {
                 DriverManager.deregisterDriver(drivers.nextElement());
             }
         } catch (SQLException e) {
-            //TODO
             LOGGER.log(Level.WARN, "Exception while deregistering database connection drivers", e);
         }
 

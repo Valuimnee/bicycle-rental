@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
+<%@ taglib prefix="fld" uri="fldlib" %>
 <script src="/js/account.js"></script>
 <div class="register-block">
     <h2 id="reg" class="greeting text-center mb-2"><fmt:message key="account.header"/></h2>

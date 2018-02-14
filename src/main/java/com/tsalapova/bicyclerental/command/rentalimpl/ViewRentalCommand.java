@@ -6,7 +6,7 @@ import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
-import com.tsalapova.bicyclerental.util.EntityAction;
+import com.tsalapova.bicyclerental.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,16 +19,16 @@ import java.util.List;
 public class ViewRentalCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        HttpSession session=request.getSession();
-        long rentalId=Long.valueOf(request.getParameter(DocumentConstant.RENTAL_ID));
+        HttpSession session = request.getSession();
+        long rentalId = Long.valueOf(request.getParameter(DocumentConstant.RENTAL_ID));
         List<Entity> entities;
         try {
-            entities=new RentalLogicImpl().displayById(rentalId);
+            entities = new RentalLogicImpl().displayById(rentalId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying rental", e);
         }
 
-        if(entities.isEmpty()){
+        if (entities.isEmpty()) {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_RENTAL);
             return PageConstant.MAIN;
         }
@@ -36,9 +36,8 @@ public class ViewRentalCommand implements ActionCommand {
         session.setAttribute(SessionConstant.LOCATION, entities.get(0));
         session.setAttribute(SessionConstant.BICYCLE, entities.get(1));
         session.setAttribute(SessionConstant.RENTAL, entities.get(2));
-
-        request.setAttribute(RequestConstant.DATETIME, new EntityAction().defineDateTime(((Rental)entities.get(2)).getStartTime()));
-
+        Rental rental=(Rental) entities.get(2);
+        request.setAttribute(RequestConstant.DATETIME, new EntityAction().defineDateTime(rental.getStartTime()));
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
         return PageConstant.MAIN;
     }

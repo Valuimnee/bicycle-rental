@@ -8,6 +8,8 @@ import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
 import com.tsalapova.bicyclerental.logic.impl.LocationLogicImpl;
+import com.tsalapova.bicyclerental.util.DocumentConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.validator.ParameterValidator;
 import javafx.util.Pair;
 
@@ -16,8 +18,9 @@ import java.util.List;
 import java.util.stream.Stream;
 
 /**
- * The interface includes common methods for some commands related to bicycle logic.
- * Such as define bicycle, set list of bicycle to the request, retrieve bicycle
+ * The interface includes common methods for commands related to bicycle logic.
+ * Such as define bicycle, set list of bicycle to the request,
+ * retrieve bicycle from logic layer
  *
  * @author TsalapovaMD
  * @version 1.0, 2/10/2018
@@ -48,7 +51,7 @@ public interface BicycleCommand extends ActionCommand {
      *
      * @param request HttpServletRequest - current request
      */
-    default void setMaterialsTypes(HttpServletRequest request) {
+    default void setToRequestMaterialsTypes(HttpServletRequest request) {
         request.setAttribute(RequestConstant.MATERIALS,
                 Stream.of(BicycleMaterial.values()).map(BicycleMaterial::getAttributeName).toArray(String[]::new));
         request.setAttribute(RequestConstant.TYPES,
@@ -61,7 +64,7 @@ public interface BicycleCommand extends ActionCommand {
      * Else sets &Prime;wrong&Prime; attribute to the request and returns false.
      *
      * @param request HttpServletRequest - current request
-     * @return Bicycle - defined bicycle or null
+     * @return boolean - true if defined bicycle is valid, otherwise false
      */
     default boolean defineBicycle(HttpServletRequest request, Bicycle bicycle) {
         String model = request.getParameter(DocumentConstant.MODEL);

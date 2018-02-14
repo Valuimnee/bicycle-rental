@@ -19,7 +19,6 @@
     <fmt:message key="error.code"/>: ${pageContext.errorData.statusCode}<br>
     <fmt:message key="error.uri"/>: ${pageContext.errorData.requestURI}<br>
     <fmt:message key="error.message"/>: ${pageContext.errorData.throwable.localizedMessage}<br>
-    <%--<fmt:message key="error.header"/>: ${pageContext.errorData.throwable.toString()}<br>--%>
 </form>
 </div>
 <jsp:include page="/jsp/component/footer.jsp"/>

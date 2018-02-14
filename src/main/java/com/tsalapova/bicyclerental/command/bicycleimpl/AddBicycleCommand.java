@@ -1,13 +1,12 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.command.PageConstant;
-import com.tsalapova.bicyclerental.command.RequestConstant;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
-import com.tsalapova.bicyclerental.validator.ParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 

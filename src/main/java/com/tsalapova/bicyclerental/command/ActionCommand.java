@@ -1,6 +1,8 @@
 package com.tsalapova.bicyclerental.command;
 
 import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,7 +27,7 @@ public interface ActionCommand {
      * Method returns the start page depending on the role of the client:
      * user, administrator or unauthorized client
      *
-     * @param request HttpServletRequset - current request
+     * @param request HttpServletRequest - current request
      * @return String - start page
      */
     default String getStartPage(HttpServletRequest request) {

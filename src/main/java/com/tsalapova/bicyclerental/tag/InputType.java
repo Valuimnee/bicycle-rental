@@ -10,7 +10,7 @@ public enum InputType {
     ADDRESS("type=\"text\" pattern=\"^([\\p{L}.,-/\\d]+\\s+)*[\\p{L}.,-/\\d]+$\""),
     PASSPORT("type=\"text\" pattern=\"^(AB|BM|HB|KH|MP|MC|KB|PP)\\d{7}$\""), PHONE("type=\"tel\" pattern=\"^\\d{12}$\""),
     EMAIL("type=\"email\""), DATETIME("type=\"datetime-local\""), HOURS("type=\"number\" min=\"1\" max=\"168\""),
-    PRODUCT_NAME("type=\"text\" pattern=\"^([\\p{L}\\d'][ \\p{L}\\d'-]*[\\p{L}\\d]|[\\p{L}\\d][\\p{L}\\d'-]*)$\"");
+    PRODUCT_NAME("type=\"text\" pattern=\"^([\\p{L}\\d'][ \\p{L}\\d'-.]*[\\p{L}\\d]|[\\p{L}\\d][\\p{L}\\d'-.]*)$\"");
 
     private final String pattern;
 

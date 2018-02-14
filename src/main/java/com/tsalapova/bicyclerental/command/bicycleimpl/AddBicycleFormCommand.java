@@ -1,8 +1,8 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.command.PageConstant;
-import com.tsalapova.bicyclerental.command.RequestConstant;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AddBicycleFormCommand implements BicycleCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        setMaterialsTypes(request);
+        setToRequestMaterialsTypes(request);
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.ADD_BICYCLE);
         return PageConstant.ADMIN;
     }

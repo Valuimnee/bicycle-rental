@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+<?xml version="1.0" encoding="UTF-8" ?>
+<taglib
+        xmlns="http://java.sun.com/xml/ns/javaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
         version="2.1">
 
+    <description>Field tag library. Includes field tags of specific kind. For example, input field tag</description>
     <tlib-version>1.0</tlib-version>
     <short-name>fld</short-name>
     <uri>fldlib</uri>
-    <info>Field tag library. Includes field tags of specific kind. For example, input field tag</info>
 
     <tag>
+        <description>Defines input field for different types of input, for example login, password, name</description>
         <name>input</name>
         <tag-class>com.tsalapova.bicyclerental.tag.InputFieldTag</tag-class>
-        <info>Defines input field for different types of input, for example login, password, name.</info>
         <body-content>scriptless</body-content>
         <attribute>
             <name>type</name>

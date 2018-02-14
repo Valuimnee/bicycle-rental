@@ -15,41 +15,43 @@ import javafx.util.Pair;
  */
 public class UserLogicImpl implements UserLogic {
     @Override
-    public User login(String login, String password) throws LogicException {
+    public User login(User currentUser) throws LogicException {
+        User user;
         try {
-            User user = new UserDAOImpl().findByLogin(login);
-            if (user != null) {
-                String hash = new HashGenerator().generateHash(password, user.getSalt());
-                if (hash.equals(user.getPassword())) {
-                    return user;
-                }
-            }
-            return null;
+            user = new UserDAOImpl().findByLogin(currentUser.getLogin());
         } catch (DAOException e) {
             throw new LogicException("Authentication error.", e);
         }
+
+        if (user != null) {
+            String hash = new HashGenerator().generateHash(currentUser.getPassword(), user.getSalt());
+            if (hash.equals(user.getPassword())) {
+                return user;
+            }
+        }
+        return null;
     }
 
     @Override
-    public boolean update(String login, String password, String newLogin, String newPassword) throws LogicException {
+    public boolean update(User currentUser, User newUser) throws LogicException {
         UserDAO userDAO = new UserDAOImpl();
         HashGenerator hashGenerator = new HashGenerator();
         try {
-            User user = userDAO.findByLogin(login);
-            if (!user.getLogin().equals(newLogin)) {
-                if(userDAO.findIdByLogin(newLogin)!=-1L){
+            User user = userDAO.findByLogin(currentUser.getLogin());
+            if (!user.getLogin().equals(newUser.getLogin())) {
+                if(userDAO.findIdByLogin(newUser.getLogin())!=-1L){
                     return false;
                 }
-                userDAO.updateLogin(user.getId(), newLogin);
-                user.setLogin(newLogin);
+                userDAO.updateLogin(user.getId(), newUser.getLogin());
+                user.setLogin(newUser.getLogin());
             }
-            if (password.isEmpty() && newPassword.isEmpty()) {
+            if (currentUser.getPassword().isEmpty() && newUser.getPassword().isEmpty()) {
                 return true;
             }
-            if (!user.getPassword().equals(hashGenerator.generateHash(password, user.getSalt()))) {
+            if (!user.getPassword().equals(hashGenerator.generateHash(currentUser.getPassword(), user.getSalt()))) {
                 return false;
             }
-            Pair<String, String> hashSalt = hashGenerator.generateHashSalt(newPassword);
+            Pair<String, String> hashSalt = hashGenerator.generateHashSalt(newUser.getPassword());
             user.setPassword(hashSalt.getKey());
             user.setSalt(hashSalt.getValue());
             userDAO.updateHashSalt(user);

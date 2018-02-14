@@ -14,7 +14,6 @@ public class LanguageCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        HttpSession session=request.getSession(true);
         return getStartPage(request);
     }
 }

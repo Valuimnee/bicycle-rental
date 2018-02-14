@@ -1,7 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
-<form name="add-bicycle" method="post" action="/control">
+<%@ taglib prefix="fld" uri="fldlib" %>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/submit.js"></script>
+<form name="add-bicycle" class="no-resubmit" method="post" action="/control">
+    <input type="hidden" name="submitted" value="false"/>
     <p class="mb-2 text-center"><label><b><fmt:message key="bicycle.add-greeting"/></b></label></p>
     <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="bicycle.wrong-info"/></p></c:if>
     <fld:input type="product-name" labelType="medium" name="model" required="required">

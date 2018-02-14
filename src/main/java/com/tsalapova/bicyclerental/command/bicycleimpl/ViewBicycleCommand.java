@@ -1,9 +1,9 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.command.PageConstant;
-import com.tsalapova.bicyclerental.command.RequestConstant;
-import com.tsalapova.bicyclerental.command.SessionConstant;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Location;
 import com.tsalapova.bicyclerental.exception.CommandException;
@@ -29,7 +29,7 @@ public class ViewBicycleCommand implements BicycleCommand {
         session.setAttribute(SessionConstant.BICYCLE, pair.getKey());
         session.setAttribute(SessionConstant.LOCATION, pair.getValue());
 
-        setMaterialsTypes(request);
+        setToRequestMaterialsTypes(request);
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.BICYCLE);
         return PageConstant.ADMIN;
     }

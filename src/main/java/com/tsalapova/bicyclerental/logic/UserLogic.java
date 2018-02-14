@@ -8,6 +8,6 @@ import com.tsalapova.bicyclerental.exception.LogicException;
  * @version 1.0, 1/3/2018
  */
 public interface UserLogic {
-    User login(String login, String password) throws LogicException;
-    boolean update(String login, String password, String newLogin, String newPassword) throws LogicException;
+    User login(User currentUser) throws LogicException;
+    boolean update(User currentUser, User newUser) throws LogicException;
 }

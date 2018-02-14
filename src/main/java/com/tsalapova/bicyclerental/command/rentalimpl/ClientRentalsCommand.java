@@ -1,11 +1,13 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
-import com.tsalapova.bicyclerental.command.*;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+import com.tsalapova.bicyclerental.command.RentalCommand;
+import com.tsalapova.bicyclerental.util.RequestConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 import javafx.util.Pair;
 
 import javax.servlet.http.HttpServletRequest;

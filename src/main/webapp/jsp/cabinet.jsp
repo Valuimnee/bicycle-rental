@@ -22,14 +22,13 @@
     <c:choose>
         <%--<c:when test="${requestScope.content=='admins'}">
             <jsp:include page="/jsp/list/admins.jsp"/>
-        </c:when>
-        <c:when test="${requestScope.content=='clients'}">
-            <jsp:include page="/jsp/list/clients.jsp"/>
-        </c:when>
-        --%>
+        </c:when>--%>
         <%--<c:when test="${requestScope.content=='rentals'}">
             <jsp:include page="/jsp/list/full-rentals.jsp"/>
         </c:when>--%>
+        <c:when test="${requestScope.content=='clients'}">
+            <jsp:include page="/jsp/list/clients.jsp"/>
+        </c:when>
         <c:when test="${requestScope.content=='locations'}">
             <jsp:include page="/jsp/list/locations.jsp"/>
         </c:when>
@@ -42,15 +41,6 @@
         <c:when test="${requestScope.content=='bicycle'}">
             <jsp:include page="/jsp/entity/bicycle.jsp"/>
         </c:when>
-        <%--<c:when test="${requestScope.content=='find-bike'}">
-            <jsp:include page="/jsp/entity/find-auto.jsp"/>
-        </c:when>
-        <c:when test="${requestScope.content=='bike'}">
-            <jsp:include page="/jsp/entity/bike.jsp"/>
-        </c:when>
-        <c:when test="${requestScope.content=='find-bike-client-form'}">
-            <jsp:include page="/jsp/entity/find-auto-client.jsp"/>
-        </c:when>--%>
         <c:when test="${requestScope.content=='account'}">
             <jsp:include page="/jsp/entity/account.jsp"/>
         </c:when>

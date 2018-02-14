@@ -1,20 +1,17 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
-import com.tsalapova.bicyclerental.command.PageConstant;
+import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.command.RentalCommand;
-import com.tsalapova.bicyclerental.command.RequestConstant;
-import com.tsalapova.bicyclerental.command.SessionConstant;
-import com.tsalapova.bicyclerental.entity.Bicycle;
+import com.tsalapova.bicyclerental.util.RequestConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
 import com.tsalapova.bicyclerental.util.EntityAction;
-import javafx.util.Pair;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.sql.Timestamp;
 
 /**
  * @author TsalapovaMD
@@ -35,10 +32,7 @@ public class EditRentalCommand implements RentalCommand {
         } catch (LogicException e) {
             throw new CommandException("Error occurred when updating rental", e);
         }
-
-        session.removeAttribute(SessionConstant.LOCATION);
-        session.removeAttribute(SessionConstant.BICYCLE);
-        session.removeAttribute(SessionConstant.RENTAL);
+        removeRentalFromSession(session);
         return PageConstant.MAIN;
     }
 }

@@ -1,4 +1,4 @@
-package com.tsalapova.bicyclerental.command;
+package com.tsalapova.bicyclerental.util;
 
 /**
  * @author TsalapovaMD

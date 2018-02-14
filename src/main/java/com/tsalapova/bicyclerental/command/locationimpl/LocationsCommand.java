@@ -12,6 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 public class LocationsCommand implements LocationCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        return displayLocations(request);
+        return setToRequestLocations(request);
     }
 }

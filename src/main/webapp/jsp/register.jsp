@@ -5,7 +5,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
+<%@ taglib prefix="fld" uri="fldlib" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
 <!DOCTYPE HTML>
@@ -14,11 +14,13 @@
 <body>
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="/js/submit.js"></script>
 <script src="/js/register.js"></script>
 <main class="container-fluid mb-5">
     <div class="register-block">
     <h2 id="reg" class="greeting text-center mb-2"><fmt:message key="register.greeting"/></h2>
-    <form name="register" method="post" action="/control">
+    <form name="register-form" class="no-resubmit" method="post" action="/control">
         <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="register.wrong-info"/></p></c:if>
         <p class="mb-2 text-center"><label><b><fmt:message key="register.login-info"/></b></label></p>
         <p class="mb-2"><c:if test="${requestScope.wrong=='wrong-login'}"><div class="mb-1">

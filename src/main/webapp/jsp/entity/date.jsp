@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fld" uri="/WEB-INF/tld/fld.tld" %>
+<%@ taglib prefix="fld" uri="fldlib" %>
 <form name="select-date" method="post" action="/control">
     <c:if test="${requestScope.wrong=='wrong'}"><p class="mb-2"><fmt:message key="date.wrong"/></p></c:if>
     <p class="mb-2 text-center"><label><b><fmt:message key="date.greeting"/></b></label></p>
