@@ -20,7 +20,7 @@ public class UserLogicImpl implements UserLogic {
         try {
             user = new UserDAOImpl().findByLogin(currentUser.getLogin());
         } catch (DAOException e) {
-            throw new LogicException("Authentication error.", e);
+            throw new LogicException("Authentication error", e);
         }
 
         if (user != null) {
@@ -56,8 +56,17 @@ public class UserLogicImpl implements UserLogic {
             user.setSalt(hashSalt.getValue());
             userDAO.updateHashSalt(user);
         } catch (DAOException e) {
-            throw new LogicException("Error occurred when updating user account.", e);
+            throw new LogicException("Error occurred when updating user account", e);
         }
         return true;
+    }
+
+    @Override
+    public User findById(long userId) throws LogicException {
+        try {
+            return new UserDAOImpl().findById(userId);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when finding user by id", e);
+        }
     }
 }

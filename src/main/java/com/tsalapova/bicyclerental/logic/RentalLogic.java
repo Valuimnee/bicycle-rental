@@ -19,4 +19,5 @@ public interface RentalLogic {
     List<Entity> displayById(long rentalId) throws LogicException;
     void cancelById(long rentalId) throws LogicException;
     void editTimeHours(Rental rental) throws LogicException;
+    Long countByClientId(long clientId) throws LogicException;
 }

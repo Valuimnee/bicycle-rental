@@ -10,4 +10,5 @@ import com.tsalapova.bicyclerental.exception.LogicException;
 public interface UserLogic {
     User login(User currentUser) throws LogicException;
     boolean update(User currentUser, User newUser) throws LogicException;
+    User findById(long userId) throws LogicException;
 }

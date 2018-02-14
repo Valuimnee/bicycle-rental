@@ -22,18 +22,21 @@ public class RequestConstant {
     public static final String CONFIRM_RENTAL = "confirm-rental";
     public static final String RENTALS = "rentals";
     public static final String ADD_BICYCLE = "add-bicycle";
+    public static final String CLIENTS = "clients";
 
     public static final String WRONG = "wrong";
     public static final String WRONG_INFO = "wrong-info";
     public static final String WRONG_LOGIN = "wrong-login";
 
     public static final String CLIENT = "client";
-
-    public static final String LOCATION = "location";
     public static final String BICYCLE = "bicycle";
     public static final String RENTAL = "rental";
+
     public static final String DATETIME = "datetime";
     public static final String MATERIALS = "materials";
     public static final String TYPES = "types";
     public static final String SELECT = "select";
+    public static final String LOGINS = "logins";
+    public static final String LOGIN = "login";
+    public static final String RENTAL_COUNT = "rentalCount";
 }

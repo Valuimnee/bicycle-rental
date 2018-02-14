@@ -5,23 +5,25 @@
         <caption></caption>
         <thead>
         <tr>
-            <th class="text-center text"><fmt:message key="rental.bicycle-name" /></th>
-            <th class="text-center text"><fmt:message key="date.start-date" /></th>
-            <th class="text-center text"><fmt:message key="rental.total"/></th>
-            <th class="text-center text"><fmt:message key="rental.status"/></th>
+            <th class="text-center text"><fmt:message key="clients.login" /></th>
+            <th class="text-center text"><fmt:message key="clients.fullname" /></th>
+            <th class="text-center text"><fmt:message key="clients.phone"/></th>
+            <th class="text-center text"><fmt:message key="clients.rentals"/></th>
+            <th class="text-center text"><fmt:message key="clients.status"/></th>
         </tr>
         </thead>
         <tbody>
-        <c:set var="tt" value="1"/>
-        <c:forEach begin="0" end="${rentals.size()-1}" varStatus="loop">
+        <c:forEach begin="0" end="${clients.size()-1}" varStatus="loop">
+            <c:set var="login" value="${logins.get(loop.index)}"/>
+            <c:set var="client" value="${clients.get(loop.index)}"/>
             <c:set var="rental" value="${rentals.get(loop.index)}"/>
-            <c:set var="bicycle" value="${bicycles.get(loop.index)}"/>
-            <tr class="clickable" onclick="document.getElementById('rental${loop.index}').click()">
-                <td class="text-center text">${bicycle.model}</td>
-                <td class="text-center text">${rental.startTime.toString().replace(":00.0", "")}</td>
-                <td class="text-center text">${rental.total} <fmt:message key="bicycle.price-ph-currency"/></td>
-                <td class="text-center text">${rental.status}</td>
-                <td hidden><button id="rental${loop.index}" type="submit" name="rental-id" value="${rental.rentalId}"></button></td>
+            <tr class="clickable" onclick="document.getElementById('client${loop.index}').click()">
+                <td class="text-center text">${login}</td>
+                <td class="text-center text">${client.firstName} ${client.middleName} ${client.lastname}</td>
+                <td class="text-center text">+${client.phone}</td>
+                <td class="text-center text">${rental}</td>
+                <td class="text-center text"><input type="checkbox" <c:if test="${client.active==1}">checked</c:if> disabled="disabled"/></td>
+                <td hidden><button id="client${loop.index}" type="submit" name="client-id" value="${client.clientId}"></button></td>
             </tr>
         </c:forEach>
         </tbody>

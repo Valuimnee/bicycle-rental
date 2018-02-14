@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<form class="container text-center pb-5" name="rentals" method="post" action="/control?command=rental">
+<form class="container text-center pb-5" name="rentals" method="post" action="/control?command=view-rental">
     <table class="table table-striped table-responsive-sm">
         <caption></caption>
         <thead>

@@ -95,11 +95,6 @@ public class BicycleDAOImpl implements BicycleDAO {
             statement.setString(3, bicycle.getMaterial());
             statement.setString(4, bicycle.getType());
             statement.setDouble(5, bicycle.getPricePh());
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding a bicycle", e);

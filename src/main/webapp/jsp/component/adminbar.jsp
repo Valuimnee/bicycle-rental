@@ -8,32 +8,35 @@
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.admins"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-admins"><fmt:message key="adminbar.view-all-admins"/></button>
+                    <button class="dropdown-item" type="submit" name="command" value="view-all-admins">
+                        <fmt:message key="adminbar.view-all-admins"/></button>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.clients"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">View all clients</button>
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">Choose client</button>
+                    <button class="dropdown-item" type="submit" name="command" value="view-clients">
+                        <fmt:message key="adminbar.view-all-clients"/></button>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.locations"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="locations">View all locations</button>
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">Add location</button>
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-user-clients">Choose location</button>
+                    <button class="dropdown-item" type="submit" name="command" value="locations">
+                        <fmt:message key="adminbar.view-all-locations"/></button>
+                    <%--<button class="dropdown-item" type="submit" name="command" value="define-location">Add location</button>--%>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.bikes"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles"><fmt:message key="menubar.all-bikes"/></button>
-                    <button class="dropdown-item" type="submit" name="command" value="add-bicycle-form"><fmt:message key="adminbar.add-bike"/></button>
+                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles">
+                        <fmt:message key="menubar.all-bikes"/></button>
+                    <button class="dropdown-item" type="submit" name="command" value="add-bicycle-form">
+                        <fmt:message key="adminbar.add-bike"/></button>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">

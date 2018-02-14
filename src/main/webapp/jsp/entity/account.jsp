@@ -6,7 +6,6 @@
     <h2 id="reg" class="greeting text-center mb-2"><fmt:message key="account.header"/></h2>
     <form name="account"  method="post" action="/control">
         <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="register.wrong-info"/></p></c:if>
-        <%--<p class="mb-2 text-center"><label><b><fmt:message key="account.header"/></b></label></p>--%>
         <fld:input type="login" labelType="long" name="login"  required="required">
             <jsp:attribute name="label"><fmt:message key="login.login"/></jsp:attribute>
             <jsp:body>${login}</jsp:body>

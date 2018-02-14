@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author TsalapovaMD
- * @version 1.0, 2/11/2018
+ * @version 1.0, 2/8/2018
  */
 public class SelectLocationCommand implements LocationCommand {
     @Override

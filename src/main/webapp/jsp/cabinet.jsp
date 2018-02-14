@@ -29,6 +29,9 @@
         <c:when test="${requestScope.content=='clients'}">
             <jsp:include page="/jsp/list/clients.jsp"/>
         </c:when>
+        <c:when test="${requestScope.content=='client'}">
+            <jsp:include page="/jsp/entity/client.jsp"/>
+        </c:when>
         <c:when test="${requestScope.content=='locations'}">
             <jsp:include page="/jsp/list/locations.jsp"/>
         </c:when>

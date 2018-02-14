@@ -4,8 +4,10 @@
     <input type="hidden" name="rental-id" value="${rental.rentalId}">
     <p class="mb-2 text-center"><label><b><fmt:message key="rental.rental-info"/></b></label></p>
     <p class="mb-2"><b><label class="container-fluid text-center"><fmt:message key="rental.edit-greeting"/></label></b></p>
+
     <p class="mb-2"><label for="bicycle-name" class="long-label"><b><fmt:message key="rental.bicycle-name"/>: </b></label>
-        <input class="disabled aria-disabled" type="text" id="bicycle-name" name="bicycle-name" size="50" value="${bicycle.model}" disabled/></p>
+        <input class="disabled aria-disabled" type="text" id="bicycle-name" name="bicycle-name" size="50"
+               value="${bicycle.model}" disabled/></p>
     <p class="mb-2"><label for="bicycle-type" class="long-label"><b><fmt:message key="rental.bicycle-type"/>: </b></label>
         <input type="text" id="bicycle-type" name="bicycle-type" size="50" value="${bicycle.type}" disabled/></p>
     <p class="mb-2"><label for="location-name" class="long-label"><b><fmt:message key="rental.location-name"/>: </b></label>

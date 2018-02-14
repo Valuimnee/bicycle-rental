@@ -8,10 +8,7 @@ import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.mapper.POJOMapper;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -23,6 +20,8 @@ public class ClientDAOImpl implements ClientDAO {
             " `passport_number`, `address`, `email`, `phone`, `active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT `client_id`, `first_name`, `middle_name`, `lastname`," +
             " `passport_number`, `address`, `email`, `phone`, `active` FROM `client` WHERE `client_id`=?";
+    private static final String FIND_ALL = "SELECT `client_id`, `first_name`, `middle_name`, `lastname`," +
+            " `passport_number`, `address`, `email`, `phone`, `active` FROM `client`";
     private static final String UPDATE_BY_ID = "UPDATE `client` SET `first_name`=?, `middle_name`=?, `lastname`=?," +
             " `passport_number`=?, `address`=?, `email`=?, `phone`=? WHERE `client_id`=?";
     private static final String UPDATE_ACTIVE_BY_ID = "UPDATE `client` SET `active`=? WHERE `client_id`=?";
@@ -108,6 +107,22 @@ public class ClientDAOImpl implements ClientDAO {
             statement.executeUpdate();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while updating status of client", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public List<Client> findAll() throws DAOException {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(FIND_ALL);
+            return new POJOMapper<Client>().mapPojos(rs, Client.class);
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding the client", e);
         } finally {
             close(statement, connection);
         }

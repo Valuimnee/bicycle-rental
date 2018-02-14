@@ -6,12 +6,11 @@ import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.ConnectionPoolException;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.mapper.POJOMapper;
+import javafx.util.Pair;
 
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +28,8 @@ public class RentalDAOImpl implements RentalDAO {
             " `total`, `status` FROM `rental` WHERE `rental_id`=?";
     private static final String CANCEL_BY_ID = "UPDATE `rental` SET `status`='Canceled' WHERE `rental_id`=?";
     private static final String UPDATE_TIME_HOURS_BY_ID = "UPDATE `rental` SET `start_time`=?, `hours`=?, `total`=? WHERE `rental_id`=?";
+    private static final String COUNT_ALL_BY_CLIENT_ID = "SELECT `client_id`, COUNT(*) AS 'count' FROM `rental` GROUP BY `client_id`";
+    private static final String COUNT_BY_CLIENT_ID = "SELECT COUNT(*) AS 'count' FROM `rental` WHERE `client_id`=?";
 
     @Override
     public void add(Rental rental) throws DAOException {
@@ -140,5 +141,49 @@ public class RentalDAOImpl implements RentalDAO {
         } finally {
             close(statement, connection);
         }
+    }
+
+    @Override
+    public List<Pair<Long, Long>> countAllByClientId() throws DAOException {
+        final String clientIdColumn = "client_id";
+        final String countColumn = "count";
+        Connection connection = null;
+        Statement statement = null;
+        List<Pair<Long, Long>> rentals = new ArrayList<>();
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(COUNT_ALL_BY_CLIENT_ID);
+            while (rs.next()) {
+                rentals.add(new Pair<Long, Long>(rs.getLong(clientIdColumn), rs.getLong(countColumn)));
+            }
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding rental counts by client", e);
+        } finally {
+            close(statement, connection);
+        }
+        return rentals;
+    }
+
+    @Override
+    public Long countByClientId(long clientId) throws DAOException {
+        final String countColumn = "count";
+        Connection connection = null;
+        PreparedStatement statement = null;
+        Long count=-1L;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(COUNT_BY_CLIENT_ID);
+            statement.setLong(1, clientId);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                count=rs.getLong(countColumn);
+            }
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding rental count by client id", e);
+        } finally {
+            close(statement, connection);
+        }
+        return count;
     }
 }

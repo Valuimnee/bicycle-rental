@@ -30,24 +30,28 @@ public class RentalLogicImpl implements RentalLogic {
         }
     }
 
+    private Pair<List<Rental>, List<Bicycle>> displayRentalsBicycles(List<Rental> rentals, long clientId) throws DAOException {
+        if (rentals.isEmpty()) {
+            return new Pair<>(rentals, null);
+        }
+        List<Bicycle> bicycles = new BicycleDAOImpl().findByRentalsClientId(clientId);
+        HashMap<Long, Bicycle> map = new HashMap<>();
+        for (Bicycle bicycle : bicycles) {
+            map.put(bicycle.getBicycleId(), bicycle);
+        }
+        bicycles.clear();
+        for (Rental rental : rentals) {
+            bicycles.add(map.get(rental.getBicycleId()));
+        }
+        map.clear();
+        return new Pair<>(rentals, bicycles);
+    }
+
     @Override
     public Pair<List<Rental>, List<Bicycle>> displayByClientId(long clientId) throws LogicException {
         try {
             List<Rental> rentals = new RentalDAOImpl().findByClientId(clientId);
-            if (rentals.isEmpty()) {
-                return new Pair<>(rentals, null);
-            }
-            List<Bicycle> bicycles = new BicycleDAOImpl().findByRentalsClientId(clientId);
-            HashMap<Long, Bicycle> map = new HashMap<>();
-            for (Bicycle bicycle : bicycles) {
-                map.put(bicycle.getBicycleId(), bicycle);
-            }
-            bicycles.clear();
-            for (Rental rental : rentals) {
-                bicycles.add(map.get(rental.getBicycleId()));
-            }
-            map.clear();
-            return new Pair<>(rentals, bicycles);
+            return displayRentalsBicycles(rentals, clientId);
         } catch (DAOException e) {
             throw new LogicException("Error occurred when displaying all rentals", e);
         }
@@ -57,20 +61,7 @@ public class RentalLogicImpl implements RentalLogic {
     public Pair<List<Rental>, List<Bicycle>> displayCurrentByClientId(long clientId) throws LogicException {
         try {
             List<Rental> rentals = new RentalDAOImpl().findConcludedByClientId(clientId);
-            if (rentals.isEmpty()) {
-                return new Pair<>(rentals, null);
-            }
-            List<Bicycle> bicycles = new BicycleDAOImpl().findByRentalsClientId(clientId);
-            HashMap<Long, Bicycle> map = new HashMap<>();
-            for (Bicycle bicycle : bicycles) {
-                map.put(bicycle.getBicycleId(), bicycle);
-            }
-            bicycles.clear();
-            for (Rental rental : rentals) {
-                bicycles.add(map.get(rental.getBicycleId()));
-            }
-            map.clear();
-            return new Pair<>(rentals, bicycles);
+            return displayRentalsBicycles(rentals, clientId);
         } catch (DAOException e) {
             throw new LogicException("Error occurred when displaying all rentals", e);
         }
@@ -119,6 +110,15 @@ public class RentalLogicImpl implements RentalLogic {
             new RentalDAOImpl().updateTimeHours(rental);
         } catch (DAOException e) {
             throw new LogicException("Error occurred when updating rental", e);
+        }
+    }
+
+    @Override
+    public Long countByClientId(long clientId) throws LogicException {
+        try {
+            return new RentalDAOImpl().countByClientId(clientId);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when finding rental count of client", e);
         }
     }
 }
