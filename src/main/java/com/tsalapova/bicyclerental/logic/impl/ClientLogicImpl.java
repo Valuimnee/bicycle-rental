@@ -37,6 +37,23 @@ public class ClientLogicImpl implements ClientLogic {
     }
 
     @Override
+    public void payRental(long clientId, double total) throws LogicException {
+        try {
+            Client client=new ClientDAOImpl().findById(clientId);
+            double balance=client.getBalance();
+            if (balance < total) {
+                client.setCredit(client.getCredit()+total-balance);
+                client.setBalance(0.);
+            }else {
+                client.setBalance(balance-total);
+            }
+            new ClientDAOImpl().updateBalanceCredit(client);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when paying client rental", e);
+        }
+    }
+
+    @Override
     public List<List> displayAll() throws LogicException {
         try {
             List<Client> clients=new ClientDAOImpl().findAll();

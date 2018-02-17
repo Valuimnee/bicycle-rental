@@ -11,6 +11,7 @@ import java.util.List;
  */
 public interface BicycleDAO extends GeneralDAO<Bicycle> {
     List<Bicycle> findByLocation(long locationId) throws DAOException;
+    List<Bicycle> findAllAvailable() throws DAOException;
     List<Bicycle> findAll() throws DAOException;
     Bicycle findById(long bicycleId) throws DAOException;
     List<Bicycle> findByRentalsClientId(long clientId) throws DAOException;

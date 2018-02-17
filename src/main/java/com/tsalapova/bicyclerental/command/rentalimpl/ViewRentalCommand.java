@@ -16,7 +16,7 @@ import java.util.List;
  * @author TsalapovaMD
  * @version 1.0, 2/8/2018
  */
-public class ViewRentalCommand implements ActionCommand {
+public class ViewRentalCommand implements RentalCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
@@ -27,16 +27,14 @@ public class ViewRentalCommand implements ActionCommand {
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying rental", e);
         }
-
         if (entities.isEmpty()) {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_RENTAL);
             return PageConstant.MAIN;
         }
-
+        Rental rental = (Rental) entities.get(2);
         session.setAttribute(SessionConstant.LOCATION, entities.get(0));
         session.setAttribute(SessionConstant.BICYCLE, entities.get(1));
-        session.setAttribute(SessionConstant.RENTAL, entities.get(2));
-        Rental rental=(Rental) entities.get(2);
+        session.setAttribute(SessionConstant.RENTAL, rental);
         request.setAttribute(RequestConstant.DATETIME, new EntityAction().defineDateTime(rental.getStartTime()));
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
         return PageConstant.MAIN;

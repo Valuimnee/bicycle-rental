@@ -5,6 +5,7 @@ import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.Location;
 
 import java.sql.Timestamp;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,7 +19,7 @@ public class ParameterValidator {
     private static final String PRODUCT_NAME_REGEX = "^([\\p{L}\\d'][ \\p{L}\\d'-.]*[\\p{L}\\d]|[\\p{L}\\d][\\p{L}\\d'-.]*)$";
     private static final String ADDRESS_REGEX = "^([\\p{L}.,-/\\d]+\\s+)*[\\p{L}.,-/\\d]+$";
     private final static String PASSPORT_NUMBER_REGEX = "^(AB|BM|HB|KH|MP|MC|KB|PP)\\d{7}$";
-    private final static String EMAIL_REGEX = "^[\\w-+]+(\\.\\w+)*@[\\w-]+(\\.\\w+)*(\\.[a-z]{2,})$";
+    private final static String EMAIL_REGEX = "^[-+\\w]+(\\.\\w+)*@[\\w-]+(\\.\\w+)*(\\.[a-z]{2,})$";
     private static final String PHONE_REGEX = "^\\d{12}$";
 
     private boolean validateProductName(String productName){
@@ -62,7 +63,7 @@ public class ParameterValidator {
     }
 
     public boolean validateStartTime(Timestamp timestamp) {
-        return timestamp.after(Timestamp.valueOf("2017-01-01 00:00:00"));
+        return timestamp.after(new Timestamp(Calendar.getInstance().getTime().getTime()));
     }
 
     public boolean validatePricePh(double pricePh){

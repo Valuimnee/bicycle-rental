@@ -30,7 +30,6 @@ public class RegisterCommand implements SessionCommand, ClientCommand {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
             return PageConstant.REGISTER;
         }
-
         try {
             if (!new RegisterLogicImpl().register(user, user.getPassword(), client)) {
                 request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_LOGIN);
@@ -39,7 +38,6 @@ public class RegisterCommand implements SessionCommand, ClientCommand {
         } catch (LogicException e) {
             throw new CommandException("Registration error. "+e.getMessage(), e);
         }
-
         setUserSession(session, user);
         return getStartPage(request);
     }
@@ -49,11 +47,9 @@ public class RegisterCommand implements SessionCommand, ClientCommand {
         String password = request.getParameter(DocumentConstant.PASSWORD);
         String password2 = request.getParameter(DocumentConstant.PASSWORD_2);
         ParameterValidator validator = new ParameterValidator();
-
         user.setLogin(login);
         user.setPassword(password);
         user.setRole(UserRole.CLIENT.getName());
-
         return validator.validateLogin(login) && validator.validateConfirmPassword(password, password2);
     }
 }

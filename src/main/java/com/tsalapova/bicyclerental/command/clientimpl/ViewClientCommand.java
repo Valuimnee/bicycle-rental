@@ -27,10 +27,10 @@ public class ViewClientCommand implements ClientCommand {
         Client client;
         Long rentals;
         try {
-            User user=new UserLogicImpl().findById(clientId);
-            login=user.getLogin();
-            client=new ClientLogicImpl().displayProfile(clientId);
-            rentals=new RentalLogicImpl().countByClientId(clientId);
+            User user = new UserLogicImpl().findById(clientId);
+            login = user.getLogin();
+            client = new ClientLogicImpl().displayProfile(clientId);
+            rentals = new RentalLogicImpl().countByClientId(clientId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying user information", e);
         }

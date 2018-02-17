@@ -51,8 +51,8 @@ public class InputFieldTag extends BodyTagSupport {
         try {
             out.write("    <div class=\"mb-2 input-group\">\n" + "        <label for=\"" + name + "\" class=\"" +
                     labelType + "-label mb-0 pt-2\"><b>" + label + ": </b></label>\n");
-            out.write("        <input class=\"form-control\" " + typePattern +
-                    "\n               id=\"" + name + "\" name=\"" + name + "\" size=\"50\" value=\"");
+            out.write("        <input class=\"form-control " + (DISABLED.equals(disabled) ? " disabled aria-disabled" : "") +
+                    "\" " + typePattern + "\n               id=\"" + name + "\" name=\"" + name + "\" size=\"50\" value=\"");
         } catch (IOException e) {
             throw new JspFieldTagException("Exception occurred while evaluating field tag", e);
         }
@@ -72,7 +72,7 @@ public class InputFieldTag extends BodyTagSupport {
     @Override
     public int doEndTag() throws JspFieldTagException {
         try {
-            pageContext.getOut().write("\" " + (REQUIRED.equals(required) ? "required=\"required\" " : "")+
+            pageContext.getOut().write("\" " + (REQUIRED.equals(required) ? "required=\"required\" " : "") +
                     (DISABLED.equals(disabled) ? "disabled " : "") + "/>\n    </div>");
         } catch (IOException e) {
             throw new JspFieldTagException("Exception occurred while evaluating field tag", e);

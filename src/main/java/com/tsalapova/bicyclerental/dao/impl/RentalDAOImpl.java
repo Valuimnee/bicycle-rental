@@ -18,38 +18,53 @@ import java.util.List;
  * @version 1.0, 2/5/2018
  */
 public class RentalDAOImpl implements RentalDAO {
-    private static final String ADD_RENTAL = "INSERT INTO `rental` (`client_id`, `bicycle_id`, `start_time`, `hours`," +
-            " `total`, `status`) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String FIND_NEXT_ID="SELECT MAX(`rental_id`)+1 AS 'next_id' FROM `rental`";
+    private static final String ADD_RENTAL = "INSERT INTO `rental` (`rental_id`, `client_id`, `bicycle_id`, `start_time`," +
+            " `hours`, `total`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_CLIENT_ID = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
             " `total`, `status` FROM `rental` WHERE `client_id`=?";
     private static final String FIND_CONCLUDED_BY_CLIENT_ID = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
             " `total`, `status` FROM `rental` WHERE `client_id`=? AND `status`='Concluded'";
+    private static final String FIND_CONCLUDED = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
+            " `total`, `status` FROM `rental` WHERE `status`='Concluded'";
     private static final String FIND_BY_ID = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
             " `total`, `status` FROM `rental` WHERE `rental_id`=?";
     private static final String CANCEL_BY_ID = "UPDATE `rental` SET `status`='Canceled' WHERE `rental_id`=?";
+    private static final String CONFIRM_BY_ID = "UPDATE `rental` SET `status`='Performed' WHERE `rental_id`=?";
     private static final String UPDATE_TIME_HOURS_BY_ID = "UPDATE `rental` SET `start_time`=?, `hours`=?, `total`=? WHERE `rental_id`=?";
     private static final String COUNT_ALL_BY_CLIENT_ID = "SELECT `client_id`, COUNT(*) AS 'count' FROM `rental` GROUP BY `client_id`";
     private static final String COUNT_BY_CLIENT_ID = "SELECT COUNT(*) AS 'count' FROM `rental` WHERE `client_id`=?";
 
     @Override
-    public void add(Rental rental) throws DAOException {
+    public Rental add(Rental rental) throws DAOException {
         Connection connection = null;
+        Statement idStatement=null;
         PreparedStatement statement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
+            idStatement=connection.createStatement();
+            ResultSet idRs=idStatement.executeQuery(FIND_NEXT_ID);
+            if(idRs.next()){
+                rental.setRentalId(idRs.getLong(1));
+            }else{
+                throw new DAOException("Error while adding rental");
+            }
             statement = connection.prepareStatement(ADD_RENTAL);
-            statement.setLong(1, rental.getClientId());
-            statement.setLong(2, rental.getBicycleId());
-            statement.setTimestamp(3, rental.getStartTime());
-            statement.setInt(4, rental.getHours());
-            statement.setDouble(5, rental.getTotal());
-            statement.setString(6, rental.getStatus());
+            statement.setLong(1, rental.getRentalId());
+            statement.setLong(2, rental.getClientId());
+            statement.setLong(3, rental.getBicycleId());
+            statement.setTimestamp(4, rental.getStartTime());
+            statement.setInt(5, rental.getHours());
+            statement.setDouble(6, rental.getTotal());
+            statement.setString(7, rental.getStatus());
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding rental", e);
         } finally {
+            close(idStatement);
             close(statement, connection);
         }
+        return rental;
     }
 
     private List<Rental> findRentalsByClientId(long clientId, String query) throws DAOException, ConnectionPoolException,
@@ -69,7 +84,7 @@ public class RentalDAOImpl implements RentalDAO {
 
     public List<Rental> findByClientId(long clientId) throws DAOException {
         try {
-            return findRentalsByClientId(clientId, FIND_CONCLUDED_BY_CLIENT_ID);
+            return findRentalsByClientId(clientId, FIND_BY_CLIENT_ID);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
                 ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding rentals by client id", e);
@@ -78,10 +93,26 @@ public class RentalDAOImpl implements RentalDAO {
 
     public List<Rental> findConcludedByClientId(long clientId) throws DAOException {
         try {
-            return findRentalsByClientId(clientId, FIND_BY_CLIENT_ID);
+            return findRentalsByClientId(clientId, FIND_CONCLUDED_BY_CLIENT_ID);
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
                 ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding concluded rentals by client id", e);
+        }
+    }
+
+    @Override
+    public List<Rental> findConcluded() throws DAOException {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(FIND_CONCLUDED);
+            return new POJOMapper<Rental>().mapPojos(rs, Rental.class);
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while finding concluded rentals", e);
+        } finally {
+            close(statement, connection);
         }
     }
 
@@ -118,7 +149,23 @@ public class RentalDAOImpl implements RentalDAO {
             statement.setLong(1, rentalId);
             statement.executeUpdate();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while canceling rental", e);
+            throw new DAOException("Error while canceling the rental", e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    @Override
+    public void confirmById(long rentalId) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(CONFIRM_BY_ID);
+            statement.setLong(1, rentalId);
+            statement.executeUpdate();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException("Error while confirming the rental", e);
         } finally {
             close(statement, connection);
         }
@@ -137,7 +184,7 @@ public class RentalDAOImpl implements RentalDAO {
             statement.setLong(4, rental.getRentalId());
             statement.executeUpdate();
         } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while updating rental", e);
+            throw new DAOException("Error while updating the rental", e);
         } finally {
             close(statement, connection);
         }

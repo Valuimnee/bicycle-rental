@@ -1,5 +1,7 @@
 package com.tsalapova.bicyclerental.logic.impl;
 
+import com.tsalapova.bicyclerental.confirmer.ConfirmTask;
+import com.tsalapova.bicyclerental.confirmer.RentalConfirmer;
 import com.tsalapova.bicyclerental.dao.impl.BicycleDAOImpl;
 import com.tsalapova.bicyclerental.dao.impl.LocationDAOImpl;
 import com.tsalapova.bicyclerental.dao.impl.RentalDAOImpl;
@@ -24,7 +26,8 @@ public class RentalLogicImpl implements RentalLogic {
     @Override
     public void createRental(Rental rental) throws LogicException {
         try {
-            new RentalDAOImpl().add(rental);
+            Rental newRental=new RentalDAOImpl().add(rental);
+            RentalConfirmer.getInstance().addTask(new ConfirmTask(newRental));
         } catch (DAOException e) {
             throw new LogicException("Error occurred when creating rental", e);
         }
@@ -68,6 +71,15 @@ public class RentalLogicImpl implements RentalLogic {
     }
 
     @Override
+    public List<Rental> findConcluded() throws LogicException {
+        try {
+            return new RentalDAOImpl().findConcluded();
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when fetching concluded rentals", e);
+        }
+    }
+
+    @Override
     public List<Entity> displayById(long rentalId) throws LogicException {
         List<Entity> entities=new ArrayList<>(3);
         Rental rental;
@@ -99,8 +111,18 @@ public class RentalLogicImpl implements RentalLogic {
     public void cancelById(long rentalId) throws LogicException {
         try {
             new RentalDAOImpl().cancelById(rentalId);
+            RentalConfirmer.getInstance().removeTask(rentalId);
         } catch (DAOException e) {
             throw new LogicException("Error occurred when canceling rental", e);
+        }
+    }
+
+    @Override
+    public void confirmById(long rentalId) throws LogicException {
+        try {
+            new RentalDAOImpl().confirmById(rentalId);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when confirming rental", e);
         }
     }
 
@@ -108,6 +130,9 @@ public class RentalLogicImpl implements RentalLogic {
     public void editTimeHours(Rental rental) throws LogicException {
         try {
             new RentalDAOImpl().updateTimeHours(rental);
+            RentalConfirmer confirmer=RentalConfirmer.getInstance();
+            confirmer.removeTask(rental.getRentalId());
+            confirmer.addTask(new ConfirmTask(rental));
         } catch (DAOException e) {
             throw new LogicException("Error occurred when updating rental", e);
         }

@@ -1,6 +1,6 @@
 package com.tsalapova.bicyclerental.command.clientimpl;
 
-import com.tsalapova.bicyclerental.command.ActionCommand;
+import com.tsalapova.bicyclerental.command.ClientCommand;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * @author TsalapovaMD
  * @version 1.0, 2/3/2018
  */
-public class ProfileCommand implements ActionCommand {
+public class ProfileCommand implements ClientCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession(true);

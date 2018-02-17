@@ -11,11 +11,13 @@ import java.util.List;
  * @version 1.0, 2/5/2018
  */
 public interface RentalDAO extends GeneralDAO<Rental> {
-    void add(Rental rental) throws DAOException;
+    Rental add(Rental rental) throws DAOException;
     List<Rental> findByClientId(long clientId) throws DAOException;
     List<Rental> findConcludedByClientId(long clientId) throws DAOException;
+    List<Rental> findConcluded() throws DAOException;
     Rental findById(long rentalId) throws DAOException;
     void cancelById(long rentalId) throws DAOException;
+    void confirmById(long rentalId) throws DAOException;
     void updateTimeHours(Rental rental) throws DAOException;
     List<Pair<Long, Long>> countAllByClientId() throws DAOException;
     Long countByClientId(long clientId) throws DAOException;

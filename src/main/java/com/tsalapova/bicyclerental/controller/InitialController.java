@@ -2,6 +2,7 @@ package com.tsalapova.bicyclerental.controller;
 
 import com.tsalapova.bicyclerental.command.ActionCommand;
 import com.tsalapova.bicyclerental.command.CommandFactory;
+import com.tsalapova.bicyclerental.confirmer.RentalConfirmer;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.exception.CommandException;
@@ -33,6 +34,7 @@ public class InitialController extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         ConnectionPool.getInstance();
+        RentalConfirmer.getInstance().setupDatabaseRentals();
     }
 
     @Override
@@ -65,5 +67,6 @@ public class InitialController extends HttpServlet {
     public void destroy() {
         super.destroy();
         ConnectionPool.getInstance().destroyPool();
+        RentalConfirmer.getInstance().shutdown();
     }
 }

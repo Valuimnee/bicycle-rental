@@ -32,7 +32,6 @@ public interface ClientCommand extends ActionCommand {
         client.setPhone(request.getParameter(DocumentConstant.PHONE));
         client.setEmail(request.getParameter(DocumentConstant.EMAIL));
         client.setActive((byte) 1);
-
         if (!new ParameterValidator().validateClientInfo(client)) {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
             return false;

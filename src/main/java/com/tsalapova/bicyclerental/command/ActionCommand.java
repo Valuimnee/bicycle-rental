@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public interface ActionCommand {
     /**
      * The main method where execution of all commands happens
+     *
      * @param request HttpServletRequest - current request
      * @return String - next page
      * @throws CommandException Exception is thrown if exception on the logic layer appears

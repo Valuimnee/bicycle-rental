@@ -21,7 +21,6 @@ public class ViewBicycleCommand implements BicycleCommand {
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         Pair<Bicycle, Location> pair = selectBicycle(request);
-
         if (pair.getKey() == null) {
             return PageConstant.ADMIN;
         }

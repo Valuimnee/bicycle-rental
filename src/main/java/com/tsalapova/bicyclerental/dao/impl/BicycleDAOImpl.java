@@ -20,6 +20,8 @@ public class BicycleDAOImpl implements BicycleDAO {
             " `type`, `price_ph` FROM `bicycle` WHERE `bicycle_id`=?";
     private static final String FIND_BY_LOCATION_ID = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
             " `type`, `price_ph` FROM `bicycle` WHERE `location_id`=?";
+    private static final String FIND_ALL_AVAILABLE = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
+            " `type`, `price_ph` FROM `bicycle` WHERE `location_id`IS NOT NULL";
     private static final String FIND_ALL = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
             " `type`, `price_ph` FROM `bicycle`";
     private static final String FIND_BY_RENTALS_CLIENT_ID = "SELECT `bicycle_id`, `location_id`, `brand`, `model`, `material`," +
@@ -48,6 +50,36 @@ public class BicycleDAOImpl implements BicycleDAO {
         }
     }
 
+    private List<Bicycle> findBicycles(String query, String exceptionMessage) throws DAOException {
+        Connection connection = null;
+        Statement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            return new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+            throw new DAOException(exceptionMessage, e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
+    private void deleteByIdParameter(long idParameter, String query, String exceptionMessage) throws DAOException {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            statement = connection.prepareStatement(query);
+            statement.setLong(1, idParameter);
+            statement.execute();
+        } catch (ConnectionPoolException | SQLException e) {
+            throw new DAOException(exceptionMessage, e);
+        } finally {
+            close(statement, connection);
+        }
+    }
+
     @Override
     public List<Bicycle> findByLocation(long locationId) throws DAOException {
         return findBicycles(locationId, FIND_BY_LOCATION_ID,
@@ -55,19 +87,13 @@ public class BicycleDAOImpl implements BicycleDAO {
     }
 
     @Override
+    public List<Bicycle> findAllAvailable() throws DAOException {
+        return findBicycles(FIND_ALL_AVAILABLE, "Error while finding all available bicycles");
+    }
+
+    @Override
     public List<Bicycle> findAll() throws DAOException {
-        Connection connection = null;
-        Statement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(FIND_ALL);
-            return new POJOMapper<Bicycle>().mapPojos(rs, Bicycle.class);
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while finding all bicycles", e);
-        } finally {
-            close(statement, connection);
-        }
+        return findBicycles(FIND_ALL, "Error while finding all bicycles");
     }
 
     @Override
@@ -98,21 +124,6 @@ public class BicycleDAOImpl implements BicycleDAO {
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding a bicycle", e);
-        } finally {
-            close(statement, connection);
-        }
-    }
-
-    private void deleteByIdParameter(long idParameter, String query, String exceptionMessage) throws DAOException{
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(query);
-            statement.setLong(1, idParameter);
-            statement.execute();
-        } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException(exceptionMessage, e);
         } finally {
             close(statement, connection);
         }

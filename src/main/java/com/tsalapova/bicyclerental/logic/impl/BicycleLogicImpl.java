@@ -32,6 +32,15 @@ public class BicycleLogicImpl implements BicycleLogic {
     }
 
     @Override
+    public List<Bicycle> displayAllAvailable() throws LogicException {
+        try {
+            return new BicycleDAOImpl().findAllAvailable();
+        } catch (DAOException e) {
+            throw new LogicException("Error while displaying all available bikes", e);
+        }
+    }
+
+    @Override
     public List<Bicycle> displayAll() throws LogicException {
         try {
             return new BicycleDAOImpl().findAll();

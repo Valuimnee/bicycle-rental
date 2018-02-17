@@ -13,7 +13,7 @@
     <fld:input type="product-name" labelType="medium" name="location" disabled="disabled">
         <jsp:attribute name="label"><fmt:message key="bicycle.location-name"/></jsp:attribute><jsp:body>${location.name}</jsp:body>
     </fld:input>
-    <fld:input type="product-name" labelType="medium" name="location-address" disabled="disabled">
+    <fld:input type="address" labelType="medium" name="location-address" disabled="disabled">
         <jsp:attribute name="label"><fmt:message key="bicycle.location-address"/></jsp:attribute><jsp:body>${location.address}</jsp:body>
     </fld:input>
     <div class="mb-2 input-group">

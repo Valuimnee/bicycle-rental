@@ -18,15 +18,14 @@ import javax.servlet.http.HttpSession;
 public class DeleteBicycleCommand implements BicycleCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        HttpSession session=request.getSession();
-        Bicycle bicycle=(Bicycle)session.getAttribute(SessionConstant.BICYCLE);
+        HttpSession session = request.getSession();
+        Bicycle bicycle = (Bicycle) session.getAttribute(SessionConstant.BICYCLE);
         try {
             new BicycleLogicImpl().deleteById(bicycle.getBicycleId());
         } catch (LogicException e) {
             throw new CommandException("Error occurred when deleting the bicycle", e);
         }
-        session.removeAttribute(SessionConstant.BICYCLE);
-        session.removeAttribute(SessionConstant.LOCATION);
+        removeBicycleFromSession(session);
         return PageConstant.ADMIN;
     }
 }

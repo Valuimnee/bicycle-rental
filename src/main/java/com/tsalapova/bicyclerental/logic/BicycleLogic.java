@@ -12,6 +12,7 @@ import java.util.List;
 public interface BicycleLogic {
     Bicycle displayById(long bicycleId) throws LogicException;
     List<Bicycle> displayByLocation(long locationId) throws LogicException;
+    List<Bicycle> displayAllAvailable() throws LogicException;
     List<Bicycle> displayAll() throws LogicException;
     void add(Bicycle bicycle) throws LogicException;
     void deleteById(long bicycleId) throws LogicException;

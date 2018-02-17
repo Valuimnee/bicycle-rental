@@ -21,11 +21,9 @@ public class SelectBicycleCommand implements BicycleCommand {
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         Pair<Bicycle, Location> pair = selectBicycle(request);
-
         if (pair.getKey() == null || pair.getValue() == null) {
             return PageConstant.MAIN;
         }
-
         session.setAttribute(SessionConstant.BICYCLE, pair.getKey());
         session.setAttribute(SessionConstant.LOCATION, pair.getValue());
         session.removeAttribute(SessionConstant.RENTAL);

@@ -10,10 +10,12 @@ import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
 import com.tsalapova.bicyclerental.logic.impl.LocationLogicImpl;
 import com.tsalapova.bicyclerental.util.DocumentConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.validator.ParameterValidator;
 import javafx.util.Pair;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -59,6 +61,16 @@ public interface BicycleCommand extends ActionCommand {
     }
 
     /**
+     * Method removes bicycle and corresponding location attributes from session
+     *
+     * @param session - current session
+     */
+    default void removeBicycleFromSession(HttpSession session) {
+        session.removeAttribute(SessionConstant.BICYCLE);
+        session.removeAttribute(SessionConstant.LOCATION);
+    }
+
+    /**
      * Method retrieves bicycle parameters from the request, updates bicycle and validates it.
      * If bicycle is valid, returns true.
      * Else sets &Prime;wrong&Prime; attribute to the request and returns false.
@@ -97,7 +109,6 @@ public interface BicycleCommand extends ActionCommand {
         long bicycleId = Long.valueOf(request.getParameter(DocumentConstant.BICYCLE_ID));
         Bicycle bicycle;
         Location location = null;
-
         try {
             bicycle = new BicycleLogicImpl().displayById(bicycleId);
             if (bicycle != null) {

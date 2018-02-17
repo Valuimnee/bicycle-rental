@@ -25,7 +25,6 @@ public interface SessionCommand extends ActionCommand {
     default void setUserSession(HttpSession session, User user) {
         session.setAttribute(SessionConstant.ID, user.getId());
         session.setAttribute(SessionConstant.LOGIN, user.getLogin());
-
         String roleName = null;
         if (user.getRole().equals(UserRole.ADMIN.getName())) {
             roleName = SessionConstant.ROLE_NAME.ADMINISTRATOR.name().toLowerCase();

@@ -27,8 +27,7 @@ public class AssignLocationCommand implements BicycleCommand {
         } catch (LogicException e) {
             throw new CommandException("Error occurred when setting location of the bike", e);
         }
-        session.removeAttribute(SessionConstant.BICYCLE);
-        session.removeAttribute(SessionConstant.LOCATION);
+        removeBicycleFromSession(session);
         return PageConstant.ADMIN;
     }
 }

@@ -19,14 +19,13 @@ import javax.servlet.http.HttpSession;
 public class EditProfileCommand implements ClientCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        HttpSession session=request.getSession();
-        Client newClient=new Client();
-        newClient.setClientId((Long)session.getAttribute(SessionConstant.ID));
-        if(!defineClient(request, newClient)){
+        HttpSession session = request.getSession();
+        Client newClient = new Client();
+        newClient.setClientId((Long) session.getAttribute(SessionConstant.ID));
+        if (!defineClient(request, newClient)) {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.PROFILE);
             return PageConstant.MAIN;
         }
-
         try {
             new ClientLogicImpl().update(newClient);
         } catch (LogicException e) {

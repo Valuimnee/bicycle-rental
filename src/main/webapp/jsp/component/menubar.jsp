@@ -24,7 +24,8 @@
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="menubar.bikes"/></button>
                 <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="all-bicycles"><fmt:message key="menubar.all-bikes"/></button>
+                    <button class="dropdown-item" type="submit" name="command" value="all-available-bicycles">
+                        <fmt:message key="menubar.all-bikes"/></button>
                     <%--<button class="dropdown-item" type="submit" name="command" value="all-autos">View bikes by type</button>--%>
                     <%--<c:if test="${sessionScope.role=='user'}">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all rented bikes</button>
@@ -47,7 +48,7 @@
             <div class="dropdown-menu dropdown-menu-right">
                 <button class="dropdown-item" type="submit" name="command" value="account"><fmt:message key="menubar.account"/></button>
                 <button class="dropdown-item" type="submit" name="command" value="profile"><fmt:message key="menubar.profile"/></button>
-                <%--<button class="dropdown-item" type="submit" name="command" value="card"><fmt:message key="menubar.card"/></button>--%>
+                <button class="dropdown-item" type="submit" name="command" value="view-card"><fmt:message key="menubar.card"/></button>
                 <button class="dropdown-item" type="submit" name="command" value="delete-account"><fmt:message key="menubar.delete-account"/></button>
             </div>
         </div>

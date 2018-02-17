@@ -28,16 +28,16 @@ public interface RentalCommand extends ActionCommand {
      * @param bicycles List bicycles corresponding to rentals to display
      * @param request  HttpServletRequest - current request
      * @param message  Message to display if there are no rentals
-     * @return String - next page
+     * @return {@code String} - next page
      */
     default String setToRequestRentals(List<Rental> rentals, List<Bicycle> bicycles, HttpServletRequest request, String message) {
         if (rentals.isEmpty()) {
             request.setAttribute(RequestConstant.MESSAGE, message);
             return PageConstant.MAIN;
         }
-        request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTALS);
         request.setAttribute(RequestConstant.RENTALS, rentals);
         request.setAttribute(RequestConstant.BICYCLES, bicycles);
+        request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTALS);
         return PageConstant.MAIN;
     }
 

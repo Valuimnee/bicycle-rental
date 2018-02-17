@@ -17,8 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 public class AddBicycleCommand implements BicycleCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
-        Bicycle bicycle=new Bicycle();
+        Bicycle bicycle = new Bicycle();
         if (!defineBicycle(request, bicycle)) {
+            setToRequestMaterialsTypes(request);
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.ADD_BICYCLE);
             return PageConstant.ADMIN;
         }

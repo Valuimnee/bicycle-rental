@@ -24,13 +24,11 @@ public class CurrentClientRentalsCommand implements RentalCommand {
         HttpSession session = request.getSession();
         long clientId = (Long) session.getAttribute(SessionConstant.ID);
         Pair<List<Rental>, List<Bicycle>> pair;
-
         try {
             pair = new RentalLogicImpl().displayCurrentByClientId(clientId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying current user rentals", e);
         }
-
         return setToRequestRentals(pair.getKey(), pair.getValue(), request, RequestConstant.NO_CURRENT_RENTALS);
     }
 }

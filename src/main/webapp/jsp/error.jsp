@@ -14,12 +14,12 @@
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
 <div class="container-fluid">
-<form>
-    <h1><fmt:message key="error.header"/></h1>
-    <fmt:message key="error.code"/>: ${pageContext.errorData.statusCode}<br>
-    <fmt:message key="error.uri"/>: ${pageContext.errorData.requestURI}<br>
-    <fmt:message key="error.message"/>: ${pageContext.errorData.throwable.localizedMessage}<br>
-</form>
+    <form>
+        <h1><fmt:message key="error.header"/></h1>
+        <fmt:message key="error.code"/>: ${pageContext.errorData.statusCode}<br>
+        <fmt:message key="error.uri"/>: ${pageContext.errorData.requestURI}<br>
+        <fmt:message key="error.message"/>: ${pageContext.errorData.throwable.localizedMessage}<br>
+    </form>
 </div>
 <jsp:include page="/jsp/component/footer.jsp"/>
 </body>

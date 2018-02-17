@@ -32,6 +32,7 @@ public class LoginCommand implements SessionCommand {
             throw new CommandException("Error while logging in", e);
         }
         if (user != null) {
+
             HttpSession session = request.getSession(true);
             setUserSession(session,user);
             return getStartPage(request);

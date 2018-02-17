@@ -3,15 +3,15 @@
 <%@ taglib prefix="fld" uri="fldlib" %>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/js/submit.js"></script>
-<form name="add-bicycle" class="no-resubmit" method="post" action="/control">
+<form class="no-resubmit" name="add-bicycle-form" method="post" action="/control">
     <input type="hidden" name="submitted" value="false"/>
     <p class="mb-2 text-center"><label><b><fmt:message key="bicycle.add-greeting"/></b></label></p>
     <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="bicycle.wrong-info"/></p></c:if>
     <fld:input type="product-name" labelType="medium" name="model" required="required">
-        <jsp:attribute name="label"><fmt:message key="bicycle.model"/></jsp:attribute><jsp:body></jsp:body>
+        <jsp:attribute name="label"><fmt:message key="bicycle.model"/></jsp:attribute><jsp:body/>
     </fld:input>
     <fld:input type="product-name" labelType="medium" name="brand" required="required">
-        <jsp:attribute name="label"><fmt:message key="bicycle.brand"/></jsp:attribute><jsp:body></jsp:body>
+        <jsp:attribute name="label"><fmt:message key="bicycle.brand"/></jsp:attribute><jsp:body/>
     </fld:input>
     <div class="mb-2 input-group">
         <label for="material" class="medium-label"><b><fmt:message key="bicycle.material"/>: </b></label>
