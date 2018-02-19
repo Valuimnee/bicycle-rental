@@ -34,4 +34,5 @@ public class DocumentConstant {
     public static final String TYPE = "type";
     public static final String PRICE_PH = "price-ph";
     public static final String ACTIVE = "active";
+    public static final String BALANCE = "balance";
 }

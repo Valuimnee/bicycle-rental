@@ -40,11 +40,14 @@
         <c:when test="${requestScope.content=='rental'}">
             <jsp:include page="/jsp/entity/rental.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='account'}">
-            <jsp:include page="/jsp/entity/account.jsp"/>
+        <c:when test="${requestScope.content=='user-account'}">
+            <jsp:include page="/jsp/entity/user-account.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='profile'}">
             <jsp:include page="/jsp/entity/profile.jsp"/>
+        </c:when>
+        <c:when test="${requestScope.content=='account'}">
+            <jsp:include page="/jsp/entity/account.jsp"/>
         </c:when>
     </c:choose>
 </main>

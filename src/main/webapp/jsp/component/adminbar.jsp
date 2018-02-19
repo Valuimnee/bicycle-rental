@@ -6,14 +6,6 @@
         <ul class="navbar-nav container-fluid">
             <li class="nav-item dropdown mr-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.admins"/></button>
-                <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-admins">
-                        <fmt:message key="adminbar.view-all-admins"/></button>
-                </div>
-            </li>
-            <li class="nav-item dropdown mr-md-2">
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.clients"/></button>
                 <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="view-clients">
@@ -26,7 +18,6 @@
                 <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="locations">
                         <fmt:message key="adminbar.view-all-locations"/></button>
-                    <%--<button class="dropdown-item" type="submit" name="command" value="define-location">Add location</button>--%>
                 </div>
             </li>
             <li class="nav-item dropdown mr-md-2">
@@ -39,19 +30,12 @@
                         <fmt:message key="adminbar.add-bike"/></button>
                 </div>
             </li>
-            <li class="nav-item dropdown mr-md-2">
-                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><fmt:message key="adminbar.rentals"/></button>
-                <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="view-all-rentals">View all rentals</button>
-                    <button class="dropdown-item" type="submit" name="command" value="three-longest-rentals">View three rentals with longest time</button>
-                    <button class="dropdown-item" type="submit" name="command" value="delete-canceled-rentals">Delete canceled rentals</button>
-                </div>
-            </li>
         </ul>
         <div class="nav-item dropdown">
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${sessionScope.login}</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">${sessionScope.login}</button>
             <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="submit" name="command" value="account"><fmt:message key="menubar.account"/></button>
+                <button class="dropdown-item" type="submit" name="command" value="user-account"><fmt:message key="menubar.account"/></button>
             </div>
         </div>
     </form>

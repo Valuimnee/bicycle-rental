@@ -5,11 +5,13 @@ import com.tsalapova.bicyclerental.exception.ConfirmerException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author TsalapovaMD
@@ -18,16 +20,20 @@ import java.util.concurrent.*;
 public class RentalConfirmer {
     private static RentalConfirmer instance = new RentalConfirmer();
 
-    private ScheduledThreadPoolExecutor executor=new ScheduledThreadPoolExecutor(20);
+    private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(20);
     private HashMap<Long, ScheduledFuture<?>> tasks;
+
     public static RentalConfirmer getInstance() {
         return instance;
     }
 
-
     private RentalConfirmer() {
         executor.setRemoveOnCancelPolicy(true);
-        tasks=new HashMap<>();
+        tasks = new HashMap<>();
+    }
+
+    public HashMap<Long, ScheduledFuture<?>> getTasks() {
+        return tasks;
     }
 
     public void setupDatabaseRentals() {
@@ -43,17 +49,20 @@ public class RentalConfirmer {
     }
 
     public void addTask(ConfirmTask task) {
-        long delay = LocalDateTime.now().toInstant(ZoneOffset.UTC).getEpochSecond() - task.getTime() / 1000L;
-        ScheduledFuture<?> future=executor.schedule(task, delay, TimeUnit.SECONDS);
+        long delay = Duration.between(LocalDateTime.now(), task.getLocalDateTime()).toMinutes();
+        if (delay < 0L) {
+            delay = 0L;
+        }
+        ScheduledFuture<?> future = executor.schedule(task, delay, TimeUnit.MINUTES);
         tasks.put(task.getRentalId(), future);
     }
 
-    public void removeTask(long rentalId){
-        ScheduledFuture<?> future=tasks.get(rentalId);
+    public void removeTask(long rentalId) {
+        ScheduledFuture<?> future = tasks.get(rentalId);
         future.cancel(false);
     }
 
-    public void shutdown(){
+    public void shutdown() {
         executor.shutdownNow();
     }
 }

@@ -2,7 +2,6 @@ package com.tsalapova.bicyclerental.entity;
 
 
 import javax.persistence.Column;
-import java.util.Objects;
 
 public class Client implements Entity {
     @Column(name = "client_id")
@@ -22,17 +21,13 @@ public class Client implements Entity {
     @Column
     private String phone;
     @Column
-    private double balance;
-    @Column
-    private double credit;
-    @Column
     private Byte active;
 
     public Client() {
     }
 
     public Client(long clientId, String firstName, String middleName, String lastname, String passportNumber,
-                  String address, String email, String phone, double balance, double credit, Byte active) {
+                  String address, String email, String phone, Byte active) {
         this.clientId = clientId;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -41,8 +36,6 @@ public class Client implements Entity {
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.balance = balance;
-        this.credit = credit;
         this.active = active;
     }
 
@@ -126,20 +119,51 @@ public class Client implements Entity {
         this.active = active;
     }
 
-    public double getBalance() {
-        return balance;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+
+        Client client = (Client) o;
+
+        if (clientId != client.clientId) return false;
+        if (firstName != null ? !firstName.equals(client.firstName) : client.firstName != null) return false;
+        if (middleName != null ? !middleName.equals(client.middleName) : client.middleName != null) return false;
+        if (lastname != null ? !lastname.equals(client.lastname) : client.lastname != null) return false;
+        if (passportNumber != null ? !passportNumber.equals(client.passportNumber) : client.passportNumber != null)
+            return false;
+        if (address != null ? !address.equals(client.address) : client.address != null) return false;
+        if (email != null ? !email.equals(client.email) : client.email != null) return false;
+        if (phone != null ? !phone.equals(client.phone) : client.phone != null) return false;
+        return active.equals(client.active);
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    @Override
+    public int hashCode() {
+        int result = (int) (clientId ^ (clientId >>> 32));
+        result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+        result = 31 * result + (middleName != null ? middleName.hashCode() : 0);
+        result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (passportNumber != null ? passportNumber.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (phone != null ? phone.hashCode() : 0);
+        result = 31 * result + active.hashCode();
+        return result;
     }
 
-    public double getCredit() {
-        return credit;
+    @Override
+    public String toString() {
+        return "Client{" +
+                "clientId=" + clientId +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", passportNumber='" + passportNumber + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", active=" + active +
+                '}';
     }
-
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
-
 }

@@ -1,12 +1,12 @@
 package com.tsalapova.bicyclerental.validator;
 
+import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.Location;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * @author TsalapovaMD
@@ -70,6 +70,10 @@ public class ParameterValidator {
         return pricePh>=0.01&&pricePh<=100.;
     }
 
+    public boolean validateCurrency(double currency){
+        return currency>=0.;
+    }
+
     public boolean validateClientInfo(Client client) {
         return validateName(client.getFirstName()) && (validateName(client.getMiddleName()) ||
                 client.getMiddleName().isEmpty()) && validateName(client.getLastname()) &&
@@ -85,5 +89,9 @@ public class ParameterValidator {
     public boolean validateBicycle(Bicycle bicycle) {
         return validateProductName(bicycle.getModel())&&validateProductName(bicycle.getBrand())&&
                 validatePricePh(bicycle.getPricePh());
+    }
+
+    public boolean validateAccount(Account account) {
+        return validateCurrency(account.getBalance())&&validateCurrency(account.getCredit());
     }
 }

@@ -28,12 +28,6 @@
         <fld:input type="email" labelType="long" name="email" required="required">
             <jsp:attribute name="label"><fmt:message key="register.email"/></jsp:attribute><jsp:body>${client.email}</jsp:body>
         </fld:input>
-        <fld:input type="currency" labelType="long" name="balance" required="required">
-            <jsp:attribute name="label"><fmt:message key="profile.balance"/></jsp:attribute><jsp:body>${client.balance}</jsp:body>
-        </fld:input>
-        <fld:input type="currency" labelType="long" name="credit" required="required" disabled="disabled">
-            <jsp:attribute name="label"><fmt:message key="profile.credit"/></jsp:attribute><jsp:body>${client.credit}</jsp:body>
-        </fld:input>
         <p class="text-right col-9"><button class="btn" type="submit" name="command" value="edit-profile">
             <fmt:message key="profile.save-changes"/></button></p>
     </form>

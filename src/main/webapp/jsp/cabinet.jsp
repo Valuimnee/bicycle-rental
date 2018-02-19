@@ -47,7 +47,7 @@
             <jsp:include page="/jsp/entity/bicycle.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='account'}">
-            <jsp:include page="/jsp/entity/account.jsp"/>
+            <jsp:include page="/jsp/entity/user-account.jsp"/>
         </c:when>
     </c:choose>
 </main>

@@ -25,7 +25,7 @@ public class EditAccountCommand implements ActionCommand {
         User user=new User();
         User newUser=new User();
         if (!defineNewUser(request, user, newUser)) {
-            request.setAttribute(RequestConstant.CONTENT, RequestConstant.ACCOUNT);
+            request.setAttribute(RequestConstant.CONTENT, RequestConstant.USER_ACCOUNT);
             return getStartPage(request);
         }
         user.setLogin(login);
@@ -35,7 +35,7 @@ public class EditAccountCommand implements ActionCommand {
                 session.setAttribute(SessionConstant.LOGIN, newUser.getLogin());
             } else {
                 request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
-                request.setAttribute(RequestConstant.CONTENT, RequestConstant.ACCOUNT);
+                request.setAttribute(RequestConstant.CONTENT, RequestConstant.USER_ACCOUNT);
             }
         } catch (LogicException e) {
             throw new CommandException("Error while updating user account", e);

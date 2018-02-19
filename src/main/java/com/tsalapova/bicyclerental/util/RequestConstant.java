@@ -14,7 +14,7 @@ public class RequestConstant {
     public static final String NO_RENTAL = "no-rental";
 
     public static final String CONTENT = "content";
-    public static final String ACCOUNT = "account";
+    public static final String USER_ACCOUNT = "user-account";
     public static final String PROFILE = "profile";
     public static final String LOCATIONS = "locations";
     public static final String BICYCLES = "bicycles";
@@ -39,4 +39,6 @@ public class RequestConstant {
     public static final String LOGINS = "logins";
     public static final String LOGIN = "login";
     public static final String RENTAL_COUNT = "rentalCount";
+    public static final String ACCOUNT = "account";
+    public static final String NO_ACCOUNT = "no-account";
 }

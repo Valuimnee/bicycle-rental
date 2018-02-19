@@ -10,15 +10,8 @@
     <form name="menu" class="form-inline navbar-collapse container-fluid pr-0" method="post" action="/control">
         <ul class="navbar-nav  mr-auto pr-0">
             <li class="nav-item dropdown mr-md-2">
-                <button type="submit" name="command" value="locations" class="btn btn-primary <%--dropdown-toggle dropdown-toggle-split--%>"
-                        <%--data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"--%>><fmt:message key="menubar.locations"/></button>
-               <%-- <div class="dropdown-menu">
-                    <button class="dropdown-item" type="submit" name="command" value="all-autos">View all locations</button>
-                    <c:if test="${sessionScope.role=='user'}">
-                    <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all available bikes</button>
-                    <button class="dropdown-item" type="submit" name="command" value="choose-date-interval">Rent a bike</button>
-                    </c:if>
-                </div>--%>
+                <button type="submit" name="command" value="locations" class="btn btn-primary">
+                    <fmt:message key="menubar.locations"/></button>
             </li>
             <li class="nav-item dropdown mr-md-2">
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
@@ -26,10 +19,6 @@
                 <div class="dropdown-menu">
                     <button class="dropdown-item" type="submit" name="command" value="all-available-bicycles">
                         <fmt:message key="menubar.all-bikes"/></button>
-                    <%--<button class="dropdown-item" type="submit" name="command" value="all-autos">View bikes by type</button>--%>
-                    <%--<c:if test="${sessionScope.role=='user'}">
-                    <button class="dropdown-item" type="submit" name="command" value="all-available-autos">View all rented bikes</button>
-                    </c:if>--%>
                 </div>
             </li>
         </ul>
@@ -46,9 +35,9 @@
             <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split menu-user" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">${sessionScope.login}</button>
             <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="submit" name="command" value="account"><fmt:message key="menubar.account"/></button>
+                <button class="dropdown-item" type="submit" name="command" value="user-account"><fmt:message key="menubar.account"/></button>
                 <button class="dropdown-item" type="submit" name="command" value="profile"><fmt:message key="menubar.profile"/></button>
-                <button class="dropdown-item" type="submit" name="command" value="view-card"><fmt:message key="menubar.card"/></button>
+                <button class="dropdown-item" type="submit" name="command" value="view-balance"><fmt:message key="menubar.balance"/></button>
                 <button class="dropdown-item" type="submit" name="command" value="delete-account"><fmt:message key="menubar.delete-account"/></button>
             </div>
         </div>

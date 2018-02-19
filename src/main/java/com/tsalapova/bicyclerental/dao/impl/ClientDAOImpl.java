@@ -17,14 +17,13 @@ import java.util.List;
  */
 public class ClientDAOImpl implements ClientDAO {
     private static final String ADD_CLIENT = "INSERT INTO `client` (`client_id`, `first_name`, `middle_name`, `lastname`," +
-            " `passport_number`, `address`, `email`, `phone`, `balance`, `active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            " `passport_number`, `address`, `email`, `phone`, `active`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String FIND_BY_ID = "SELECT `client_id`, `first_name`, `middle_name`, `lastname`," +
-            " `passport_number`, `address`, `email`, `phone`, `balance`, `credit`, `active` FROM `client` WHERE `client_id`=?";
+            " `passport_number`, `address`, `email`, `phone`, `active` FROM `client` WHERE `client_id`=?";
     private static final String FIND_ALL = "SELECT `client_id`, `first_name`, `middle_name`, `lastname`," +
-            " `passport_number`, `address`, `email`, `phone`, `balance`, `credit`, `active` FROM `client`";
+            " `passport_number`, `address`, `email`, `phone`, `active` FROM `client`";
     private static final String UPDATE_BY_ID = "UPDATE `client` SET `first_name`=?, `middle_name`=?, `lastname`=?," +
             " `passport_number`=?, `address`=?, `email`=?, `phone`=? WHERE `client_id`=?";
-    private static final String UPDATE_BALANCE_BY_ID = "UPDATE `client` SET `balance`=?, `credit`=? WHERE `client_id`=?";
     private static final String UPDATE_ACTIVE_BY_ID = "UPDATE `client` SET `active`=? WHERE `client_id`=?";
 
     @Override
@@ -42,8 +41,7 @@ public class ClientDAOImpl implements ClientDAO {
             statement.setString(6, client.getAddress());
             statement.setString(7, client.getEmail());
             statement.setString(8, client.getPhone());
-            statement.setDouble(9, client.getBalance());
-            statement.setByte(10, client.getActive());
+            statement.setByte(9, client.getActive());
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding client", e);
@@ -98,24 +96,6 @@ public class ClientDAOImpl implements ClientDAO {
     }
 
     @Override
-    public void updateBalanceCredit(Client client) throws DAOException {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(UPDATE_BALANCE_BY_ID);
-            statement.setDouble(1, client.getBalance());
-            statement.setDouble(2, client.getCredit());
-            statement.setLong(3, client.getClientId());
-            statement.executeUpdate();
-        } catch (ConnectionPoolException | SQLException e) {
-            throw new DAOException("Error while updating balance and credit of client", e);
-        } finally {
-            close(statement, connection);
-        }
-    }
-
-    @Override
     public void changeStatusById(long clientId, byte status) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
@@ -147,4 +127,5 @@ public class ClientDAOImpl implements ClientDAO {
             close(statement, connection);
         }
     }
+
 }

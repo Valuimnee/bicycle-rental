@@ -3,7 +3,7 @@ package com.tsalapova.bicyclerental.command.userimpl;
 import com.tsalapova.bicyclerental.command.*;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.DeleteAccountLogicImpl;
+import com.tsalapova.bicyclerental.logic.impl.DeleteClientLogicImpl;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 
@@ -20,7 +20,7 @@ public class DeleteAccountCommand implements SessionCommand {
         HttpSession session = request.getSession(true);
         Long clientId=(Long)session.getAttribute(SessionConstant.ID);
         try {
-            new DeleteAccountLogicImpl().deleteClient(clientId);
+            new DeleteClientLogicImpl().deleteClient(clientId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred on delete account", e);
         }

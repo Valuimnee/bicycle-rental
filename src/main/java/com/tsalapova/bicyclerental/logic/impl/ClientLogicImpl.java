@@ -37,45 +37,28 @@ public class ClientLogicImpl implements ClientLogic {
     }
 
     @Override
-    public void payRental(long clientId, double total) throws LogicException {
-        try {
-            Client client=new ClientDAOImpl().findById(clientId);
-            double balance=client.getBalance();
-            if (balance < total) {
-                client.setCredit(client.getCredit()+total-balance);
-                client.setBalance(0.);
-            }else {
-                client.setBalance(balance-total);
-            }
-            new ClientDAOImpl().updateBalanceCredit(client);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred when paying client rental", e);
-        }
-    }
-
-    @Override
     public List<List> displayAll() throws LogicException {
         try {
-            List<Client> clients=new ClientDAOImpl().findAll();
+            List<Client> clients = new ClientDAOImpl().findAll();
             if (clients.isEmpty()) {
                 return new ArrayList<>();
             }
-            List<User> users=new UserDAOImpl().findByRole(UserRole.CLIENT);
+            List<User> users = new UserDAOImpl().findByRole(UserRole.CLIENT);
             HashMap<Long, User> map = new HashMap<>();
-            for (User user: users) {
+            for (User user : users) {
                 map.put(user.getId(), user);
             }
-            List<String> logins=new ArrayList<>(clients.size());
-            HashMap<Long, Long> countMap=new HashMap<>();
-            for(Pair<Long, Long> pair: new RentalDAOImpl().countAllByClientId()){
+            List<String> logins = new ArrayList<>(clients.size());
+            HashMap<Long, Long> countMap = new HashMap<>();
+            for (Pair<Long, Long> pair : new RentalDAOImpl().countAllByClientId()) {
                 countMap.put(pair.getKey(), pair.getValue());
             }
-            List<Long> counts=new ArrayList<>(clients.size());
-            for (Client client: clients) {
+            List<Long> counts = new ArrayList<>(clients.size());
+            for (Client client : clients) {
                 logins.add(map.get(client.getClientId()).getLogin());
                 counts.add(countMap.get(client.getClientId()));
             }
-            List<List> content=new ArrayList<>(3);
+            List<List> content = new ArrayList<>(3);
             content.add(logins);
             content.add(clients);
             content.add(counts);

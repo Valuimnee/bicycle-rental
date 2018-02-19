@@ -1,10 +1,12 @@
 package com.tsalapova.bicyclerental.confirmer;
 
 import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.exception.ConfirmerException;
-import com.tsalapova.bicyclerental.logic.impl.ClientLogicImpl;
+import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.logic.impl.AccountLogicImpl;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+
+import java.time.LocalDateTime;
 
 /**
  * @author TsalapovaMD
@@ -14,21 +16,21 @@ public class ConfirmTask implements Runnable {
     private Rental rental;
 
     public ConfirmTask(Rental rental) {
-        this.rental=rental;
+        this.rental = rental;
     }
 
-    public long getTime(){
-        return rental.getStartTime().getTime();
+    public LocalDateTime getLocalDateTime() {
+        return rental.getStartTime().toLocalDateTime();
     }
 
-    public long getRentalId(){
+    public long getRentalId() {
         return rental.getRentalId();
     }
 
     @Override
     public void run() {
         try {
-            new ClientLogicImpl().payRental(rental.getClientId(), rental.getTotal());
+            new AccountLogicImpl().payRental(rental.getClientId(), rental.getTotal());
             new RentalLogicImpl().confirmById(rental.getRentalId());
         } catch (LogicException e) {
             throw new ConfirmerException("Error while paying the rental", e);

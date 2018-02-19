@@ -1,5 +1,6 @@
 package com.tsalapova.bicyclerental.command;
 
+import com.tsalapova.bicyclerental.command.accountimpl.ViewBalanceCommand;
 import com.tsalapova.bicyclerental.command.bicycleimpl.*;
 import com.tsalapova.bicyclerental.command.clientimpl.*;
 import com.tsalapova.bicyclerental.command.locationimpl.LocationsCommand;
@@ -16,8 +17,8 @@ import com.tsalapova.bicyclerental.command.userimpl.*;
  */
 public enum CommandEnum {
     LOGIN(new LoginCommand()), LOGOUT(new LogoutCommand()), LANGUAGE(new LanguageCommand()), REGISTER(new RegisterCommand()),
-    ACCOUNT(new AccountCommand()), EDIT_ACCOUNT(new EditAccountCommand()), PROFILE(new ProfileCommand()),
-    EDIT_PROFILE(new EditProfileCommand()), DELETE_ACCOUNT(new DeleteAccountCommand()),
+    USER_ACCOUNT(new UserAccountCommand()), EDIT_ACCOUNT(new EditAccountCommand()), PROFILE(new ProfileCommand()),
+    EDIT_PROFILE(new EditProfileCommand()), VIEW_BALANCE(new ViewBalanceCommand()), DELETE_ACCOUNT(new DeleteAccountCommand()),
     LOCATIONS(new LocationsCommand()), ALL_AVAILABLE_BICYCLES(new AllAvailableBicyclesCommand()),
     ALL_BICYCLES(new AllBicyclesCommand()), BICYCLES_BY_LOCATION(new BicyclesByLocationCommand()),
     SELECT_BICYCLE(new SelectBicycleCommand()), SELECT_DATE(new SelectDateCommand()), RENT(new RentCommand()),

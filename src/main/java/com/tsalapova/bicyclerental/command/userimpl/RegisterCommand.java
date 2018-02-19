@@ -1,6 +1,9 @@
 package com.tsalapova.bicyclerental.command.userimpl;
 
-import com.tsalapova.bicyclerental.command.*;
+import com.tsalapova.bicyclerental.command.AccountCommand;
+import com.tsalapova.bicyclerental.command.ClientCommand;
+import com.tsalapova.bicyclerental.command.SessionCommand;
+import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.entity.UserRole;
@@ -19,30 +22,31 @@ import javax.servlet.http.HttpSession;
  * @author TsalapovaMD
  * @version 1.0, 2/1/2018
  */
-public class RegisterCommand implements SessionCommand, ClientCommand {
+public class RegisterCommand implements SessionCommand, ClientCommand, AccountCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession(true);
         User user = new User();
         Client client = new Client();
-        if (!defineUser(request, user) || !defineClient(request, client)) {
+        Account account = new Account();
+        if (!defineUser(request, user) || !defineClient(request, client) || !defineAccount(request, account)) {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
             return PageConstant.REGISTER;
         }
         try {
-            if (!new RegisterLogicImpl().register(user, user.getPassword(), client)) {
+            if (!new RegisterLogicImpl().register(user, user.getPassword(), client, account)) {
                 request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_LOGIN);
                 return PageConstant.REGISTER;
             }
         } catch (LogicException e) {
-            throw new CommandException("Registration error. "+e.getMessage(), e);
+            throw new CommandException("Registration error. " + e.getMessage(), e);
         }
         setUserSession(session, user);
         return getStartPage(request);
     }
 
-    private boolean defineUser(HttpServletRequest request, User user){
+    private boolean defineUser(HttpServletRequest request, User user) {
         String login = request.getParameter(DocumentConstant.LOGIN);
         String password = request.getParameter(DocumentConstant.PASSWORD);
         String password2 = request.getParameter(DocumentConstant.PASSWORD_2);
