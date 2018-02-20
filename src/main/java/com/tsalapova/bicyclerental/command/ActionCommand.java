@@ -19,7 +19,7 @@ public interface ActionCommand {
      * The main method where execution of all commands happens
      *
      * @param request HttpServletRequest - current request
-     * @return String - next page
+     * @return {@code String} - next page
      * @throws CommandException Exception is thrown if exception on the logic layer appears
      */
     String execute(HttpServletRequest request) throws CommandException;
@@ -29,7 +29,7 @@ public interface ActionCommand {
      * user, administrator or unauthorized client
      *
      * @param request HttpServletRequest - current request
-     * @return String - start page
+     * @return {@code String} - start page
      */
     default String getStartPage(HttpServletRequest request) {
         HttpSession session = request.getSession(true);

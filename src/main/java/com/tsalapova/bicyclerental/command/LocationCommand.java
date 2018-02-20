@@ -23,8 +23,8 @@ public interface LocationCommand extends ActionCommand {
      * Otherwise sets locations to the request.
      * Returns user main page
      *
-     * @param request HttpServletRequest - current request
-     * @return String - user main page
+     * @param request {@code HttpServletRequest} - current request
+     * @return {@code String} - user main page
      * @throws CommandException thrown if exception appears when retrieving locations
      */
     default String setToRequestLocations(HttpServletRequest request) throws CommandException {

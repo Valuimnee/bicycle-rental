@@ -20,7 +20,6 @@
                     <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><fmt:message key="main-nav.language"/></button>
                     <div class="dropdown-menu">
                         <button class="dropdown-item" type="submit" name="lang" value="en_US" >EN</button>
-                        <%--<button class="dropdown-item" type="submit" name="command" value="language" onclick="<fmt:setLocale value="be_BY" scope="session"/>">BE</button>--%>
                         <button class="dropdown-item" type="submit" name="lang" value="ru_RU">RU</button>
                     </div>
                 </form>

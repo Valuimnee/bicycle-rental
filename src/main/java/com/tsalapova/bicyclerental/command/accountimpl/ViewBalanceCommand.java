@@ -24,14 +24,14 @@ public class ViewBalanceCommand implements AccountCommand {
         long clientId = (Long) session.getAttribute(SessionConstant.ID);
         Account account;
         try {
-            account= new AccountLogicImpl().findByClientId(clientId);
+            account = new AccountLogicImpl().findByClientId(clientId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when finding client account", e);
         }
-        if(account!=null){
+        if (account != null) {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.ACCOUNT);
             request.setAttribute(RequestConstant.ACCOUNT, account);
-        }else{
+        } else {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_ACCOUNT);
         }
         return PageConstant.MAIN;

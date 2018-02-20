@@ -10,11 +10,11 @@ public class EntityAction {
     private final static int DAY = 24;
     private final static double PRICE_COEFFICIENT = 4.;
 
-    public Timestamp defineTimestamp(String datetime){
+    public Timestamp defineTimestamp(String datetime) {
         return Timestamp.valueOf(datetime.replace('T', ' ').concat(":00"));
     }
 
-    public String defineDateTime(Timestamp timestamp){
+    public String defineDateTime(Timestamp timestamp) {
         return timestamp.toString().replace(' ', 'T')
                 .substring(0, timestamp.toString().lastIndexOf(':'));
     }
@@ -23,7 +23,13 @@ public class EntityAction {
         if (hours < DAY) {
             return pricePh * hours;
         } else {
-            return pricePh * PRICE_COEFFICIENT * hours / DAY;
+            double total = pricePh * PRICE_COEFFICIENT * hours / DAY;
+            total=((int)(total*100))/100.;
+            return total;
         }
+    }
+
+    public String formatPhone(String phone) {
+        return phone.substring(1);
     }
 }

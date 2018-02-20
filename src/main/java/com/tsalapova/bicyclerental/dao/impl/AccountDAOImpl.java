@@ -21,8 +21,8 @@ import java.util.List;
 public class AccountDAOImpl implements AccountDAO {
     private static final String ADD_ACCOUNT = "INSERT INTO `account` (`client_id`, `balance`, `credit`) VALUES (?, ?, ?)";
     private static final String FIND_BY_CLIENT_ID = "SELECT `client_id`, `balance`, `credit` FROM `account` WHERE `client_id`=?";
-    private static final String UPDATE_BY_ID = "UPDATE `account` SET `balance`=GREATEST(`balance`-?, 0), " +
-            "`credit`=`credit`+GREATEST(?-`balance`, 0) WHERE `client_id`=?";
+    private static final String UPDATE_BY_ID = "UPDATE `account` SET `credit`=`credit`+GREATEST(?-`balance`, 0)," +
+            " `balance`=GREATEST(`balance`-?, 0) WHERE `client_id`=?";
 
     @Override
     public void update(long clientId, double total) throws DAOException {

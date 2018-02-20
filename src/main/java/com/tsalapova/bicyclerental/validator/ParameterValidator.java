@@ -1,9 +1,6 @@
 package com.tsalapova.bicyclerental.validator;
 
-import com.tsalapova.bicyclerental.entity.Account;
-import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.entity.Client;
-import com.tsalapova.bicyclerental.entity.Location;
+import com.tsalapova.bicyclerental.entity.*;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
@@ -20,7 +17,7 @@ public class ParameterValidator {
     private static final String ADDRESS_REGEX = "^([\\p{L}.,-/\\d]+\\s+)*[\\p{L}.,-/\\d]+$";
     private final static String PASSPORT_NUMBER_REGEX = "^(AB|BM|HB|KH|MP|MC|KB|PP)\\d{7}$";
     private final static String EMAIL_REGEX = "^[-+\\w]+(\\.\\w+)*@[\\w-]+(\\.\\w+)*(\\.[a-z]{2,})$";
-    private static final String PHONE_REGEX = "^\\d{12}$";
+    private static final String PHONE_REGEX = "^\\+\\d{12}$";
 
     private boolean validateProductName(String productName){
         return productName!=null&&productName.matches(PRODUCT_NAME_REGEX);
@@ -79,6 +76,10 @@ public class ParameterValidator {
                 client.getMiddleName().isEmpty()) && validateName(client.getLastname()) &&
                 validateAddress(client.getAddress()) && validatePassportNumber(client.getPassportNumber()) &&
                 validateEmail(client.getEmail()) && validatePhone(client.getPhone());
+    }
+
+    public boolean validateUserInfo(User user) {
+        return validateLogin(user.getLogin())&&validatePassword(user.getPassword());
     }
 
     public boolean validateLocation(Location location) {

@@ -20,7 +20,7 @@ public class ConfirmTask implements Runnable {
     }
 
     public LocalDateTime getLocalDateTime() {
-        return rental.getStartTime().toLocalDateTime();
+        return rental.getStartTime().toLocalDateTime().plusHours(rental.getHours());
     }
 
     public long getRentalId() {

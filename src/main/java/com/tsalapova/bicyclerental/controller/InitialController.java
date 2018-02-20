@@ -6,6 +6,7 @@ import com.tsalapova.bicyclerental.confirmer.RentalConfirmer;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -18,18 +19,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
+ * The front controller of the application.
+ * It receives any request, handles request and response to appropriate command,
+ * and then sends back the result.
+ *
  * @author TsalapovaMD
  * @version 1.0, 12/26/2017
  */
 @WebServlet(urlPatterns = "/control")
 public class InitialController extends HttpServlet {
     private static final Logger LOGGER = LogManager.getLogger(InitialController.class);
-    private static final String COMMAND = "command";
 
-    /**
-     *
-     * @throws ServletException
-     */
     @Override
     public void init() throws ServletException {
         super.init();
@@ -48,7 +48,7 @@ public class InitialController extends HttpServlet {
     }
 
     private void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String commandName = request.getParameter(COMMAND);
+        String commandName = request.getParameter(SessionConstant.COMMAND);
         if (commandName != null) {
             try {
                 ActionCommand command = CommandFactory.defineCommand(commandName);

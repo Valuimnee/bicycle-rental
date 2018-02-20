@@ -1,4 +1,4 @@
-package com.tsalapova.bicyclerental.command.userimpl;
+package com.tsalapova.bicyclerental.command.sessionimpl;
 
 import com.tsalapova.bicyclerental.command.*;
 import com.tsalapova.bicyclerental.exception.CommandException;
@@ -18,7 +18,7 @@ public class DeleteAccountCommand implements SessionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession(true);
-        Long clientId=(Long)session.getAttribute(SessionConstant.ID);
+        Long clientId = (Long) session.getAttribute(SessionConstant.ID);
         try {
             new DeleteClientLogicImpl().deleteClient(clientId);
         } catch (LogicException e) {

@@ -11,14 +11,6 @@ import com.tsalapova.bicyclerental.logic.AccountLogic;
  * @version 1.0, 2/11/2018
  */
 public class AccountLogicImpl implements AccountLogic {
-    @Override
-    public void payRental(long clientId, double total) throws LogicException {
-        try {
-            new AccountDAOImpl().update(clientId, total);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred when paying client rental", e);
-        }
-    }
 
     @Override
     public Account findByClientId(long clientId) throws LogicException {
@@ -29,4 +21,12 @@ public class AccountLogicImpl implements AccountLogic {
         }
     }
 
+    @Override
+    public void payRental(long clientId, double total) throws LogicException {
+        try {
+            new AccountDAOImpl().update(clientId, total);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred when paying client rental", e);
+        }
+    }
 }

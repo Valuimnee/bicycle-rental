@@ -14,20 +14,22 @@ form {
 }
 form[name="locations-form"] {
     margin: 2rem auto;
-    /*max-width: 920px;*/
 }
 .location-card{
     margin:1rem;
-    /*padding: 1rem;*/
+}
+.bicycle-card{
+    margin:1rem;
+    min-height: 307px;
 }
 .clickable{
     cursor: pointer;
 }
 .custom-select, .form-control {
-    max-width: 386px;
+    max-width: 400px;
 }
 .medium-label{
-    min-width: 115px;
+    min-width: 125px;
 }
 label{
     margin-bottom: 0;

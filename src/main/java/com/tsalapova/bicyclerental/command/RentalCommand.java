@@ -26,7 +26,7 @@ public interface RentalCommand extends ActionCommand {
      *
      * @param rentals  List of rentals to display
      * @param bicycles List bicycles corresponding to rentals to display
-     * @param request  HttpServletRequest - current request
+     * @param request  {@code HttpServletRequest} - current request
      * @param message  Message to display if there are no rentals
      * @return {@code String} - next page
      */
@@ -47,9 +47,9 @@ public interface RentalCommand extends ActionCommand {
      * and returns true.
      * Otherwise sets &Prime;wrong&Prime; attribute to the request and returns false.
      *
-     * @param request HttpServletRequest - current request
+     * @param request {@code HttpServletRequest} - current request
      * @param rental  current rental
-     * @return boolean - true if the defined start date and hours are valid, else false
+     * @return {@code boolean} - {@code true} if defined bicycle is valid, otherwise {@code false}
      */
     default boolean defineDateHours(HttpServletRequest request, Rental rental) {
         HttpSession session = request.getSession();

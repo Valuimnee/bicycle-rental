@@ -22,14 +22,14 @@ public class ProfileCommand implements ClientCommand {
         HttpSession session = request.getSession(true);
         Client client;
         try {
-            client=new ClientLogicImpl().displayProfile((Long) session.getAttribute(SessionConstant.ID));
+            client = new ClientLogicImpl().displayProfile((Long) session.getAttribute(SessionConstant.ID));
         } catch (LogicException e) {
             throw new CommandException("Error occurred while displaying profile", e);
         }
-        if(client!=null){
+        if (client != null) {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.PROFILE);
             session.setAttribute(RequestConstant.CLIENT, client);
-        }else{
+        } else {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_PROFILE);
         }
         return PageConstant.MAIN;

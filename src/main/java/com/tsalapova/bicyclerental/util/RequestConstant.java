@@ -41,4 +41,5 @@ public class RequestConstant {
     public static final String RENTAL_COUNT = "rentalCount";
     public static final String ACCOUNT = "account";
     public static final String NO_ACCOUNT = "no-account";
+    public static final String BLOCKED = "blocked";
 }

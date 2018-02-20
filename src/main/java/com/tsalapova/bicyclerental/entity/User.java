@@ -20,6 +20,7 @@ public class User implements Entity {
     private String role;
 
     public User() {
+        id=-1L;
     }
 
     public User(long id, String login, String password, String salt, String role) {

@@ -7,7 +7,7 @@
             <c:forEach begin="0" end="3" varStatus="element">
                 <c:if test="${4*loop.index+element.index lt bicycles.size()}">
                     <div class="col-sm-3 pl-0 pr-0">
-                        <div class="card location-card">
+                        <div class="card bicycle-card">
                             <c:set var="bicycle" value="${bicycles.get(4*loop.index+element.index)}"/>
                             <div class="card-header text-center text">${bicycle.model}</div>
                             <div class="card-body">

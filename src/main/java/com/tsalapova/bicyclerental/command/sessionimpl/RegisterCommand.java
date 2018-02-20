@@ -1,19 +1,17 @@
-package com.tsalapova.bicyclerental.command.userimpl;
+package com.tsalapova.bicyclerental.command.sessionimpl;
 
 import com.tsalapova.bicyclerental.command.AccountCommand;
 import com.tsalapova.bicyclerental.command.ClientCommand;
 import com.tsalapova.bicyclerental.command.SessionCommand;
+import com.tsalapova.bicyclerental.command.UserCommand;
 import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
-import com.tsalapova.bicyclerental.entity.UserRole;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.RegisterLogicImpl;
-import com.tsalapova.bicyclerental.util.DocumentConstant;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
-import com.tsalapova.bicyclerental.validator.ParameterValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpSession;
  * @author TsalapovaMD
  * @version 1.0, 2/1/2018
  */
-public class RegisterCommand implements SessionCommand, ClientCommand, AccountCommand {
+public class RegisterCommand implements SessionCommand, UserCommand, ClientCommand, AccountCommand {
 
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
@@ -30,7 +28,7 @@ public class RegisterCommand implements SessionCommand, ClientCommand, AccountCo
         User user = new User();
         Client client = new Client();
         Account account = new Account();
-        if (!defineUser(request, user) || !defineClient(request, client) || !defineAccount(request, account)) {
+        if (!defineNewUser(request, user) || !defineClient(request, client) || !defineAccount(request, account)) {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
             return PageConstant.REGISTER;
         }
@@ -46,14 +44,4 @@ public class RegisterCommand implements SessionCommand, ClientCommand, AccountCo
         return getStartPage(request);
     }
 
-    private boolean defineUser(HttpServletRequest request, User user) {
-        String login = request.getParameter(DocumentConstant.LOGIN);
-        String password = request.getParameter(DocumentConstant.PASSWORD);
-        String password2 = request.getParameter(DocumentConstant.PASSWORD_2);
-        ParameterValidator validator = new ParameterValidator();
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setRole(UserRole.CLIENT.getName());
-        return validator.validateLogin(login) && validator.validateConfirmPassword(password, password2);
-    }
 }

@@ -1,7 +1,6 @@
 <%--
   Author: TsalapovaMD
-  Date: 5/28/2017
-  Time: 2:14 PM
+  Date: 12/28/2017
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -31,7 +30,7 @@
         <c:when test="${requestScope.content=='date'}">
             <jsp:include page="/jsp/entity/date.jsp"/>
         </c:when>
-        <c:when test="${requestScope.content=='confirmById-rental'}">
+        <c:when test="${requestScope.content=='confirm-rental'}">
             <jsp:include page="/jsp/entity/confirm-rental.jsp"/>
         </c:when>
         <c:when test="${requestScope.content=='rentals'}">

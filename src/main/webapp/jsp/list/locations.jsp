@@ -12,7 +12,7 @@
                             <button class="btn mb-2" type="submit" name="location-id"
                                     value="${location.locationId}">${location.name}</button>
                             <p class="text-center text">${location.address}</p>
-                            <p class="text-center text">${location.phone}</p>
+                            <p class="text-center text">+${location.phone}</p>
                         </div>
                     </div>
                 </c:if>

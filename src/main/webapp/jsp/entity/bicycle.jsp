@@ -3,7 +3,7 @@
 <%@ taglib prefix="fld" uri="fldlib" %>
 <form name="bicycle-form" method="post" action="/control">
     <p class="mb-2 text-center"><label><b><fmt:message key="bicycle.edit-greeting"/></b></label></p>
-    <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="bicycle.wrong-info"/></p></c:if>
+    <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2 text-center"><fmt:message key="bicycle.wrong-info"/></p></c:if>
     <fld:input type="product-name" labelType="medium" name="model" required="required">
         <jsp:attribute name="label"><fmt:message key="bicycle.model"/></jsp:attribute><jsp:body>${bicycle.model}</jsp:body>
     </fld:input>

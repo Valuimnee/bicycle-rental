@@ -10,6 +10,7 @@ import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.generator.HashGenerator;
 import com.tsalapova.bicyclerental.logic.RegisterLogic;
+import com.tsalapova.bicyclerental.util.EntityAction;
 import javafx.util.Pair;
 
 /**
@@ -35,6 +36,7 @@ public class RegisterLogicImpl implements RegisterLogic {
             }
             user.setId(id);
             client.setClientId(id);
+            client.setPhone(new EntityAction().formatPhone(client.getPhone()));
             account.setClientId(id);
             new ClientDAOImpl().add(client);
             new AccountDAOImpl().add(account);

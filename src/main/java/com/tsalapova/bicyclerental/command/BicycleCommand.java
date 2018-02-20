@@ -35,7 +35,7 @@ public interface BicycleCommand extends ActionCommand {
      *
      * @param bicycles List of bicycles to display
      * @param request  HttpServletRequest - current request
-     * @return String - next page
+     * @return {@code String} - next page
      */
     default String setToRequestBicycles(List<Bicycle> bicycles, HttpServletRequest request) {
         if (bicycles.isEmpty()) {
@@ -75,8 +75,9 @@ public interface BicycleCommand extends ActionCommand {
      * If bicycle is valid, returns true.
      * Else sets &Prime;wrong&Prime; attribute to the request and returns false.
      *
-     * @param request HttpServletRequest - current request
-     * @return boolean - true if defined bicycle is valid, otherwise false
+     * @param request {@code HttpServletRequest} - current request
+     * @param bicycle bicycle to be defined
+     * @return {@code boolean} - {@code true} if defined bicycle is valid, otherwise {@code false}
      */
     default boolean defineBicycle(HttpServletRequest request, Bicycle bicycle) {
         String model = request.getParameter(DocumentConstant.MODEL);
@@ -101,8 +102,8 @@ public interface BicycleCommand extends ActionCommand {
      * Method selects bicycle and corresponding location from the logic layer using the request parameter.
      * If no bicycle is found returns pair of nulls.
      *
-     * @param request HttpServletRequest - current request
-     * @return Pair - pair of bicycle and corresponding location
+     * @param request {@code HttpServletRequest} - current request
+     * @return {@code javafx.util.Pair} - pair of bicycle and corresponding location
      * @throws CommandException thrown if exception appears when retrieving bicycle and location
      */
     default Pair<Bicycle, Location> selectBicycle(HttpServletRequest request) throws CommandException {

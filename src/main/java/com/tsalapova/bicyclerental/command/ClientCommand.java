@@ -20,8 +20,9 @@ public interface ClientCommand extends ActionCommand {
      * If client is valid, returns true.
      * Else sets &Prime;wrong&Prime; attribute to the request and returns false.
      *
-     * @param request HttpServletRequest - current request
-     * @return boolean - true if defined client is valid, otherwise false
+     * @param request {@code HttpServletRequest} - current request
+     * @param client  client to be defined
+     * @return {@code boolean} - {@code true} if defined bicycle is valid, otherwise {@code false}
      */
     default boolean defineClient(HttpServletRequest request, Client client) {
         client.setFirstName(request.getParameter(DocumentConstant.FIRST_NAME));

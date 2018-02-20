@@ -24,7 +24,6 @@ public class ViewBicycleCommand implements BicycleCommand {
         if (pair.getKey() == null) {
             return PageConstant.ADMIN;
         }
-
         session.setAttribute(SessionConstant.BICYCLE, pair.getKey());
         session.setAttribute(SessionConstant.LOCATION, pair.getValue());
 

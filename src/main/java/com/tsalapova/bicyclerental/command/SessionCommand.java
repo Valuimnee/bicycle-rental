@@ -19,7 +19,7 @@ public interface SessionCommand extends ActionCommand {
     /**
      * Method sets user id, login and role to session
      *
-     * @param session HttpSession - current session
+     * @param session {@code HttpSession} - current session
      * @param user    current user
      */
     default void setUserSession(HttpSession session, User user) {

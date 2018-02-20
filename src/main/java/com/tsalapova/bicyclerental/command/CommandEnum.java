@@ -6,11 +6,14 @@ import com.tsalapova.bicyclerental.command.clientimpl.*;
 import com.tsalapova.bicyclerental.command.locationimpl.LocationsCommand;
 import com.tsalapova.bicyclerental.command.locationimpl.SelectLocationCommand;
 import com.tsalapova.bicyclerental.command.rentalimpl.*;
+import com.tsalapova.bicyclerental.command.sessionimpl.DeleteAccountCommand;
+import com.tsalapova.bicyclerental.command.sessionimpl.LanguageCommand;
 import com.tsalapova.bicyclerental.command.sessionimpl.LogoutCommand;
+import com.tsalapova.bicyclerental.command.sessionimpl.RegisterCommand;
 import com.tsalapova.bicyclerental.command.userimpl.*;
 
 /**
- * The enum retrieves specified command for the Command factory by name
+ * The enum links specified command to it&apos;s name for the {@code CommandFactory}
  *
  * @author TsalapovaMD
  * @version 1.0, 12/28/2017

@@ -1,17 +1,15 @@
-package com.tsalapova.bicyclerental.command.userimpl;
+package com.tsalapova.bicyclerental.command.sessionimpl;
 
-import com.tsalapova.bicyclerental.command.ActionCommand;
+import com.tsalapova.bicyclerental.command.SessionCommand;
 import com.tsalapova.bicyclerental.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author TsalapovaMD
  * @version 1.0, 1/24/2018
  */
-public class LanguageCommand implements ActionCommand {
-
+public class LanguageCommand implements SessionCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         return getStartPage(request);

@@ -1,7 +1,6 @@
 <%--
   Author: TsalapovaMD
   Date: 12/28/2017
-  Time: 2:25 PM
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>

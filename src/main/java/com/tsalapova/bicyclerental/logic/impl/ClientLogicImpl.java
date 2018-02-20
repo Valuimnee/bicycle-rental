@@ -7,6 +7,7 @@ import com.tsalapova.bicyclerental.entity.*;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.ClientLogic;
+import com.tsalapova.bicyclerental.util.EntityAction;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ClientLogicImpl implements ClientLogic {
 
     @Override
     public void update(Client client) throws LogicException {
+        client.setPhone(new EntityAction().formatPhone(client.getPhone()));
         try {
             new ClientDAOImpl().update(client);
         } catch (DAOException e) {

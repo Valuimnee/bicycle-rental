@@ -3,6 +3,7 @@ package com.tsalapova.bicyclerental.logic.impl;
 import com.tsalapova.bicyclerental.dao.UserDAO;
 import com.tsalapova.bicyclerental.dao.impl.UserDAOImpl;
 import com.tsalapova.bicyclerental.entity.User;
+import com.tsalapova.bicyclerental.entity.UserRole;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.generator.HashGenerator;
@@ -15,21 +16,26 @@ import javafx.util.Pair;
  */
 public class UserLogicImpl implements UserLogic {
     @Override
-    public User login(User currentUser) throws LogicException {
+    public boolean login(User currentUser) throws LogicException {
         User user;
         try {
             user = new UserDAOImpl().findByLogin(currentUser.getLogin());
         } catch (DAOException e) {
             throw new LogicException("Authentication error", e);
         }
-
         if (user != null) {
             String hash = new HashGenerator().generateHash(currentUser.getPassword(), user.getSalt());
-            if (hash.equals(user.getPassword())) {
-                return user;
+            if(hash.equals(user.getPassword())) {
+                if (user.getRole().equals(UserRole.CLIENT.getName()) &&
+                        new ClientLogicImpl().displayProfile(user.getId()).getActive() == (byte) 0) {
+                    return false;
+                }else{
+                    currentUser.setId(user.getId());
+                    currentUser.setRole(user.getRole());
+                }
             }
         }
-        return null;
+        return true;
     }
 
     @Override
@@ -39,7 +45,7 @@ public class UserLogicImpl implements UserLogic {
         try {
             User user = userDAO.findByLogin(currentUser.getLogin());
             if (!user.getLogin().equals(newUser.getLogin())) {
-                if(userDAO.findIdByLogin(newUser.getLogin())!=-1L){
+                if (userDAO.findIdByLogin(newUser.getLogin()) != -1L) {
                     return false;
                 }
                 userDAO.updateLogin(user.getId(), newUser.getLogin());
