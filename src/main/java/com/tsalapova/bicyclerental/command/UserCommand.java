@@ -1,7 +1,6 @@
 package com.tsalapova.bicyclerental.command;
 
 import com.tsalapova.bicyclerental.entity.User;
-import com.tsalapova.bicyclerental.entity.UserRole;
 import com.tsalapova.bicyclerental.util.DocumentConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.validator.ParameterValidator;
@@ -22,7 +21,7 @@ public interface UserCommand extends ActionCommand {
      * Returns result of the validation.
      *
      * @param request {@code HttpServletRequest} - current request
-     * @param user user to be defined
+     * @param user    user to be defined
      * @return {@code boolean} - {@code true} if user bicycle is valid, otherwise {@code false}
      */
     default boolean defineUser(HttpServletRequest request, User user) {
@@ -39,7 +38,7 @@ public interface UserCommand extends ActionCommand {
      * Returns result of the validation.
      *
      * @param request {@code HttpServletRequest} - current request
-     * @param user new user to be defined
+     * @param user    new user to be defined
      * @return {@code boolean} - {@code true} if defined new user is valid, otherwise {@code false}
      */
     default boolean defineNewUser(HttpServletRequest request, User user) {
@@ -49,7 +48,6 @@ public interface UserCommand extends ActionCommand {
         ParameterValidator validator = new ParameterValidator();
         user.setLogin(login);
         user.setPassword(password);
-        user.setRole(UserRole.CLIENT.getName());
         return validator.validateLogin(login) && validator.validateConfirmPassword(password, password2);
     }
 
@@ -59,7 +57,7 @@ public interface UserCommand extends ActionCommand {
      * Returns result of the validation.
      *
      * @param request {@code HttpServletRequest} - current request
-     * @param user old user to be defined
+     * @param user    old user to be defined
      * @param newUser updated user to be defined
      * @return {@code boolean} - {@code true} if defined user and updated user are valid, otherwise {@code false}
      */

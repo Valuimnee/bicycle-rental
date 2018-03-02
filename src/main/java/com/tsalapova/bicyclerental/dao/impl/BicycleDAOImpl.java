@@ -135,7 +135,7 @@ public class BicycleDAOImpl implements BicycleDAO {
     }
 
     @Override
-    public void edit(Bicycle bicycle) throws DAOException {
+    public void update(Bicycle bicycle) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         try {

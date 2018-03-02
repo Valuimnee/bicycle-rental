@@ -3,21 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-<display-name>BicycleRental</display-name>
-<session-config>
-    <session-timeout>30</session-timeout>
-</session-config>
-<welcome-file-list>
-    <welcome-file>/index.jsp</welcome-file>
-</welcome-file-list>
-<jsp-config>
-    <taglib>
-        <taglib-uri>fldlib</taglib-uri>
-        <taglib-location>/WEB-INF/tag/fld.tld</taglib-location>
-    </taglib>
-</jsp-config>
-<error-page>
-    <exception-type>java.lang.Exception</exception-type>
-    <location>/jsp/error.jsp</location>
-</error-page>
+    <display-name>BicycleRental</display-name>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>/WEB-INF/classes/log4j2.xml</param-value>
+    </context-param>
+    <welcome-file-list>
+        <welcome-file>/index.jsp</welcome-file>
+    </welcome-file-list>
+    <jsp-config>
+        <taglib>
+            <taglib-uri>fldlib</taglib-uri>
+            <taglib-location>/WEB-INF/tag/fld.tld</taglib-location>
+        </taglib>
+    </jsp-config>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/jsp/error.jsp</location>
+    </error-page>
 </web-app>

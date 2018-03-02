@@ -2,10 +2,10 @@ package com.tsalapova.bicyclerental.controller;
 
 import com.tsalapova.bicyclerental.command.ActionCommand;
 import com.tsalapova.bicyclerental.command.CommandFactory;
-import com.tsalapova.bicyclerental.confirmer.RentalConfirmer;
-import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.confirmer.TaskExecutor;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -34,7 +34,8 @@ public class InitialController extends HttpServlet {
     public void init() throws ServletException {
         super.init();
         ConnectionPool.getInstance();
-        RentalConfirmer.getInstance().setupDatabaseRentals();
+        TaskExecutor.getInstance().setupInitialRentals();
+        LOGGER.log(Level.INFO, "Site successfully started");
     }
 
     @Override
@@ -55,7 +56,7 @@ public class InitialController extends HttpServlet {
                 String page = command.execute(request);
                 request.getRequestDispatcher(page).forward(request, response);
             } catch (CommandException e) {
-                LOGGER.log(Level.WARN, "Exception while executing command "+ commandName+".", e);
+                LOGGER.log(Level.WARN, "Exception while executing command " + commandName + ".", e);
                 throw new ServletException(e);
             }
         } else {
@@ -67,6 +68,7 @@ public class InitialController extends HttpServlet {
     public void destroy() {
         super.destroy();
         ConnectionPool.getInstance().destroyPool();
-        RentalConfirmer.getInstance().shutdown();
+        TaskExecutor.getInstance().shutdown();
+        LOGGER.log(Level.INFO, "Site shut down");
     }
 }

@@ -11,7 +11,10 @@ import java.util.List;
  */
 public interface ClientLogic {
     Client displayProfile(long clientId) throws LogicException;
+
     void update(Client client) throws LogicException;
+
     List<List> displayAll() throws LogicException;
+
     void changeActiveById(long clientId, byte active) throws LogicException;
 }

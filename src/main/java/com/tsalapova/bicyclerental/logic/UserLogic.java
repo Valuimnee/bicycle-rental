@@ -8,7 +8,9 @@ import com.tsalapova.bicyclerental.exception.LogicException;
  * @version 1.0, 1/3/2018
  */
 public interface UserLogic {
-    boolean login(User currentUser) throws LogicException;
-    boolean update(User currentUser, User newUser) throws LogicException;
     User findById(long userId) throws LogicException;
+
+    boolean login(User currentUser) throws LogicException;
+
+    boolean update(User currentUser, User newUser) throws LogicException;
 }

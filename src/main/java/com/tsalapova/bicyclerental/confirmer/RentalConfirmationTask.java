@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
  * @author TsalapovaMD
  * @version 1.0, 2/11/2018
  */
-public class ConfirmTask implements Runnable {
+public class RentalConfirmationTask implements Runnable {
     private Rental rental;
 
-    public ConfirmTask(Rental rental) {
+    public RentalConfirmationTask(Rental rental) {
         this.rental = rental;
     }
 

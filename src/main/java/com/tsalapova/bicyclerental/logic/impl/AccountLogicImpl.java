@@ -15,7 +15,7 @@ public class AccountLogicImpl implements AccountLogic {
     @Override
     public Account findByClientId(long clientId) throws LogicException {
         try {
-            return new AccountDAOImpl().findByClientId(clientId);
+            return new AccountDAOImpl().findById(clientId);
         } catch (DAOException e) {
             throw new LogicException("Error occurred when finding client account", e);
         }

@@ -7,9 +7,10 @@ import com.tsalapova.bicyclerental.command.UserCommand;
 import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
+import com.tsalapova.bicyclerental.entity.UserRole;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RegisterLogicImpl;
+import com.tsalapova.bicyclerental.logic.impl.SessionLogicImpl;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 
@@ -32,8 +33,9 @@ public class RegisterCommand implements SessionCommand, UserCommand, ClientComma
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
             return PageConstant.REGISTER;
         }
+        user.setRole(UserRole.CLIENT.getName());
         try {
-            if (!new RegisterLogicImpl().register(user, user.getPassword(), client, account)) {
+            if (!new SessionLogicImpl().register(user, user.getPassword(), client, account)) {
                 request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_LOGIN);
                 return PageConstant.REGISTER;
             }

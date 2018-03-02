@@ -9,7 +9,7 @@ import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.generator.HashGenerator;
-import com.tsalapova.bicyclerental.logic.RegisterLogic;
+import com.tsalapova.bicyclerental.logic.SessionLogic;
 import com.tsalapova.bicyclerental.util.EntityAction;
 import javafx.util.Pair;
 
@@ -17,11 +17,11 @@ import javafx.util.Pair;
  * @author TsalapovaMD
  * @version 1.0, 2/1/2018
  */
-public class RegisterLogicImpl implements RegisterLogic {
+public class SessionLogicImpl implements SessionLogic {
     @Override
     public boolean register(User user, String password, Client client, Account account) throws LogicException {
+        UserDAOImpl userDAO = new UserDAOImpl();
         try {
-            UserDAOImpl userDAO = new UserDAOImpl();
             long id = userDAO.findIdByLogin(user.getLogin());
             if (id != -1L) {
                 return false;
@@ -29,7 +29,7 @@ public class RegisterLogicImpl implements RegisterLogic {
             Pair<String, String> hashSalt = new HashGenerator().generateHashSalt(password);
             user.setPassword(hashSalt.getKey());
             user.setSalt(hashSalt.getValue());
-            userDAO.addClient(user);
+            userDAO.add(user);
             id = userDAO.findIdByLogin(user.getLogin());
             if (id == -1L) {
                 return false;
@@ -40,9 +40,19 @@ public class RegisterLogicImpl implements RegisterLogic {
             account.setClientId(id);
             new ClientDAOImpl().add(client);
             new AccountDAOImpl().add(account);
-            return true;
         } catch (DAOException e) {
             throw new LogicException("Registration error. " + e.getMessage(), e);
+        }
+        return true;
+
+    }
+
+    @Override
+    public void deleteClient(long clientId) throws LogicException {
+        try {
+            new UserDAOImpl().deleteById(clientId);
+        } catch (DAOException e) {
+            throw new LogicException("Error occurred while deleting account", e);
         }
     }
 }

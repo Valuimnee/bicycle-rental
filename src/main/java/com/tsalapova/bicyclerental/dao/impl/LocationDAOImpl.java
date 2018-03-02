@@ -56,4 +56,10 @@ public class LocationDAOImpl implements LocationDAO {
             close(statement, connection);
         }
     }
+
+    @Override
+    public void add(Location location) throws DAOException {
+
+    }
+
 }

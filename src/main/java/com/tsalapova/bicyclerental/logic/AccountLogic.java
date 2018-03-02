@@ -9,5 +9,6 @@ import com.tsalapova.bicyclerental.exception.LogicException;
  */
 public interface AccountLogic {
     Account findByClientId(long clientId) throws LogicException;
+
     void payRental(long clientId, double total) throws LogicException;
 }

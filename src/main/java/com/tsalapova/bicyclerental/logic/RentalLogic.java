@@ -14,12 +14,20 @@ import java.util.List;
  */
 public interface RentalLogic {
     void createRental(Rental rental) throws LogicException;
+
     Pair<List<Rental>, List<Bicycle>> displayByClientId(long clientId) throws LogicException;
-    Pair<List<Rental>,List<Bicycle>> displayCurrentByClientId(long clientId) throws LogicException;
+
+    Pair<List<Rental>, List<Bicycle>> displayCurrentByClientId(long clientId) throws LogicException;
+
     List<Rental> findConcluded() throws LogicException;
+
     List<Entity> displayById(long rentalId) throws LogicException;
+
     void cancelById(long rentalId) throws LogicException;
+
     void confirmById(long rentalId) throws LogicException;
+
     void editTimeHours(Rental rental) throws LogicException;
+
     Long countByClientId(long clientId) throws LogicException;
 }

@@ -23,7 +23,7 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
     private static final String FIND_BY_LOGIN = "SELECT `id`, `login`, `password`, `salt`, `role` FROM `user` WHERE `login`=?";
     private static final String FIND_ID_BY_LOGIN = "SELECT `id` FROM `user` WHERE `login`=?";
-    private static final String ADD_USER_CLIENT = "INSERT INTO `user` (`login`, `password`, `salt`, `role`) VALUES (?, ?, ?, 'client')";
+    private static final String ADD_USER = "INSERT INTO `user` (`login`, `password`, `salt`, `role`) VALUES (?, ?, ?, ?)";
     private static final String UPDATE_LOGIN = "UPDATE `user` SET `login`=? WHERE `id`=?";
     private static final String UPDATE_HASH_SALT = "UPDATE `user` SET `password`=?, `salt`=? WHERE `id`=?";
     private static final String DELETE_BY_ID = "DELETE FROM `user` WHERE `id`=?";
@@ -74,15 +74,16 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void addClient(User user) throws DAOException {
+    public void add(User user) throws DAOException {
         Connection connection = null;
         PreparedStatement statement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
-            statement = connection.prepareStatement(ADD_USER_CLIENT);
+            statement = connection.prepareStatement(ADD_USER);
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getSalt());
+            statement.setString(4, user.getRole());
             statement.execute();
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding user", e);

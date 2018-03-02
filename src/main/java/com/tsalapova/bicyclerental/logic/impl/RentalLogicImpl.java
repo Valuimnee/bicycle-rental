@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.logic.impl;
 
-import com.tsalapova.bicyclerental.confirmer.ConfirmTask;
-import com.tsalapova.bicyclerental.confirmer.RentalConfirmer;
+import com.tsalapova.bicyclerental.confirmer.RentalConfirmationTask;
+import com.tsalapova.bicyclerental.confirmer.TaskExecutor;
 import com.tsalapova.bicyclerental.dao.impl.BicycleDAOImpl;
 import com.tsalapova.bicyclerental.dao.impl.LocationDAOImpl;
 import com.tsalapova.bicyclerental.dao.impl.RentalDAOImpl;
@@ -26,8 +26,10 @@ public class RentalLogicImpl implements RentalLogic {
     @Override
     public void createRental(Rental rental) throws LogicException {
         try {
-            Rental newRental=new RentalDAOImpl().add(rental);
-            RentalConfirmer.getInstance().addTask(new ConfirmTask(newRental));
+            RentalDAOImpl rentalDAO = new RentalDAOImpl();
+            rentalDAO.add(rental);
+            Rental newRental = rentalDAO.findByParameters(rental);
+            TaskExecutor.getInstance().addTask(new RentalConfirmationTask(newRental));
         } catch (DAOException e) {
             throw new LogicException("Error occurred when creating rental", e);
         }
@@ -81,21 +83,21 @@ public class RentalLogicImpl implements RentalLogic {
 
     @Override
     public List<Entity> displayById(long rentalId) throws LogicException {
-        List<Entity> entities=new ArrayList<>(3);
+        List<Entity> entities = new ArrayList<>(3);
         Rental rental;
         Bicycle bicycle;
         Location location;
         try {
-            rental=new RentalDAOImpl().findById(rentalId);
-            if(rental==null){
+            rental = new RentalDAOImpl().findById(rentalId);
+            if (rental == null) {
                 return entities;
             }
-            bicycle=new BicycleDAOImpl().findById(rental.getBicycleId());
-            if(bicycle==null){
+            bicycle = new BicycleDAOImpl().findById(rental.getBicycleId());
+            if (bicycle == null) {
                 return entities;
             }
-            location=new LocationDAOImpl().findById(bicycle.getLocationId());
-            if(location==null){
+            location = new LocationDAOImpl().findById(bicycle.getLocationId());
+            if (location == null) {
                 return entities;
             }
         } catch (DAOException e) {
@@ -111,7 +113,7 @@ public class RentalLogicImpl implements RentalLogic {
     public void cancelById(long rentalId) throws LogicException {
         try {
             new RentalDAOImpl().cancelById(rentalId);
-            RentalConfirmer.getInstance().removeTask(rentalId);
+            TaskExecutor.getInstance().removeTask(rentalId);
         } catch (DAOException e) {
             throw new LogicException("Error occurred when canceling rental", e);
         }
@@ -130,9 +132,9 @@ public class RentalLogicImpl implements RentalLogic {
     public void editTimeHours(Rental rental) throws LogicException {
         try {
             new RentalDAOImpl().updateTimeHours(rental);
-            RentalConfirmer confirmer=RentalConfirmer.getInstance();
+            TaskExecutor confirmer = TaskExecutor.getInstance();
             confirmer.removeTask(rental.getRentalId());
-            confirmer.addTask(new ConfirmTask(rental));
+            confirmer.addTask(new RentalConfirmationTask(rental));
         } catch (DAOException e) {
             throw new LogicException("Error occurred when updating rental", e);
         }

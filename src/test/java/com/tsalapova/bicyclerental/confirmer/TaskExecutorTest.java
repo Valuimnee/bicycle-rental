@@ -10,12 +10,12 @@ import java.util.concurrent.ScheduledFuture;
  * @author TsalapovaMD
  * @version 1.0, 2/11/2018
  */
-public class RentalConfirmerTest {
+public class TaskExecutorTest {
     @Test
     public void testSetupDatabaseRentals() throws Exception {
-        RentalConfirmer.getInstance().setupDatabaseRentals();
+        TaskExecutor.getInstance().setupInitialRentals();
         Thread.sleep(2000);
-        HashMap map=RentalConfirmer.getInstance().getTasks();
+        HashMap map= TaskExecutor.getInstance().getTasks();
         System.out.println(map.keySet());
         Assert.assertNull((ScheduledFuture)map.get(0));
     }

@@ -17,17 +17,19 @@ import java.util.concurrent.TimeUnit;
  * @author TsalapovaMD
  * @version 1.0, 2/11/2018
  */
-public class RentalConfirmer {
-    private static RentalConfirmer instance = new RentalConfirmer();
+public class TaskExecutor {
+    private static TaskExecutor instance = new TaskExecutor();
 
-    private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(20);
+    private static final int POOL_SIZE = 20;
+
+    private ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(POOL_SIZE);
     private HashMap<Long, ScheduledFuture<?>> tasks;
 
-    public static RentalConfirmer getInstance() {
+    public static TaskExecutor getInstance() {
         return instance;
     }
 
-    private RentalConfirmer() {
+    private TaskExecutor() {
         executor.setRemoveOnCancelPolicy(true);
         tasks = new HashMap<>();
     }
@@ -36,19 +38,19 @@ public class RentalConfirmer {
         return tasks;
     }
 
-    public void setupDatabaseRentals() {
+    public void setupInitialRentals() {
         List<Rental> rentals;
         try {
             rentals = new RentalLogicImpl().findConcluded();
         } catch (LogicException e) {
-            throw new ConfirmerException("Error occurred when setting up confirmer", e);
+            throw new ConfirmerException("Error occurred when setting up task holder", e);
         }
         for (Rental rental : rentals) {
-            addTask(new ConfirmTask(rental));
+            addTask(new RentalConfirmationTask(rental));
         }
     }
 
-    public void addTask(ConfirmTask task) {
+    public void addTask(RentalConfirmationTask task) {
         long delay = Duration.between(LocalDateTime.now(), task.getLocalDateTime()).toMinutes();
         if (delay < 0L) {
             delay = 0L;

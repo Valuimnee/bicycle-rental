@@ -70,7 +70,7 @@ public class BicycleLogicImpl implements BicycleLogic {
     @Override
     public void edit(Bicycle bicycle) throws LogicException {
         try {
-            new BicycleDAOImpl().edit(bicycle);
+            new BicycleDAOImpl().update(bicycle);
         } catch (DAOException e) {
             throw new LogicException("Error while editing the bike", e);
         }

@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 public enum RentalStatus {
     CONCLUDED, PERFORMED, CANCELED;
 
-    public String getName(){
+    public String getName() {
         return StringUtils.capitalize(name().toLowerCase());
     }
 }
