@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.command.userimpl;
 
 import com.tsalapova.bicyclerental.command.UserCommand;
-import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class UserAccountCommand implements UserCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         request.setAttribute(RequestConstant.CONTENT, RequestConstant.USER_ACCOUNT);
         return getStartPage(request);
     }

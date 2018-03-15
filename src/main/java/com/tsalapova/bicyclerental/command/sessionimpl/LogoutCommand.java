@@ -1,8 +1,8 @@
 package com.tsalapova.bicyclerental.command.sessionimpl;
 
-import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.command.SessionCommand;
-import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.util.PageConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LogoutCommand implements SessionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession(true);
         clearUserSession(session);
         return PageConstant.MAIN;

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form class="container text-center pb-5" name="locations-form" method="post" action="/control">
+<form class="container text-center pb-5 mt-1" name="locations-form" method="post" action="/control">
     <input type="hidden" name="command"
            value="${sessionScope.role=='administrator'&&select=='select'?'assign-location':'bicycles-by-location'}"/>
     <c:forEach begin="0" end="${locations.size()/2+locations.size()%2-1}" varStatus="loop">

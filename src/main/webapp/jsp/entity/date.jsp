@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fld" uri="fldlib" %>
-<form name="select-date-form" method="post" action="/control">
+<form name="select-date-form" class="mt-1" method="post" action="/control">
     <c:if test="${requestScope.wrong=='wrong'}"><p class="mb-2 text-center"><fmt:message key="date.wrong"/></p></c:if>
     <p class="mb-2 text-center"><label><b><fmt:message key="date.greeting"/></b></label></p>
     <fld:input type="datetime" labelType="long" name="start-date" required="required">

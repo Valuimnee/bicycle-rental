@@ -2,8 +2,8 @@ package com.tsalapova.bicyclerental.confirmer;
 
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.ConfirmerException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -41,8 +41,8 @@ public class TaskExecutor {
     public void setupInitialRentals() {
         List<Rental> rentals;
         try {
-            rentals = new RentalLogicImpl().findConcluded();
-        } catch (LogicException e) {
+            rentals = new LogicInjector().getRentalLogic().findConcluded();
+        } catch (DAOException e) {
             throw new ConfirmerException("Error occurred when setting up task holder", e);
         }
         for (Rental rental : rentals) {

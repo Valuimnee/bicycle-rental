@@ -1,12 +1,12 @@
 package com.tsalapova.bicyclerental.logic.impl;
 
-import com.tsalapova.bicyclerental.dao.impl.ClientDAOImpl;
-import com.tsalapova.bicyclerental.dao.impl.RentalDAOImpl;
-import com.tsalapova.bicyclerental.dao.impl.UserDAOImpl;
-import com.tsalapova.bicyclerental.entity.*;
+import com.tsalapova.bicyclerental.dao.ClientDAO;
+import com.tsalapova.bicyclerental.entity.Client;
+import com.tsalapova.bicyclerental.entity.User;
+import com.tsalapova.bicyclerental.entity.UserRole;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.ClientLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.EntityAction;
 import javafx.util.Pair;
 
@@ -19,63 +19,54 @@ import java.util.List;
  * @version 1.0, 2/3/2018
  */
 public class ClientLogicImpl implements ClientLogic {
-    @Override
-    public Client displayProfile(long clientId) throws LogicException {
-        try {
-            return new ClientDAOImpl().findById(clientId);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred while displaying profile", e);
-        }
+    private ClientDAO clientDAO;
+
+    public ClientLogicImpl(ClientDAO clientDAO) {
+        this.clientDAO = clientDAO;
     }
 
     @Override
-    public void update(Client client) throws LogicException {
+    public Client displayProfile(long clientId) throws DAOException {
+        return clientDAO.findById(clientId);
+    }
+
+    @Override
+    public void update(Client client) throws DAOException {
         client.setPhone(new EntityAction().formatPhone(client.getPhone()));
-        try {
-            new ClientDAOImpl().update(client);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred while updating client information", e);
-        }
+        clientDAO.update(client);
     }
 
     @Override
-    public List<List> displayAll() throws LogicException {
-        try {
-            List<Client> clients = new ClientDAOImpl().findAll();
-            if (clients.isEmpty()) {
-                return new ArrayList<>();
-            }
-            List<User> users = new UserDAOImpl().findByRole(UserRole.CLIENT);
-            HashMap<Long, User> map = new HashMap<>();
-            for (User user : users) {
-                map.put(user.getId(), user);
-            }
-            List<String> logins = new ArrayList<>(clients.size());
-            HashMap<Long, Long> countMap = new HashMap<>();
-            for (Pair<Long, Long> pair : new RentalDAOImpl().countAllByClientId()) {
-                countMap.put(pair.getKey(), pair.getValue());
-            }
-            List<Long> counts = new ArrayList<>(clients.size());
-            for (Client client : clients) {
-                logins.add(map.get(client.getClientId()).getLogin());
-                counts.add(countMap.get(client.getClientId()));
-            }
-            List<List> content = new ArrayList<>(3);
-            content.add(logins);
-            content.add(clients);
-            content.add(counts);
-            return content;
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred while displaying all clients", e);
+    public List<List> displayAll() throws DAOException {
+        List<Client> clients = clientDAO.findAll();
+        if (clients.isEmpty()) {
+            return new ArrayList<>();
         }
+        LogicInjector logicInjector=new LogicInjector();
+        List<User> users = logicInjector.getDaoInjector().getUserDAO().findByRole(UserRole.CLIENT);
+        HashMap<Long, User> map = new HashMap<>();
+        for (User user : users) {
+            map.put(user.getId(), user);
+        }
+        List<String> logins = new ArrayList<>(clients.size());
+        HashMap<Long, Long> countMap = new HashMap<>();
+        for (Pair<Long, Long> pair : logicInjector.getDaoInjector().getRentalDAO().countAllByClientId()) {
+            countMap.put(pair.getKey(), pair.getValue());
+        }
+        List<Long> counts = new ArrayList<>(clients.size());
+        for (Client client : clients) {
+            logins.add(map.get(client.getClientId()).getLogin());
+            counts.add(countMap.get(client.getClientId()));
+        }
+        List<List> content = new ArrayList<>(3);
+        content.add(logins);
+        content.add(clients);
+        content.add(counts);
+        return content;
     }
 
     @Override
-    public void changeActiveById(long clientId, byte active) throws LogicException {
-        try {
-            new ClientDAOImpl().changeStatusById(clientId, active);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred while updating client status", e);
-        }
+    public void changeActiveById(long clientId, byte active) throws DAOException {
+        clientDAO.changeStatusById(clientId, active);
     }
 }

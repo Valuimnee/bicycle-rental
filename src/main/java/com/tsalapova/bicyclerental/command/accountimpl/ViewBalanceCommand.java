@@ -5,7 +5,8 @@ import com.tsalapova.bicyclerental.command.AccountCommand;
 import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.AccountLogicImpl;
+import com.tsalapova.bicyclerental.logic.AccountLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
@@ -23,8 +24,9 @@ public class ViewBalanceCommand implements AccountCommand {
         HttpSession session = request.getSession();
         long clientId = (Long) session.getAttribute(SessionConstant.ID);
         Account account;
+        AccountLogic logic = new LogicInjector().getAccountLogic();
         try {
-            account = new AccountLogicImpl().findByClientId(clientId);
+            account = logic.findByClientId(clientId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when finding client account", e);
         }

@@ -50,5 +50,8 @@
     <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.3" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.2" level="project" />
+    <orderEntry type="library" name="jquery-3.2.1" level="application" />
+    <orderEntry type="library" name="popper" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

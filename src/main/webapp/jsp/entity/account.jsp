@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fld" uri="fldlib" %>
 <script src="/js/account.js"></script>
-<div class="register-block">
+<div class="register-block mt-1">
     <h2 id="reg" class="greeting text-center mb-2"><fmt:message key="account.header"/></h2>
     <form name="account-form">
         <fld:input type="currency" labelType="long" name="balance" required="required" disabled="disabled">

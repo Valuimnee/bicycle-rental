@@ -1,12 +1,13 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.util.PageConstant;
-import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
+import com.tsalapova.bicyclerental.logic.BicycleLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,8 +24,9 @@ public class AddBicycleCommand implements BicycleCommand {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.ADD_BICYCLE);
             return PageConstant.ADMIN;
         }
+        BicycleLogic logic = new LogicInjector().getBicycleLogic();
         try {
-            new BicycleLogicImpl().add(bicycle);
+            logic.add(bicycle);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when adding the bike", e);
         }

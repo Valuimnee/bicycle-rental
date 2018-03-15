@@ -1,13 +1,14 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.util.PageConstant;
-import com.tsalapova.bicyclerental.util.RequestConstant;
-import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
+import com.tsalapova.bicyclerental.logic.BicycleLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.RequestConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,8 +27,9 @@ public class EditBicycleCommand implements BicycleCommand {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.BICYCLE);
             return PageConstant.ADMIN;
         }
+        BicycleLogic logic = new LogicInjector().getBicycleLogic();
         try {
-            new BicycleLogicImpl().edit(bicycle);
+            logic.edit(bicycle);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when updating the bike", e);
         }

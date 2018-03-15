@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fld" uri="fldlib" %>
-<form name="edit-rental" method="post" action="/control">
+<form class="mt-1" name="edit-rental" method="post" action="/control">
     <input type="hidden" name="rental-id" value="${rental.rentalId}">
     <p class="mb-2 text-center"><label><b><fmt:message key="rental.rental-info"/></b></label></p>
     <p class="mb-2"><b><label class="container-fluid text-center"><fmt:message key="rental.edit-greeting"/></label></b></p>

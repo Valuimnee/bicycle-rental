@@ -3,6 +3,7 @@ package com.tsalapova.bicyclerental.command.userimpl;
 import com.tsalapova.bicyclerental.command.UserCommand;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.impl.UserLogicImpl;
 import com.tsalapova.bicyclerental.util.RequestConstant;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 public class EditAccountCommand implements UserCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession(true);
         String login = (String) session.getAttribute(SessionConstant.LOGIN);
         User user = new User();
@@ -27,15 +28,11 @@ public class EditAccountCommand implements UserCommand {
             return getStartPage(request);
         }
         user.setLogin(login);
-        try {
-            if (new UserLogicImpl().update(user, newUser)) {
-                session.setAttribute(SessionConstant.LOGIN, newUser.getLogin());
-            } else {
-                request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
-                request.setAttribute(RequestConstant.CONTENT, RequestConstant.USER_ACCOUNT);
-            }
-        } catch (LogicException e) {
-            throw new CommandException("Error while updating user account", e);
+        if (new UserLogicImpl().update(user, newUser)) {
+            session.setAttribute(SessionConstant.LOGIN, newUser.getLogin());
+        } else {
+            request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);
+            request.setAttribute(RequestConstant.CONTENT, RequestConstant.USER_ACCOUNT);
         }
         return getStartPage(request);
     }

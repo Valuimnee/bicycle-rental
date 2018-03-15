@@ -56,7 +56,7 @@ public interface UserCommand extends ActionCommand {
      * Retrieves users parameters from {@code request}, sets them to users and validates them.
      * Returns result of the validation.
      *
-     * @param request {@code HttpServletRequest} - current request
+     * @param request {@code HttpServletRequest} current request
      * @param user    old user to be defined
      * @param newUser updated user to be defined
      * @return {@code boolean} - {@code true} if defined user and updated user are valid, otherwise {@code false}

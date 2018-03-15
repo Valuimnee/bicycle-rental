@@ -18,7 +18,7 @@ public interface AccountCommand extends ActionCommand {
      * Method retrieves account parameters from the request, sets them to {@code account} and validates it.
      * If account is valid, returns true, else false.
      *
-     * @param request {@code HttpServletRequest} - current request
+     * @param request {@code HttpServletRequest} current request
      * @param account account to be defined
      * @return {@code boolean} - {@code true} if defined bicycle is valid, otherwise {@code false}
      */

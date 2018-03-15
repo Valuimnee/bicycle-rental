@@ -1,8 +1,7 @@
 package com.tsalapova.bicyclerental.command.sessionimpl;
 
 import com.tsalapova.bicyclerental.command.SessionCommand;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.impl.SessionLogicImpl;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
@@ -16,14 +15,10 @@ import javax.servlet.http.HttpSession;
  */
 public class DeleteAccountCommand implements SessionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession(true);
         Long clientId = (Long) session.getAttribute(SessionConstant.ID);
-        try {
-            new SessionLogicImpl().deleteClient(clientId);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred on delete account", e);
-        }
+        new SessionLogicImpl().deleteClient(clientId);
         clearUserSession(session);
         return PageConstant.MAIN;
     }

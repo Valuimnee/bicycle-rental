@@ -7,15 +7,15 @@
 <%@ taglib prefix="fld" uri="fldlib" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <jsp:include page="/jsp/component/head.jsp"/>
 <body>
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="/js/submit.js"></script>
-<script src="/js/register.js"></script>
+<%--<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>--%>
+<script type="text/javascript" src="/js/submit.js"></script>
+<script type="text/javascript" src="/js/register.js"></script>
 <main class="container-fluid mb-5">
     <div class="register-block">
         <h2 id="reg" class="greeting text-center mb-1"><fmt:message key="register.greeting"/></h2>

@@ -10,7 +10,7 @@
        scope="session"/>
 <fmt:setLocale value="${lang}" scope="session"/>
 <fmt:setBundle basename="text" scope="session"/>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <jsp:include page="/jsp/component/head.jsp"/>
 <body>

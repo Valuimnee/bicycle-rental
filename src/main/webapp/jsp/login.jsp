@@ -7,7 +7,7 @@
 <%@ taglib prefix="fld" uri="fldlib" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page errorPage="/jsp/error.jsp" %>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <jsp:include page="/jsp/component/head.jsp"/>
 <body>

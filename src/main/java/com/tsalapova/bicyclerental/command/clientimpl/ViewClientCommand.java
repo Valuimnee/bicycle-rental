@@ -5,7 +5,8 @@ import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.ClientLogicImpl;
+import com.tsalapova.bicyclerental.logic.ClientLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
 import com.tsalapova.bicyclerental.logic.impl.UserLogicImpl;
 import com.tsalapova.bicyclerental.util.DocumentConstant;
@@ -26,10 +27,12 @@ public class ViewClientCommand implements ClientCommand {
         String login;
         Client client;
         Long rentals;
+        ClientLogic clientLogic = new LogicInjector().getClientLogic();
+        //TODO
         try {
             User user = new UserLogicImpl().findById(clientId);
             login = user.getLogin();
-            client = new ClientLogicImpl().displayProfile(clientId);
+            client = clientLogic.displayProfile(clientId);
             rentals = new RentalLogicImpl().countByClientId(clientId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying user information", e);

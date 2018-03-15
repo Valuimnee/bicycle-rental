@@ -1,12 +1,13 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.util.PageConstant;
-import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
+import com.tsalapova.bicyclerental.logic.BicycleLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -20,8 +21,9 @@ public class DeleteBicycleCommand implements BicycleCommand {
     public String execute(HttpServletRequest request) throws CommandException {
         HttpSession session = request.getSession();
         Bicycle bicycle = (Bicycle) session.getAttribute(SessionConstant.BICYCLE);
+        BicycleLogic logic = new LogicInjector().getBicycleLogic();
         try {
-            new BicycleLogicImpl().deleteById(bicycle.getBicycleId());
+            logic.deleteById(bicycle.getBicycleId());
         } catch (LogicException e) {
             throw new CommandException("Error occurred when deleting the bicycle", e);
         }

@@ -8,8 +8,7 @@ import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.entity.UserRole;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.impl.SessionLogicImpl;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
@@ -24,7 +23,7 @@ import javax.servlet.http.HttpSession;
 public class RegisterCommand implements SessionCommand, UserCommand, ClientCommand, AccountCommand {
 
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession(true);
         User user = new User();
         Client client = new Client();
@@ -34,13 +33,9 @@ public class RegisterCommand implements SessionCommand, UserCommand, ClientComma
             return PageConstant.REGISTER;
         }
         user.setRole(UserRole.CLIENT.getName());
-        try {
-            if (!new SessionLogicImpl().register(user, user.getPassword(), client, account)) {
-                request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_LOGIN);
-                return PageConstant.REGISTER;
-            }
-        } catch (LogicException e) {
-            throw new CommandException("Registration error. " + e.getMessage(), e);
+        if (!new SessionLogicImpl().register(user, user.getPassword(), client, account)) {
+            request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_LOGIN);
+            return PageConstant.REGISTER;
         }
         setUserSession(session, user);
         return getStartPage(request);

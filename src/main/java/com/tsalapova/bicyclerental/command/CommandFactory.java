@@ -3,7 +3,7 @@ package com.tsalapova.bicyclerental.command;
 import com.tsalapova.bicyclerental.exception.CommandException;
 
 /**
- * Factory that creates specific {@code ActionCommand} from it&apos;s name.
+ * Factory that creates specific {@code ActionCommand} from it's name.
  *
  * @author TsalapovaMD
  * @version 1.0, 12/28/2017

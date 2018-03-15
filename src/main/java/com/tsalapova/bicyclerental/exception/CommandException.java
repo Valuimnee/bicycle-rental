@@ -2,7 +2,7 @@ package com.tsalapova.bicyclerental.exception;
 
 /**
  * @author TsalapovaMD
- * @version 1.0, 1/3/2018
+ * @version 1.0, 3/15/2018
  */
 public class CommandException extends Exception {
     public CommandException() {

@@ -4,7 +4,8 @@ import com.tsalapova.bicyclerental.command.BicycleCommand;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
+import com.tsalapova.bicyclerental.logic.BicycleLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -17,8 +18,9 @@ public class AllBicyclesCommand implements BicycleCommand {
     @Override
     public String execute(HttpServletRequest request) throws CommandException {
         List<Bicycle> bicycles;
+        BicycleLogic logic = new LogicInjector().getBicycleLogic();
         try {
-            bicycles = new BicycleLogicImpl().displayAll();
+            bicycles = logic.displayAll();
         } catch (LogicException e) {
             throw new CommandException("Error occurred when displaying bicycles", e);
         }

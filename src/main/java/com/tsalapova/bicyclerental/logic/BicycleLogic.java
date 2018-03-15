@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.logic;
 
 import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 
 import java.util.List;
 
@@ -10,21 +10,21 @@ import java.util.List;
  * @version 1.0, 2/4/2018
  */
 public interface BicycleLogic {
-    Bicycle displayById(long bicycleId) throws LogicException;
+    Bicycle displayById(long bicycleId) throws DAOException;
 
-    List<Bicycle> displayByLocation(long locationId) throws LogicException;
+    List<Bicycle> displayByLocation(long locationId) throws DAOException;
 
-    List<Bicycle> displayAllAvailable() throws LogicException;
+    List<Bicycle> displayAllAvailable() throws DAOException;
 
-    List<Bicycle> displayAll() throws LogicException;
+    List<Bicycle> displayAll() throws DAOException;
 
-    void add(Bicycle bicycle) throws LogicException;
+    void add(Bicycle bicycle) throws DAOException;
 
-    void deleteById(long bicycleId) throws LogicException;
+    void deleteById(long bicycleId) throws DAOException;
 
-    void edit(Bicycle bicycle) throws LogicException;
+    void edit(Bicycle bicycle) throws DAOException;
 
-    void deleteLocation(long bicycleId) throws LogicException;
+    void deleteLocation(long bicycleId) throws DAOException;
 
-    void assignLocation(long bicycleId, long locationId) throws LogicException;
+    void assignLocation(long bicycleId, long locationId) throws DAOException;
 }

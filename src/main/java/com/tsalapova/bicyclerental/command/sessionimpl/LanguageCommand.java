@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.command.sessionimpl;
 
 import com.tsalapova.bicyclerental.command.SessionCommand;
-import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class LanguageCommand implements SessionCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         return getStartPage(request);
     }
 }

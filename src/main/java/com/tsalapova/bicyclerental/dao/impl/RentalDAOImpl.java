@@ -20,6 +20,7 @@ import java.util.List;
 public class RentalDAOImpl implements RentalDAO {
     private static final String ADD_RENTAL = "INSERT INTO `rental` (`rental_id`, `client_id`, `bicycle_id`, `start_time`," +
             " `hours`, `total`, `status`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String FIND_NEXT_ID = "SELECT MAX(`rental_id`)+1 AS 'next_id' FROM `rental`";
     private static final String FIND_BY_ID = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
             " `total`, `status` FROM `rental` WHERE `rental_id`=?";
     private static final String FIND_BY_PARAMETERS = "SELECT `rental_id`, `client_id`, `bicycle_id`, `start_time`, `hours`," +
@@ -39,10 +40,18 @@ public class RentalDAOImpl implements RentalDAO {
     @Override
     public void add(Rental rental) throws DAOException {
         Connection connection = null;
+        Statement idStatement = null;
         PreparedStatement statement = null;
         try {
             connection = ConnectionPool.getInstance().getConnection();
+            idStatement = connection.createStatement();
             statement = connection.prepareStatement(ADD_RENTAL);
+            ResultSet idRs = idStatement.executeQuery(FIND_NEXT_ID);
+            if (idRs.next()) {
+                rental.setRentalId(idRs.getLong(1));
+            } else {
+                throw new DAOException("Error while adding rental");
+            }
             statement.setLong(1, rental.getRentalId());
             statement.setLong(2, rental.getClientId());
             statement.setLong(3, rental.getBicycleId());
@@ -54,6 +63,7 @@ public class RentalDAOImpl implements RentalDAO {
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while adding rental", e);
         } finally {
+            close(idStatement);
             close(statement, connection);
         }
     }
@@ -83,7 +93,7 @@ public class RentalDAOImpl implements RentalDAO {
 
     @Override
     public Rental findByParameters(Rental rental) throws DAOException {
-        Rental foundRental=null;
+        Rental foundRental = null;
         Connection connection = null;
         PreparedStatement statement = null;
         try {
@@ -234,14 +244,14 @@ public class RentalDAOImpl implements RentalDAO {
         final String countColumn = "count";
         Connection connection = null;
         PreparedStatement statement = null;
-        Long count=-1L;
+        Long count = -1L;
         try {
             connection = ConnectionPool.getInstance().getConnection();
             statement = connection.prepareStatement(COUNT_BY_CLIENT_ID);
             statement.setLong(1, clientId);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                count=rs.getLong(countColumn);
+                count = rs.getLong(countColumn);
             }
         } catch (ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding rental count by client id", e);

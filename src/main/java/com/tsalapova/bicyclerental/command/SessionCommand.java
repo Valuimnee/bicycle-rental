@@ -38,7 +38,7 @@ public interface SessionCommand extends ActionCommand {
      * Method removes all attributes from the current session
      * except &Prime;lang&Prime; attribute
      *
-     * @param session - current session
+     * @param session current session
      */
     default void clearUserSession(HttpSession session) {
         Enumeration<String> attributes = session.getAttributeNames();

@@ -10,16 +10,16 @@
        scope="session"/>
 <fmt:setLocale value="${lang}" scope="session"/>
 <fmt:setBundle basename="text" scope="session"/>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
 <jsp:include page="/jsp/component/head.jsp"/>
 <body>
 <jsp:include page="/jsp/component/main-nav.jsp"/>
 <jsp:include page="/jsp/component/header.jsp"/>
 <jsp:include page="/jsp/component/menubar.jsp"/>
-<main class="container-fluid mt-4 mb-5">
-    <c:if test="${requestScope.containsKey('message')}"><p class="text-center">
-        <fmt:message  key="message.${requestScope.message}"/></p></c:if>
+<main class="container-fluid mt-3 mb-5">
+    <c:if test="${requestScope.containsKey('message')}"><p class="text-center mt-1">
+        <fmt:message key="message.${requestScope.message}"/></p></c:if>
     <c:choose>
         <c:when test="${requestScope.content=='locations'}">
             <jsp:include page="/jsp/list/locations.jsp"/>

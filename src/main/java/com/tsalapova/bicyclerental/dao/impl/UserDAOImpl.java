@@ -44,7 +44,8 @@ public class UserDAOImpl implements UserDAO {
             if (!users.isEmpty()) {
                 user = users.get(0);
             }
-        } catch (IllegalAccessException | InstantiationException | InvocationTargetException | ConnectionPoolException | SQLException e) {
+        } catch (IllegalAccessException | InstantiationException | InvocationTargetException |
+                ConnectionPoolException | SQLException e) {
             throw new DAOException("Error while finding the user by login", e);
         } finally {
             close(statement, connection);

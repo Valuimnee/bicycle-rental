@@ -1,6 +1,6 @@
 package com.tsalapova.bicyclerental.command;
 
-import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 
@@ -18,11 +18,11 @@ public interface ActionCommand {
     /**
      * The main method where execution of all commands happens
      *
-     * @param request HttpServletRequest - current request
+     * @param request HttpServletRequest current request
      * @return {@code String} - next page
-     * @throws CommandException Exception is thrown if exception on the logic layer appears
+     * @throws DAOException Exception is thrown if exception on the logic layer appears
      */
-    String execute(HttpServletRequest request) throws CommandException;
+    String execute(HttpServletRequest request) throws DAOException;
 
     /**
      * Method returns the start page depending on the role of the client:

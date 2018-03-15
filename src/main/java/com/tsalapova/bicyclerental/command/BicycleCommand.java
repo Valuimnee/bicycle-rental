@@ -4,9 +4,9 @@ import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.BicycleMaterial;
 import com.tsalapova.bicyclerental.entity.BicycleType;
 import com.tsalapova.bicyclerental.entity.Location;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.BicycleLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.logic.impl.LocationLogicImpl;
 import com.tsalapova.bicyclerental.util.DocumentConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
@@ -63,7 +63,7 @@ public interface BicycleCommand extends ActionCommand {
     /**
      * Method removes bicycle and corresponding location attributes from session
      *
-     * @param session - current session
+     * @param session current session
      */
     default void removeBicycleFromSession(HttpSession session) {
         session.removeAttribute(SessionConstant.BICYCLE);
@@ -104,19 +104,16 @@ public interface BicycleCommand extends ActionCommand {
      *
      * @param request {@code HttpServletRequest} - current request
      * @return {@code javafx.util.Pair} - pair of bicycle and corresponding location
-     * @throws CommandException thrown if exception appears when retrieving bicycle and location
+     * @throws DAOException thrown if exception appears when retrieving bicycle and location
      */
-    default Pair<Bicycle, Location> selectBicycle(HttpServletRequest request) throws CommandException {
+    default Pair<Bicycle, Location> selectBicycle(HttpServletRequest request) throws DAOException {
         long bicycleId = Long.valueOf(request.getParameter(DocumentConstant.BICYCLE_ID));
         Bicycle bicycle;
         Location location = null;
-        try {
-            bicycle = new BicycleLogicImpl().displayById(bicycleId);
-            if (bicycle != null) {
-                location = new LocationLogicImpl().displayById(bicycle.getLocationId());
-            }
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when selecting bike", e);
+        BicycleLogic logic=new LogicInjector().getBicycleLogic();
+        bicycle = logic.displayById(bicycleId);
+        if (bicycle != null) {
+            location = new LocationLogicImpl().displayById(bicycle.getLocationId());
         }
         return new Pair<>(bicycle, location);
     }

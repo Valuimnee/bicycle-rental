@@ -5,6 +5,7 @@ import com.tsalapova.bicyclerental.command.CommandFactory;
 import com.tsalapova.bicyclerental.confirmer.TaskExecutor;
 import com.tsalapova.bicyclerental.db.ConnectionPool;
 import com.tsalapova.bicyclerental.exception.CommandException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 import org.apache.logging.log4j.Level;
@@ -55,7 +56,7 @@ public class InitialController extends HttpServlet {
                 ActionCommand command = CommandFactory.defineCommand(commandName);
                 String page = command.execute(request);
                 request.getRequestDispatcher(page).forward(request, response);
-            } catch (CommandException e) {
+            } catch (DAOException | CommandException e) {
                 LOGGER.log(Level.WARN, "Exception while executing command " + commandName + ".", e);
                 throw new ServletException(e);
             }

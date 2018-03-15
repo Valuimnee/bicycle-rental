@@ -3,7 +3,7 @@
 <%@ taglib prefix="fld" uri="fldlib" %>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="/js/submit.js"></script>
-<form class="no-resubmit" name="confirm-rental-form" method="post" action="/control">
+<form class="no-resubmit mt-1" name="confirm-rental-form" method="post" action="/control">
     <input type="hidden" name="submitted" value="false"/>
     <p class="mb-2 text-center"><label><b><fmt:message key="rental.rental-info"/></b></label></p>
     <p class="mb-2"><b><label class="container-fluid text-center"><fmt:message key="rental.greeting"/></label></b></p>

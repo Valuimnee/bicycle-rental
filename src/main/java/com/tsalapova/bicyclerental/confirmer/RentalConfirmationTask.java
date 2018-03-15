@@ -2,9 +2,8 @@ package com.tsalapova.bicyclerental.confirmer;
 
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.exception.ConfirmerException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.AccountLogicImpl;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 
 import java.time.LocalDateTime;
 
@@ -29,10 +28,11 @@ public class RentalConfirmationTask implements Runnable {
 
     @Override
     public void run() {
+        LogicInjector injector = new LogicInjector();
         try {
-            new AccountLogicImpl().payRental(rental.getClientId(), rental.getTotal());
-            new RentalLogicImpl().confirmById(rental.getRentalId());
-        } catch (LogicException e) {
+            injector.getAccountLogic().payRental(rental.getClientId(), rental.getTotal());
+            injector.getRentalLogic().confirmById(rental.getRentalId());
+        } catch (DAOException e) {
             throw new ConfirmerException("Error while paying the rental", e);
         }
     }

@@ -13,7 +13,7 @@ import com.tsalapova.bicyclerental.command.sessionimpl.RegisterCommand;
 import com.tsalapova.bicyclerental.command.userimpl.*;
 
 /**
- * The enum links specified command to it&apos;s name for the {@code CommandFactory}
+ * The enum links specified command to it's name for the {@code CommandFactory}
  *
  * @author TsalapovaMD
  * @version 1.0, 12/28/2017
@@ -44,7 +44,7 @@ public enum CommandEnum {
     }
 
     /**
-     * Getter for enum object&apos;s command
+     * Getter for enum object's command
      *
      * @return ActionCommand - corresponding command
      */

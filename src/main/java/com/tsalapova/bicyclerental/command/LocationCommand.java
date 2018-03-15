@@ -1,8 +1,7 @@
 package com.tsalapova.bicyclerental.command;
 
 import com.tsalapova.bicyclerental.entity.Location;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.impl.LocationLogicImpl;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 
@@ -25,15 +24,10 @@ public interface LocationCommand extends ActionCommand {
      *
      * @param request {@code HttpServletRequest} - current request
      * @return {@code String} - user main page
-     * @throws CommandException thrown if exception appears when retrieving locations
+     * @throws DAOException thrown if exception appears when retrieving locations
      */
-    default String setToRequestLocations(HttpServletRequest request) throws CommandException {
-        List<Location> locations;
-        try {
-            locations = new LocationLogicImpl().displayAll();
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying locations", e);
-        }
+    default String setToRequestLocations(HttpServletRequest request) throws DAOException {
+        List<Location> locations = new LocationLogicImpl().displayAll();
         if (locations.isEmpty()) {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_LOCATIONS);
         } else {

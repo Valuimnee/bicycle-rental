@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * The interface includes methods, common for several rental commands,
- * such as displaying rentals, defining rental&apos;s parameters.
+ * such as displaying rentals, defining rental's parameters.
  * Base interface for all commands, working with rentals
  *
  * @author TsalapovaMD

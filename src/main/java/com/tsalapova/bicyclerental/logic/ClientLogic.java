@@ -1,7 +1,7 @@
 package com.tsalapova.bicyclerental.logic;
 
 import com.tsalapova.bicyclerental.entity.Client;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ import java.util.List;
  * @version 1.0, 2/3/2018
  */
 public interface ClientLogic {
-    Client displayProfile(long clientId) throws LogicException;
+    Client displayProfile(long clientId) throws DAOException;
 
-    void update(Client client) throws LogicException;
+    void update(Client client) throws DAOException;
 
-    List<List> displayAll() throws LogicException;
+    List<List> displayAll() throws DAOException;
 
-    void changeActiveById(long clientId, byte active) throws LogicException;
+    void changeActiveById(long clientId, byte active) throws DAOException;
 }

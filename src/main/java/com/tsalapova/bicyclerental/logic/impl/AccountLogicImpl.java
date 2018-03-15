@@ -1,9 +1,8 @@
 package com.tsalapova.bicyclerental.logic.impl;
 
-import com.tsalapova.bicyclerental.dao.impl.AccountDAOImpl;
+import com.tsalapova.bicyclerental.dao.AccountDAO;
 import com.tsalapova.bicyclerental.entity.Account;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.exception.LogicException;
 import com.tsalapova.bicyclerental.logic.AccountLogic;
 
 /**
@@ -11,22 +10,19 @@ import com.tsalapova.bicyclerental.logic.AccountLogic;
  * @version 1.0, 2/11/2018
  */
 public class AccountLogicImpl implements AccountLogic {
+    private AccountDAO accountDAO;
 
-    @Override
-    public Account findByClientId(long clientId) throws LogicException {
-        try {
-            return new AccountDAOImpl().findById(clientId);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred when finding client account", e);
-        }
+    public AccountLogicImpl(AccountDAO accountDAO) {
+        this.accountDAO = accountDAO;
     }
 
     @Override
-    public void payRental(long clientId, double total) throws LogicException {
-        try {
-            new AccountDAOImpl().update(clientId, total);
-        } catch (DAOException e) {
-            throw new LogicException("Error occurred when paying client rental", e);
-        }
+    public Account findByClientId(long clientId) throws DAOException {
+        return accountDAO.findById(clientId);
+    }
+
+    @Override
+    public void payRental(long clientId, double total) throws DAOException {
+        accountDAO.update(clientId, total);
     }
 }

@@ -1,13 +1,14 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
-import com.tsalapova.bicyclerental.util.DocumentConstant;
-import com.tsalapova.bicyclerental.util.PageConstant;
-import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.BicycleLogicImpl;
+import com.tsalapova.bicyclerental.logic.BicycleLogic;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
+import com.tsalapova.bicyclerental.util.DocumentConstant;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,8 +23,9 @@ public class AssignLocationCommand implements BicycleCommand {
         HttpSession session = request.getSession();
         Bicycle bicycle = (Bicycle) session.getAttribute(SessionConstant.BICYCLE);
         Long locationId = Long.valueOf(request.getParameter(DocumentConstant.LOCATION_ID));
+        BicycleLogic logic = new LogicInjector().getBicycleLogic();
         try {
-            new BicycleLogicImpl().assignLocation(bicycle.getBicycleId(), locationId);
+            logic.assignLocation(bicycle.getBicycleId(), locationId);
         } catch (LogicException e) {
             throw new CommandException("Error occurred when setting location of the bike", e);
         }
