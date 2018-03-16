@@ -1,14 +1,13 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
-import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.command.RentalCommand;
+import com.tsalapova.bicyclerental.entity.Rental;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
+import com.tsalapova.bicyclerental.util.EntityAction;
+import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
-import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
-import com.tsalapova.bicyclerental.util.EntityAction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 public class EditRentalCommand implements RentalCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         Rental rental = (Rental) session.getAttribute(SessionConstant.RENTAL);
         if (!defineDateHours(request, rental)) {
@@ -27,11 +26,7 @@ public class EditRentalCommand implements RentalCommand {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.RENTAL);
             return PageConstant.MAIN;
         }
-        try {
-            new RentalLogicImpl().editTimeHours(rental);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when updating rental", e);
-        }
+        new LogicInjector().getRentalLogic().editTimeHours(rental);
         removeRentalFromSession(session);
         return PageConstant.MAIN;
     }

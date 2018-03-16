@@ -2,10 +2,8 @@ package com.tsalapova.bicyclerental.command.userimpl;
 
 import com.tsalapova.bicyclerental.command.UserCommand;
 import com.tsalapova.bicyclerental.entity.User;
-import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.UserLogicImpl;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 
@@ -28,7 +26,7 @@ public class EditAccountCommand implements UserCommand {
             return getStartPage(request);
         }
         user.setLogin(login);
-        if (new UserLogicImpl().update(user, newUser)) {
+        if (new LogicInjector().getUserLogic().update(user, newUser)) {
             session.setAttribute(SessionConstant.LOGIN, newUser.getLogin());
         } else {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_INFO);

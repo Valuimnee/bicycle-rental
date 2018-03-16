@@ -1,8 +1,8 @@
 package com.tsalapova.bicyclerental.command.locationimpl;
 
 import com.tsalapova.bicyclerental.command.LocationCommand;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.util.RequestConstant;
-import com.tsalapova.bicyclerental.exception.CommandException;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SelectLocationCommand implements LocationCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         request.setAttribute(RequestConstant.SELECT, RequestConstant.SELECT);
         return setToRequestLocations(request);
     }

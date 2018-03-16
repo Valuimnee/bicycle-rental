@@ -1,12 +1,12 @@
 package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
+import com.tsalapova.bicyclerental.entity.Bicycle;
+import com.tsalapova.bicyclerental.entity.Location;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
-import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.entity.Location;
-import com.tsalapova.bicyclerental.exception.CommandException;
 import javafx.util.Pair;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewBicycleCommand implements BicycleCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         Pair<Bicycle, Location> pair = selectBicycle(request);
         if (pair.getKey() == null) {

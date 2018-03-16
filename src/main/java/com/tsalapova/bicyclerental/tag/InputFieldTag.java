@@ -14,6 +14,7 @@ import java.io.IOException;
 public class InputFieldTag extends BodyTagSupport {
     private static final String REQUIRED = "required";
     private static final String DISABLED = "disabled";
+    private static final String AUTOFOCUS = "autofocus";
 
     private String type;
     private String label;
@@ -21,6 +22,7 @@ public class InputFieldTag extends BodyTagSupport {
     private String name;
     private String required;
     private String disabled;
+    private String autofocus;
 
     public void setType(String type) {
         this.type = type;
@@ -44,6 +46,10 @@ public class InputFieldTag extends BodyTagSupport {
 
     public void setDisabled(String disabled) {
         this.disabled = disabled;
+    }
+
+    public void setAutofocus(String autofocus) {
+        this.autofocus = autofocus;
     }
 
     protected void writeStartTag(String typePattern) throws JspFieldTagException {
@@ -73,7 +79,8 @@ public class InputFieldTag extends BodyTagSupport {
     public int doEndTag() throws JspFieldTagException {
         try {
             pageContext.getOut().write("\" " + (REQUIRED.equals(required) ? "required=\"required\" " : "") +
-                    (DISABLED.equals(disabled) ? "disabled " : "") + "/>\n    </div>");
+                    (DISABLED.equals(disabled) ? "disabled " : "") + (AUTOFOCUS.equals(autofocus) ? "autofocus" : "") +
+                    "/>\n    </div>");
         } catch (IOException e) {
             throw new JspFieldTagException("Exception occurred while evaluating field tag", e);
         }

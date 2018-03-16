@@ -7,7 +7,6 @@ import com.tsalapova.bicyclerental.entity.Location;
 import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.BicycleLogic;
 import com.tsalapova.bicyclerental.logic.LogicInjector;
-import com.tsalapova.bicyclerental.logic.impl.LocationLogicImpl;
 import com.tsalapova.bicyclerental.util.DocumentConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
@@ -113,7 +112,7 @@ public interface BicycleCommand extends ActionCommand {
         BicycleLogic logic=new LogicInjector().getBicycleLogic();
         bicycle = logic.displayById(bicycleId);
         if (bicycle != null) {
-            location = new LocationLogicImpl().displayById(bicycle.getLocationId());
+            location = new LogicInjector().getLocationLogic().displayById(bicycle.getLocationId());
         }
         return new Pair<>(bicycle, location);
     }

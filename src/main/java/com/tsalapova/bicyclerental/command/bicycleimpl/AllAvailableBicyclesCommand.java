@@ -2,8 +2,7 @@ package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
 import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.BicycleLogic;
 import com.tsalapova.bicyclerental.logic.LogicInjector;
 
@@ -16,14 +15,10 @@ import java.util.List;
  */
 public class AllAvailableBicyclesCommand implements BicycleCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         List<Bicycle> bicycles;
         BicycleLogic logic = new LogicInjector().getBicycleLogic();
-        try {
-            bicycles = logic.displayAllAvailable();
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying available bicycles", e);
-        }
+        bicycles = logic.displayAllAvailable();
         return setToRequestBicycles(bicycles, request);
     }
 }

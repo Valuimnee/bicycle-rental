@@ -43,6 +43,10 @@
             <name>disabled</name>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+        <attribute>
+            <name>autofocus</name>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
     </tag>
 
 </taglib>

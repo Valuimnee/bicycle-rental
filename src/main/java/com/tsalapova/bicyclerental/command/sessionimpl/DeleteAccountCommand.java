@@ -2,7 +2,7 @@ package com.tsalapova.bicyclerental.command.sessionimpl;
 
 import com.tsalapova.bicyclerental.command.SessionCommand;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.logic.impl.SessionLogicImpl;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 
@@ -18,7 +18,7 @@ public class DeleteAccountCommand implements SessionCommand {
     public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession(true);
         Long clientId = (Long) session.getAttribute(SessionConstant.ID);
-        new SessionLogicImpl().deleteClient(clientId);
+        new LogicInjector().getSessionLogic().deleteClient(clientId);
         clearUserSession(session);
         return PageConstant.MAIN;
     }

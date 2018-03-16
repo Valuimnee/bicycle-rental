@@ -1,12 +1,11 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
-import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.command.RentalCommand;
-import com.tsalapova.bicyclerental.util.SessionConstant;
 import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
+import com.tsalapova.bicyclerental.util.PageConstant;
+import com.tsalapova.bicyclerental.util.SessionConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,14 +16,10 @@ import javax.servlet.http.HttpSession;
  */
 public class RentCommand implements RentalCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         Rental rental = (Rental) session.getAttribute(SessionConstant.RENTAL);
-        try {
-            new RentalLogicImpl().createRental(rental);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred while renting the bicycle", e);
-        }
+        new LogicInjector().getRentalLogic().createRental(rental);
         removeRentalFromSession(session);
         return PageConstant.MAIN;
     }

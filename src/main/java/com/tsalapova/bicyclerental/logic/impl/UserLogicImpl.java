@@ -65,6 +65,9 @@ public class UserLogicImpl implements UserLogic {
 
     @Override
     public User findById(long userId) throws DAOException {
-        return userDAO.findById(userId);
+        User user = userDAO.findById(userId);
+        user.setPassword(null);
+        user.setSalt(null);
+        return user;
     }
 }

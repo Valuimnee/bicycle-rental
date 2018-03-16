@@ -3,10 +3,8 @@ package com.tsalapova.bicyclerental.command.userimpl;
 import com.tsalapova.bicyclerental.command.SessionCommand;
 import com.tsalapova.bicyclerental.command.UserCommand;
 import com.tsalapova.bicyclerental.entity.User;
-import com.tsalapova.bicyclerental.exception.CommandException;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.UserLogicImpl;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 
@@ -25,7 +23,7 @@ public class LoginCommand implements SessionCommand, UserCommand {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG);
             return PageConstant.LOGIN;
         }
-        if(!new UserLogicImpl().login(user)){
+        if(!new LogicInjector().getUserLogic().login(user)){
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.BLOCKED);
             return PageConstant.MAIN;
         }

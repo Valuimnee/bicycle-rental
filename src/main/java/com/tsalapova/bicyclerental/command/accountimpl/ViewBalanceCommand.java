@@ -3,8 +3,7 @@ package com.tsalapova.bicyclerental.command.accountimpl;
 
 import com.tsalapova.bicyclerental.command.AccountCommand;
 import com.tsalapova.bicyclerental.entity.Account;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.AccountLogic;
 import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
@@ -20,16 +19,12 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewBalanceCommand implements AccountCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         long clientId = (Long) session.getAttribute(SessionConstant.ID);
         Account account;
         AccountLogic logic = new LogicInjector().getAccountLogic();
-        try {
-            account = logic.findByClientId(clientId);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when finding client account", e);
-        }
+        account = logic.findByClientId(clientId);
         if (account != null) {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.ACCOUNT);
             request.setAttribute(RequestConstant.ACCOUNT, account);

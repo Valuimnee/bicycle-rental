@@ -1,11 +1,10 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
+import com.tsalapova.bicyclerental.command.RentalCommand;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
-import com.tsalapova.bicyclerental.command.RentalCommand;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 import com.tsalapova.bicyclerental.util.SessionConstant;
 import javafx.util.Pair;
@@ -20,15 +19,10 @@ import java.util.List;
  */
 public class ClientRentalsCommand implements RentalCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         long clientId = (Long) session.getAttribute(SessionConstant.ID);
-        Pair<List<Rental>, List<Bicycle>> pair;
-        try {
-            pair = new RentalLogicImpl().displayByClientId(clientId);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying user rentals", e);
-        }
+        Pair<List<Rental>, List<Bicycle>> pair = new LogicInjector().getRentalLogic().displayByClientId(clientId);
         return setToRequestRentals(pair.getKey(), pair.getValue(), request, RequestConstant.NO_RENTALS);
     }
 }

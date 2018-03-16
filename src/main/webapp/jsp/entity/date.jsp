@@ -4,7 +4,7 @@
 <form name="select-date-form" class="mt-1" method="post" action="/control">
     <c:if test="${requestScope.wrong=='wrong'}"><p class="mb-2 text-center"><fmt:message key="date.wrong"/></p></c:if>
     <p class="mb-2 text-center"><label><b><fmt:message key="date.greeting"/></b></label></p>
-    <fld:input type="datetime" labelType="long" name="start-date" required="required">
+    <fld:input type="datetime" labelType="long" name="start-date" required="required" autofocus="autofocus">
         <jsp:attribute name="label"><fmt:message key="date.start-date"/></jsp:attribute><jsp:body>${datetime}</jsp:body>
     </fld:input>
     <fld:input type="hours" labelType="long" name="hours" required="required">

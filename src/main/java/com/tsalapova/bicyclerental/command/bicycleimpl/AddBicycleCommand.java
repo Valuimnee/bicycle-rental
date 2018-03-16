@@ -2,8 +2,7 @@ package com.tsalapova.bicyclerental.command.bicycleimpl;
 
 import com.tsalapova.bicyclerental.command.BicycleCommand;
 import com.tsalapova.bicyclerental.entity.Bicycle;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.BicycleLogic;
 import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class AddBicycleCommand implements BicycleCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         Bicycle bicycle = new Bicycle();
         if (!defineBicycle(request, bicycle)) {
             setToRequestMaterialsTypes(request);
@@ -25,11 +24,7 @@ public class AddBicycleCommand implements BicycleCommand {
             return PageConstant.ADMIN;
         }
         BicycleLogic logic = new LogicInjector().getBicycleLogic();
-        try {
-            logic.add(bicycle);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when adding the bike", e);
-        }
+        logic.add(bicycle);
         return PageConstant.ADMIN;
     }
 }

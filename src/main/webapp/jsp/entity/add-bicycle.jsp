@@ -7,7 +7,7 @@
     <input type="hidden" name="submitted" value="false"/>
     <p class="mb-2 text-center"><label><b><fmt:message key="bicycle.add-greeting"/></b></label></p>
     <c:if test="${requestScope.wrong=='wrong-info'}"><p class="mb-2"><fmt:message key="bicycle.wrong-info"/></p></c:if>
-    <fld:input type="product-name" labelType="medium" name="model" required="required">
+    <fld:input type="product-name" labelType="medium" name="model" required="required" autofocus="autofocus">
         <jsp:attribute name="label"><fmt:message key="bicycle.model"/></jsp:attribute><jsp:body/>
     </fld:input>
     <fld:input type="product-name" labelType="medium" name="brand" required="required">

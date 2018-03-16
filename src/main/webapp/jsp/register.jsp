@@ -26,7 +26,7 @@
             <p class="mb-0 text-center"><label class="mb-0 pt-0"><b><fmt:message key="register.login-info"/></b></label></p>
             <p class="mb-0"><c:if test="${requestScope.wrong=='wrong-login'}"><div class="mt-1">
                     <fmt:message key="register.wrong-login"/></div></c:if></p>
-            <fld:input type="login" labelType="long" name="login" required="required">
+            <fld:input type="login" labelType="long" name="login" required="required" autofocus="autofocus">
                 <jsp:attribute name="label"><fmt:message key="register.login"/></jsp:attribute><jsp:body/>
             </fld:input>
             <fld:input type="password" labelType="long" name="password" required="required">

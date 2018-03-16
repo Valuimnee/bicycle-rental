@@ -9,7 +9,7 @@ import com.tsalapova.bicyclerental.entity.Client;
 import com.tsalapova.bicyclerental.entity.User;
 import com.tsalapova.bicyclerental.entity.UserRole;
 import com.tsalapova.bicyclerental.exception.DAOException;
-import com.tsalapova.bicyclerental.logic.impl.SessionLogicImpl;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
 
@@ -33,7 +33,7 @@ public class RegisterCommand implements SessionCommand, UserCommand, ClientComma
             return PageConstant.REGISTER;
         }
         user.setRole(UserRole.CLIENT.getName());
-        if (!new SessionLogicImpl().register(user, user.getPassword(), client, account)) {
+        if (!new LogicInjector().getSessionLogic().register(user, user.getPassword(), client, account)) {
             request.setAttribute(RequestConstant.WRONG, RequestConstant.WRONG_LOGIN);
             return PageConstant.REGISTER;
         }

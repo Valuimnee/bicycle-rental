@@ -19,7 +19,7 @@
         <h2 id="log" class="text-center mb-4"><fmt:message key="login.header"/></h2>
         <form name="login" method="post" action="/control">
             <c:if test="${requestScope.containsKey('wrong')}" ><p><fmt:message key="login.wrong"/></p></c:if>
-            <fld:input type="login" labelType="short" name="login" required="required">
+            <fld:input type="login" labelType="short" name="login" required="required" autofocus="autofocus">
                 <jsp:attribute name="label"><fmt:message key="login.login"/></jsp:attribute><jsp:body/>
             </fld:input>
             <fld:input type="password" labelType="short" name="password" required="required">

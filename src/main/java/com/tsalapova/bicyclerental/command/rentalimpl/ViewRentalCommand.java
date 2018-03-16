@@ -1,11 +1,10 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
-import com.tsalapova.bicyclerental.command.*;
+import com.tsalapova.bicyclerental.command.RentalCommand;
 import com.tsalapova.bicyclerental.entity.Entity;
 import com.tsalapova.bicyclerental.entity.Rental;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
-import com.tsalapova.bicyclerental.logic.impl.RentalLogicImpl;
+import com.tsalapova.bicyclerental.exception.DAOException;
+import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,15 +17,10 @@ import java.util.List;
  */
 public class ViewRentalCommand implements RentalCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         long rentalId = Long.valueOf(request.getParameter(DocumentConstant.RENTAL_ID));
-        List<Entity> entities;
-        try {
-            entities = new RentalLogicImpl().displayById(rentalId);
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred when displaying rental", e);
-        }
+        List<Entity> entities = new LogicInjector().getRentalLogic().displayById(rentalId);
         if (entities.isEmpty()) {
             request.setAttribute(RequestConstant.MESSAGE, RequestConstant.NO_RENTAL);
             return PageConstant.MAIN;

@@ -2,8 +2,7 @@ package com.tsalapova.bicyclerental.command.clientimpl;
 
 import com.tsalapova.bicyclerental.command.ClientCommand;
 import com.tsalapova.bicyclerental.entity.Client;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.ClientLogic;
 import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
@@ -19,15 +18,11 @@ import javax.servlet.http.HttpSession;
  */
 public class ProfileCommand implements ClientCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession(true);
         Client client;
         ClientLogic clientLogic = new LogicInjector().getClientLogic();
-        try {
-            client = clientLogic.displayProfile((Long) session.getAttribute(SessionConstant.ID));
-        } catch (LogicException e) {
-            throw new CommandException("Error occurred while displaying profile", e);
-        }
+        client = clientLogic.displayProfile((Long) session.getAttribute(SessionConstant.ID));
         if (client != null) {
             request.setAttribute(RequestConstant.CONTENT, RequestConstant.PROFILE);
             session.setAttribute(RequestConstant.CLIENT, client);

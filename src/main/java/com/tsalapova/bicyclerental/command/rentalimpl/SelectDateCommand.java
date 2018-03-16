@@ -1,10 +1,10 @@
 package com.tsalapova.bicyclerental.command.rentalimpl;
 
+import com.tsalapova.bicyclerental.command.RentalCommand;
 import com.tsalapova.bicyclerental.entity.Bicycle;
 import com.tsalapova.bicyclerental.entity.Rental;
 import com.tsalapova.bicyclerental.entity.RentalStatus;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.command.RentalCommand;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.util.EntityAction;
 import com.tsalapova.bicyclerental.util.PageConstant;
 import com.tsalapova.bicyclerental.util.RequestConstant;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SelectDateCommand implements RentalCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         Rental rental = new Rental();
         if (!defineDateHours(request, rental)) {

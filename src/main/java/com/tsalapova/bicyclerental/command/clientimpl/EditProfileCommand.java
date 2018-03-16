@@ -2,8 +2,7 @@ package com.tsalapova.bicyclerental.command.clientimpl;
 
 import com.tsalapova.bicyclerental.command.ClientCommand;
 import com.tsalapova.bicyclerental.entity.Client;
-import com.tsalapova.bicyclerental.exception.CommandException;
-import com.tsalapova.bicyclerental.exception.LogicException;
+import com.tsalapova.bicyclerental.exception.DAOException;
 import com.tsalapova.bicyclerental.logic.ClientLogic;
 import com.tsalapova.bicyclerental.logic.LogicInjector;
 import com.tsalapova.bicyclerental.util.PageConstant;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 public class EditProfileCommand implements ClientCommand {
     @Override
-    public String execute(HttpServletRequest request) throws CommandException {
+    public String execute(HttpServletRequest request) throws DAOException {
         HttpSession session = request.getSession();
         Client newClient = new Client();
         newClient.setClientId((Long) session.getAttribute(SessionConstant.ID));
@@ -28,11 +27,7 @@ public class EditProfileCommand implements ClientCommand {
             return PageConstant.MAIN;
         }
         ClientLogic clientLogic = new LogicInjector().getClientLogic();
-        try {
-            clientLogic.update(newClient);
-        } catch (LogicException e) {
-            throw new CommandException("Error while updating client information", e);
-        }
+        clientLogic.update(newClient);
         return PageConstant.MAIN;
     }
 }
