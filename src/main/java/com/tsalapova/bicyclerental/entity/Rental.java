@@ -6,6 +6,8 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Rental implements Entity {
+    private static final long serialVersionUID = 6096428443128149736L;
+
     @Column(name = "rental_id")
     private long rentalId;
     @Column(name = "client_id")

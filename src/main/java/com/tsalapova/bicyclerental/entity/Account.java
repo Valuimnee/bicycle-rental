@@ -7,6 +7,8 @@ import javax.persistence.Column;
  * @version 1.0, 2/19/2018
  */
 public class Account implements Entity {
+    private static final long serialVersionUID = 5772525459724787361L;
+
     @Column(name = "client_id")
     private long clientId;
     @Column

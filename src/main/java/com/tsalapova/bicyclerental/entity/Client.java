@@ -4,6 +4,8 @@ package com.tsalapova.bicyclerental.entity;
 import javax.persistence.Column;
 
 public class Client implements Entity {
+    private static final long serialVersionUID = 7708667814123320702L;
+
     @Column(name = "client_id")
     private long clientId;
     @Column(name = "first_name")

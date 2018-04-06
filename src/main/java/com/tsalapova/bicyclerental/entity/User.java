@@ -8,6 +8,8 @@ import java.util.Objects;
  * @version 1.0, 1/3/2018
  */
 public class User implements Entity {
+    private static final long serialVersionUID = 365429749179812270L;
+
     @Column
     private long id;
     @Column

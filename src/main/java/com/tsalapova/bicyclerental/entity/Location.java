@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import java.util.Objects;
 
 public class Location implements Entity {
+    private static final long serialVersionUID = 3102768490098690940L;
+
     @Column(name = "location_id")
     private long locationId;
     @Column

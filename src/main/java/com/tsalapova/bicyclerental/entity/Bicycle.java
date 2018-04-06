@@ -8,6 +8,8 @@ import java.util.Objects;
  * @version 1.0, 1/3/2018
  */
 public class Bicycle implements Entity {
+    private static final long serialVersionUID = -134489312830016856L;
+
     @Column(name = "bicycle_id")
     private long bicycleId;
     @Column(name = "location_id")
