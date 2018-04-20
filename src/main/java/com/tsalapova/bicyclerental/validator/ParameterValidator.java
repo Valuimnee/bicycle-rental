@@ -10,8 +10,8 @@ import java.util.Calendar;
  * @version 1.0, 1/3/2018
  */
 public class ParameterValidator {
-    private final static String PASSWORD_REGEX = "^[^ ]{8,40}$";
-    private final static String LOGIN_REGEX = "^[-\\w.]{4,20}$";
+    private static final String PASSWORD_REGEX = "^[^ ]{8,40}$";
+    private static final String LOGIN_REGEX = "^[-\\w.]{4,20}$";
     private static final String NAME_REGEX = "^([\\p{L}'][ \\p{L}'-]*\\p{L}|\\p{L}[\\p{L}'-]*)$";
     private static final String PRODUCT_NAME_REGEX = "^([\\p{L}\\d'][ \\p{L}\\d'-.]*[\\p{L}\\d]|[\\p{L}\\d][\\p{L}\\d'-.]*)$";
     private static final String ADDRESS_REGEX = "^([\\p{L}.,-/\\d]+\\s+)*[\\p{L}.,-/\\d]+$";
